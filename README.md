@@ -471,9 +471,9 @@ This project is licensed under the **MIT License**.
 
 AI & Machine Learning Enthusiast
 
-GitHub: https://github.com/<YOUR_USERNAME>
+GitHub: https://github.com/SMukul04
 
-LinkedIn: *(Add your LinkedIn here)*
+LinkedIn: https://www.linkedin.com/in/mukul-singh-11b71030b/
 
 ---
 
