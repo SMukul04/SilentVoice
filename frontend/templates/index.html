@@ -1,9 +1,281 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>SilentVoice - Index</title>
-</head>
-<body>
-    <h1>Welcome to SilentVoice</h1>
-</body>
-</html>
+{% extends "layout.html" %}
+
+{% block content %}
+<!-- Top Header/Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark navbar-glass sticky-top">
+    <div class="container-fluid">
+        <a class="navbar-brand d-flex align-items-center" href="#">
+            <span class="logo-icon"><i class="fa-solid fa-hand-holding-hand"></i></span>
+            <span>SilentVoice</span>
+            <span class="navbar-tagline d-none d-md-inline-block">Giving Every Gesture a Voice.</span>
+        </a>
+        <div class="ms-auto d-flex align-items-center">
+            <button class="btn btn-link text-light p-2" data-bs-toggle="modal" data-bs-target="#settingsModal" id="btnSettings" title="SilentVoice Settings">
+                <i class="fa-solid fa-sliders fa-lg"></i>
+            </button>
+        </div>
+    </div>
+</nav>
+
+<!-- Main Container -->
+<div class="container-fluid py-4 px-md-5">
+    <div class="row dashboard-panels">
+        
+        <!-- LEFT PANEL: Sign Language Recognition -->
+        <div class="col-lg-6 mb-4">
+            <div class="glass-card accent-blue h-100 d-flex flex-column justify-content-between">
+                <div>
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h4 class="m-0 text-white"><i class="fa-solid fa-hand-spock me-2 text-info"></i>Sign Language Recognition</h4>
+                        <span class="status-pill" id="cameraStatusBadge">
+                            <span class="status-dot" id="cameraStatusDot"></span>
+                            <span id="cameraStatusText">Camera Off</span>
+                        </span>
+                    </div>
+
+                    <!-- Camera Feed Card -->
+                    <div class="feed-viewport mb-4" id="cameraContainer">
+                        <!-- Simulated Grid & Scanning lines -->
+                        <div class="feed-grid"></div>
+                        <div class="feed-scan-line"></div>
+                        
+                        <!-- Real Webcam Video element (hidden by default) -->
+                        <video id="webcamVideo" class="video-element d-none" autoplay playsinline muted></video>
+                        
+                        <!-- Fallback / Static Placeholder -->
+                        <div class="feed-placeholder-content" id="cameraPlaceholder">
+                            <span class="feed-placeholder-icon text-info"><i class="fa-solid fa-camera"></i></span>
+                            <h5 class="text-white mb-1">Live Camera Feed</h5>
+                            <p class="text-muted small">Click "Start Camera" to capture hand gestures</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recognition Stats Subgrid -->
+                <div class="row g-3">
+                    <!-- Recognized Sign Card -->
+                    <div class="col-md-4">
+                        <div class="glass-card bg-dark bg-opacity-50 p-3 h-100 border-0">
+                            <span class="text-muted small text-uppercase tracking-wider">Recognized Sign</span>
+                            <div class="metrics-glow-value mt-2 text-truncate" id="signOutput">--</div>
+                        </div>
+                    </div>
+                    <!-- Confidence Card -->
+                    <div class="col-md-4">
+                        <div class="glass-card bg-dark bg-opacity-50 p-3 h-100 border-0">
+                            <span class="text-muted small text-uppercase tracking-wider">Confidence</span>
+                            <div class="metrics-glow-value mt-2" id="confidenceOutput">0%</div>
+                            <div class="progress progress-glow mt-2" style="height: 4px;">
+                                <div class="progress-bar bg-info progress-glow-bar" role="progressbar" style="width: 0%" id="confidenceProgress"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- FPS Card -->
+                    <div class="col-md-4">
+                        <div class="glass-card bg-dark bg-opacity-50 p-3 h-100 border-0">
+                            <span class="text-muted small text-uppercase tracking-wider">FPS</span>
+                            <div class="metrics-glow-value mt-2 purple" id="fpsOutput">0.0</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- RIGHT PANEL: Sign Language Avatar -->
+        <div class="col-lg-6 mb-4">
+            <div class="glass-card accent-purple h-100 d-flex flex-column justify-content-between">
+                <div>
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h4 class="m-0 text-white"><i class="fa-solid fa-user-astronaut me-2 text-purple text-opacity-75"></i>Sign Language Avatar</h4>
+                        <span class="status-pill" id="avatarStatusBadge">
+                            <span class="status-dot" id="avatarStatusDot"></span>
+                            <span id="avatarStatusText">Offline</span>
+                        </span>
+                    </div>
+
+                    <!-- Avatar Viewport -->
+                    <div class="feed-viewport avatar-view mb-4" id="avatarContainer">
+                        <div class="feed-grid"></div>
+                        <div class="feed-scan-line purple"></div>
+                        
+                        <!-- Generated Avatar Image Asset -->
+                        <img src="/static/images/avatar_preview.png" class="avatar-image-placeholder d-none" id="avatarImage" alt="3D Avatar mesh preview">
+                        
+                        <!-- Fallback / Load Placeholder -->
+                        <div class="feed-placeholder-content" id="avatarPlaceholder">
+                            <span class="feed-placeholder-icon text-purple"><i class="fa-solid fa-child-reaching"></i></span>
+                            <h5 class="text-white mb-1">3D Avatar Preview</h5>
+                            <p class="text-muted small">Visualizing translated speech gestures</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Avatar Status -->
+                <div class="glass-card bg-dark bg-opacity-50 p-3 border-0">
+                    <span class="text-muted small text-uppercase tracking-wider d-block mb-1">Avatar Status</span>
+                    <div class="d-flex align-items-center gap-2">
+                        <span class="badge bg-purple bg-opacity-25 text-purple border border-purple border-opacity-25" id="avatarStateBadge">IDLE</span>
+                        <span class="text-light-50 small" id="avatarDetailedStatus">Waiting for input...</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONVERSATION SECTION (Full-Width Card) -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="glass-card">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="m-0 text-white"><i class="fa-solid fa-comments me-2 text-primary"></i>Conversation</h4>
+                    <span class="badge bg-primary bg-opacity-25 text-info border border-info border-opacity-25" id="chatCounterBadge">3 Messages</span>
+                </div>
+                
+                <!-- Chat Window Scrollable -->
+                <div class="chat-window p-2" id="chatWindow">
+                    <!-- Dummy Message 1 -->
+                    <div class="chat-message deaf">
+                        <div class="message-avatar">🤟</div>
+                        <div>
+                            <div class="message-bubble">
+                                Hello
+                            </div>
+                            <div class="message-meta">
+                                <span>🤟 Deaf</span>
+                                <span>•</span>
+                                <span class="msg-time" data-offset="120">19:54</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Dummy Message 2 -->
+                    <div class="chat-message hearing">
+                        <div class="message-avatar">🎤</div>
+                        <div>
+                            <div class="message-bubble">
+                                Hi! How are you?
+                            </div>
+                            <div class="message-meta">
+                                <span class="msg-time" data-offset="60">19:55</span>
+                                <span>•</span>
+                                <span>🎤 Hearing</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Dummy Message 3 -->
+                    <div class="chat-message deaf">
+                        <div class="message-avatar">🤟</div>
+                        <div>
+                            <div class="message-bubble">
+                                I am fine.
+                            </div>
+                            <div class="message-meta">
+                                <span>🤟 Deaf</span>
+                                <span>•</span>
+                                <span class="msg-time" data-offset="0">19:56</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- BOTTOM CONTROL PANEL -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <div class="glass-card py-3 d-flex flex-wrap justify-content-center align-items-center gap-3">
+                <button class="control-btn control-btn-blue" id="btnSpeak" title="Record microphone voice input">
+                    <i class="fa-solid fa-microphone"></i>
+                    <span id="btnSpeakText">Start Speaking</span>
+                </button>
+                <button class="control-btn control-btn-purple" id="btnCamera" title="Toggle webcam gesture tracking">
+                    <i class="fa-solid fa-camera"></i>
+                    <span id="btnCameraText">Start Camera</span>
+                </button>
+                <button class="control-btn control-btn-gray" id="btnClear" title="Clear chat conversation">
+                    <i class="fa-solid fa-trash-can"></i>
+                    <span>Clear Chat</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- STATUS BAR FOOTER -->
+<footer class="status-bar-footer fixed-bottom">
+    <div class="container-fluid d-flex justify-content-between align-items-center flex-wrap gap-2">
+        <div class="status-indicator-group">
+            <div class="status-indicator-item">
+                <span class="status-dot" id="barCameraDot"></span>
+                <span>Camera: <strong id="barCameraText" class="text-muted">Disconnected</strong></span>
+            </div>
+            <div class="status-indicator-item">
+                <span class="status-dot" id="barMicDot"></span>
+                <span>Microphone: <strong id="barMicText" class="text-muted">Disconnected</strong></span>
+            </div>
+            <div class="status-indicator-item">
+                <span class="status-dot active" id="barModelDot"></span>
+                <span>Model: <strong id="barModelText" class="text-info">Ready (LSTM)</strong></span>
+            </div>
+            <div class="status-indicator-item">
+                <span class="status-dot" id="barAvatarDot"></span>
+                <span>Avatar: <strong id="barAvatarText" class="text-muted">Offline</strong></span>
+            </div>
+        </div>
+        <div class="text-muted small">
+            SilentVoice Prototype v1.0.0
+        </div>
+    </div>
+</footer>
+
+<!-- SETTINGS MODAL -->
+<div class="modal fade glass-modal" id="settingsModal" tabindex="-1" aria-labelledby="settingsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content text-light">
+            <div class="modal-header">
+                <h5 class="modal-title" id="settingsModalLabel"><i class="fa-solid fa-gear me-2 text-info"></i>System Settings</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-4">
+                    <label class="form-label text-muted small text-uppercase tracking-wider">AI Recognition Model</label>
+                    <select class="form-select form-select-glass text-light" id="selectModel">
+                        <option value="lstm" selected>LSTM Sign Recognizer (Low Latency)</option>
+                        <option value="transformer">Transformer Hand Gesture Pipeline</option>
+                        <option value="mediapipe">MediaPipe Raw Landmarks Tester</option>
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <label class="form-label text-muted small text-uppercase tracking-wider d-flex justify-content-between">
+                        <span>Confidence Threshold</span>
+                        <span id="sliderThresholdVal" class="text-info">85%</span>
+                    </label>
+                    <input type="range" class="form-range form-range-glass" min="50" max="99" value="85" id="sliderThreshold">
+                </div>
+                <div class="mb-4">
+                    <label class="form-label text-muted small text-uppercase tracking-wider">Camera Input Resolution</label>
+                    <select class="form-select form-select-glass text-light" id="selectResolution">
+                        <option value="640" selected>640 x 360 (Optimal 30 FPS)</option>
+                        <option value="1280">1280 x 720 (HD - High Load)</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label text-muted small text-uppercase tracking-wider">Speech-to-Text Language</label>
+                    <select class="form-select form-select-glass text-light" id="selectLanguage">
+                        <option value="en-US" selected>English (United States)</option>
+                        <option value="es-ES">Spanish (Spain)</option>
+                        <option value="fr-FR">French (France)</option>
+                        <option value="hi-IN">Hindi (India)</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary bg-opacity-25 border-0" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-info text-dark" data-bs-dismiss="modal" id="btnSaveSettings">Apply Settings</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
