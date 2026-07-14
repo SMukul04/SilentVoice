@@ -216,3 +216,89 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# ==========================================================
+# SilentVoice Project
+# ==========================================================
+
+# VS Code / Antigravity
+.vscode/
+.idea/
+
+# Environment files
+.env.*
+!.env.example
+
+# ==========================================================
+# Datasets (keep folder structure only)
+# ==========================================================
+datasets/raw/*
+datasets/processed/*
+datasets/train/*
+datasets/validation/*
+datasets/test/*
+datasets/landmarks/*
+
+!datasets/raw/.gitkeep
+!datasets/processed/.gitkeep
+!datasets/train/.gitkeep
+!datasets/validation/.gitkeep
+!datasets/test/.gitkeep
+!datasets/landmarks/.gitkeep
+
+# ==========================================================
+# Trained Models & Checkpoints
+# ==========================================================
+models/checkpoints/*
+models/trained/*
+
+!models/checkpoints/.gitkeep
+!models/trained/.gitkeep
+
+# Whisper downloaded models
+models/whisper/*
+
+!models/whisper/.gitkeep
+
+# ==========================================================
+# Blender
+# ==========================================================
+*.blend1
+*.blend2
+
+blender/exports/*
+!blender/exports/.gitkeep
+
+# ==========================================================
+# Unity
+# ==========================================================
+[Ll]ibrary/
+[Tt]emp/
+Obj/
+Build/
+Builds/
+Logs/
+MemoryCaptures/
+UserSettings/
+
+# ==========================================================
+# Project Logs
+# ==========================================================
+logs/
+*.log
+
+# ==========================================================
+# Large media files
+# ==========================================================
+*.mp4
+*.avi
+*.mov
+*.mkv
+*.wav
+*.flac
+
+# ==========================================================
+# OS Files
+# ==========================================================
+.DS_Store
+Thumbs.db
