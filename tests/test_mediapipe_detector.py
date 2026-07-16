@@ -79,11 +79,18 @@ class TestMediaPipeDetector(unittest.TestCase):
 
         detector = MediaPipeDetector()
         frame = np.zeros((480, 640, 3), dtype=np.uint8)
+        
+        # Test with SWAP_HANDEDNESS = True (default)
         res = detector.detect(frame)
-
         self.assertTrue(res["success"])
         self.assertEqual(res["num_hands"], 2)
-        self.assertEqual(res["handedness"], ["Right", "Left"])
+        self.assertEqual(res["handedness"], ["Left", "Right"])  # Right -> Left, Left -> Right
+
+        # Test with SWAP_HANDEDNESS = False
+        with patch("backend.sign_recognition.mediapipe_detector.SWAP_HANDEDNESS", False):
+            res_no_swap = detector.detect(frame)
+            self.assertEqual(res_no_swap["handedness"], ["Right", "Left"])
+
         
         # Verify first hand landmarks
         self.assertEqual(len(res["landmarks"]), 2)

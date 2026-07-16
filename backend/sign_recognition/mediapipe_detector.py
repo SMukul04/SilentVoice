@@ -15,6 +15,7 @@ from backend.config import (
     HAND_MODEL_COMPLEXITY,
     HAND_MIN_DETECTION_CONFIDENCE,
     HAND_MIN_TRACKING_CONFIDENCE,
+    SWAP_HANDEDNESS,
 )
 
 logger = logging.getLogger(__name__)
@@ -93,6 +94,16 @@ class MediaPipeDetector:
                     for idx, hand_classification in enumerate(self._latest_raw_results.multi_handedness):
                         # classification is a list of category objects; get the label (e.g. Left/Right)
                         label = hand_classification.classification[0].label
+                        
+                        # Swap handedness if configured.
+                        # MediaPipe Hands assumes a mirrored (selfie) camera feed, which reports 
+                        # handedness backwards (Left as Right, Right as Left) on non-mirrored webcams.
+                        if SWAP_HANDEDNESS:
+                            if label == "Left":
+                                label = "Right"
+                            elif label == "Right":
+                                label = "Left"
+                                
                         handedness_list.append(label)
 
                 # Extract landmark coordinates
