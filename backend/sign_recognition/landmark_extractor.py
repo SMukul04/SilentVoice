@@ -4,6 +4,8 @@ import logging
 from typing import Any, Dict, List, Tuple
 import numpy as np
 
+from backend.sign_recognition.hand_features import HandFeatures
+
 logger = logging.getLogger(__name__)
 
 
@@ -11,14 +13,15 @@ class LandmarkExtractor:
     """Extracts and flattens hand landmarks from MediaPipe detector outputs.
 
     This class processes the structured dictionary output from MediaPipeDetector
-    and converts landmark coordinates into flattened NumPy feature vectors of length 63.
+    and converts landmark coordinates into HandFeatures objects containing
+    flattened NumPy feature vectors and metadata (handedness, confidence).
     """
 
     def __init__(self) -> None:
         """Initializes the LandmarkExtractor."""
         logger.info("Initializing LandmarkExtractor.")
 
-    def extract(self, detection_result: Dict[str, Any]) -> List[np.ndarray]:
+    def extract(self, detection_result: Dict[str, Any]) -> List[HandFeatures]:
         """Extracts and flattens hand landmark coordinates from detection results.
 
         Args:
@@ -26,9 +29,11 @@ class LandmarkExtractor:
                 MediaPipeDetector.detect(), containing:
                 - "success" (bool): True if hands were detected.
                 - "landmarks" (List[List[Tuple[float, float, float]]]): List of 21 landmarks per hand.
+                - "handedness" (List[str], optional): List of handedness labels.
+                - "confidences" (List[float], optional): List of detection confidence scores.
 
         Returns:
-            List[np.ndarray]: A list of 1D NumPy arrays of shape (63,), one per valid detected hand.
+            List[HandFeatures]: A list of HandFeatures dataclass instances, one per valid detected hand.
                 If no hands are detected or data is invalid, returns an empty list.
         """
         if not detection_result or not detection_result.get("success", False):
@@ -38,7 +43,10 @@ class LandmarkExtractor:
         if not landmarks_list:
             return []
 
-        extracted_vectors: List[np.ndarray] = []
+        handedness_list = detection_result.get("handedness", [])
+        confidences_list = detection_result.get("confidences", [])
+
+        extracted_features: List[HandFeatures] = []
 
         for idx, hand_landmarks in enumerate(landmarks_list):
             # Validate input data structure
@@ -60,7 +68,6 @@ class LandmarkExtractor:
 
             try:
                 # Convert the 21 (x, y, z) tuples into a flat NumPy array of length 63
-                # We expect each element to be a sequence of 3 floats (x, y, z)
                 coords: List[float] = []
                 for lm_idx, lm in enumerate(hand_landmarks):
                     if not isinstance(lm, (list, tuple)) or len(lm) != 3:
@@ -70,7 +77,48 @@ class LandmarkExtractor:
                     coords.extend(lm)
 
                 feature_vector = np.array(coords, dtype=np.float32)
-                extracted_vectors.append(feature_vector)
+
+                # Get handedness and confidence, providing safe defaults if missing or invalid
+                handedness = "Right"
+                if idx < len(handedness_list):
+                    label = handedness_list[idx]
+                    if label in ("Left", "Right"):
+                        handedness = label
+                    else:
+                        logger.warning(
+                            "Hand index %d: Invalid handedness label '%s', defaulting to 'Right'.",
+                            idx,
+                            label
+                        )
+                else:
+                    logger.warning(
+                        "Hand index %d: Missing handedness info, defaulting to 'Right'.",
+                        idx
+                    )
+
+                confidence = 1.0
+                if idx < len(confidences_list):
+                    val = confidences_list[idx]
+                    if isinstance(val, (int, float)) and 0.0 <= val <= 1.0:
+                        confidence = float(val)
+                    else:
+                        logger.warning(
+                            "Hand index %d: Invalid confidence score %s, defaulting to 1.0.",
+                            idx,
+                            val
+                        )
+                else:
+                    logger.warning(
+                        "Hand index %d: Missing confidence score, defaulting to 1.0.",
+                        idx
+                    )
+
+                hand_features = HandFeatures(
+                    landmarks=feature_vector,
+                    handedness=handedness,
+                    confidence=confidence
+                )
+                extracted_features.append(hand_features)
 
             except Exception as e:
                 logger.warning(
@@ -80,4 +128,4 @@ class LandmarkExtractor:
                 )
                 continue
 
-        return extracted_vectors
+        return extracted_features

@@ -73,14 +73,30 @@ def main() -> None:
                 f"Hands: {detection_res['num_hands']}",
                 f"Extracted Vectors: {len(feature_vectors)}"
             ]
-            for idx, f_vec in enumerate(feature_vectors):
-                overlay_texts.append(f"Vector {idx} Shape: {f_vec.shape}")
+            for idx, h_feat in enumerate(feature_vectors):
+                overlay_texts.append(f"Hand {idx + 1} Shape: {h_feat.landmarks.shape}")
 
             # Draw overlays
             for idx, text in enumerate(overlay_texts):
                 y_pos = 30 + (idx * 30)
                 cv2.putText(annotated_frame, text, (10, y_pos), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 0), 2, cv2.LINE_AA)
                 cv2.putText(annotated_frame, text, (10, y_pos), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 0), 1, cv2.LINE_AA)
+
+            # Draw handedness labels above the wrist of each detected hand
+            height, width = frame.shape[:2]
+            for h_feat in feature_vectors:
+                if len(h_feat.landmarks) >= 2:
+                    x_norm = h_feat.landmarks[0]
+                    y_norm = h_feat.landmarks[1]
+                    px = int(x_norm * width)
+                    py = int(y_norm * height)
+                    # Offset text slightly above the wrist and clamp to keep it visible inside frame bounds
+                    text_x = max(10, min(width - 80, px))
+                    text_y = max(25, min(height - 10, py - 20))
+                    
+                    # Draw text with shadow for maximum readability
+                    cv2.putText(annotated_frame, h_feat.handedness, (text_x, text_y), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 0), 3, cv2.LINE_AA)
+                    cv2.putText(annotated_frame, h_feat.handedness, (text_x, text_y), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 0), 2, cv2.LINE_AA)
 
             # Show annotated image
             cv2.imshow("SilentVoice Landmark Extractor Test", annotated_frame)
@@ -89,12 +105,20 @@ def main() -> None:
             if current_time - last_print_time >= 1.0:
                 print("=" * 60)
                 print(f"FPS: {fps:.1f}")
-                print(f"Number of detected hands: {detection_res['num_hands']}")
-                for idx, f_vec in enumerate(feature_vectors):
+                print(f"Number of Hands: {len(feature_vectors)}")
+                print()
+
+                for idx, h_feat in enumerate(feature_vectors):
                     # Format values to 4 decimal places for clean reading
-                    formatted_values = [f"{val:.4f}" for val in f_vec[:10]]
-                    print(f"Hand {idx} - Feature vector shape: {f_vec.shape}")
-                    print(f"Hand {idx} - First 10 values: {formatted_values}")
+                    formatted_values = [f"{val:.4f}" for val in h_feat.landmarks[:10]]
+                    print(f"Hand {idx + 1}")
+                    print("-" * 25)
+                    print(f"Handedness : {h_feat.handedness}")
+                    print(f"Confidence : {h_feat.confidence:.2f}")
+                    print(f"Shape      : {h_feat.landmarks.shape}")
+                    print("First 10 values:")
+                    print(f"[{', '.join(formatted_values)}...]")
+                    print()
                 print("=" * 60 + "\n")
                 last_print_time = current_time
 

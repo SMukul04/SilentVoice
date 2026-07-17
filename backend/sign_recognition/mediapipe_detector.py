@@ -83,17 +83,20 @@ class MediaPipeDetector:
             success = False
             num_hands = 0
             handedness_list: List[str] = []
+            confidences_list: List[float] = []
             landmarks_list: List[List[Tuple[float, float, float]]] = []
 
             if self._latest_raw_results.multi_hand_landmarks:
                 num_hands = len(self._latest_raw_results.multi_hand_landmarks)
                 success = num_hands > 0
 
-                # Extract handedness labels
+                # Extract handedness labels and confidences
                 if self._latest_raw_results.multi_handedness:
                     for idx, hand_classification in enumerate(self._latest_raw_results.multi_handedness):
                         # classification is a list of category objects; get the label (e.g. Left/Right)
-                        label = hand_classification.classification[0].label
+                        classification = hand_classification.classification[0]
+                        label = classification.label
+                        confidence = float(classification.score)
                         
                         # Swap handedness if configured.
                         # MediaPipe Hands assumes a mirrored (selfie) camera feed, which reports 
@@ -105,6 +108,7 @@ class MediaPipeDetector:
                                 label = "Left"
                                 
                         handedness_list.append(label)
+                        confidences_list.append(confidence)
 
                 # Extract landmark coordinates
                 for hand_landmarks in self._latest_raw_results.multi_hand_landmarks:
@@ -117,6 +121,7 @@ class MediaPipeDetector:
                 "success": success,
                 "num_hands": num_hands,
                 "handedness": handedness_list,
+                "confidences": confidences_list,
                 "landmarks": landmarks_list,
             }
 
@@ -126,6 +131,7 @@ class MediaPipeDetector:
                 "success": False,
                 "num_hands": 0,
                 "handedness": [],
+                "confidences": [],
                 "landmarks": [],
             }
 
