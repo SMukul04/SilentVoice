@@ -2,6 +2,7 @@ import unittest
 import numpy as np
 
 from backend.sign_recognition.hand_features import HandFeatures
+from backend.sign_recognition.frame_features import FrameFeatures
 from backend.sign_recognition.normalizer import LandmarkNormalizer
 
 
@@ -31,21 +32,18 @@ class TestLandmarkNormalizer(unittest.TestCase):
             confidence=0.98
         )
 
-        normalized_features = self.normalizer.normalize(hand_features)
+        frame_features = FrameFeatures(right_hand=hand_features)
+        normalized_vector = self.normalizer.normalize(frame_features)
 
-        # Ensure type is HandFeatures and instances are distinct
-        self.assertIsInstance(normalized_features, HandFeatures)
-        self.assertNotEqual(id(hand_features), id(normalized_features))
+        # Ensure type is np.ndarray and shape is (126,)
+        self.assertIsInstance(normalized_vector, np.ndarray)
+        self.assertEqual(normalized_vector.shape, (126,))
 
-        # Check metadata preserved
-        self.assertEqual(normalized_features.handedness, "Right")
-        self.assertEqual(normalized_features.confidence, 0.98)
+        # Left hand is missing -> first 63 values should be exactly 0
+        np.testing.assert_array_almost_equal(normalized_vector[:63], np.zeros(63, dtype=np.float32))
 
-        # Check shape
-        self.assertEqual(normalized_features.landmarks.shape, (63,))
-
-        # Reshape to check coordinates
-        norm_coords = normalized_features.landmarks.reshape(21, 3)
+        # Reshape right hand to check coordinates
+        norm_coords = normalized_vector[63:].reshape(21, 3)
 
         # Check wrist (landmark 0) is at origin
         np.testing.assert_array_almost_equal(norm_coords[0], [0.0, 0.0, 0.0])
@@ -67,10 +65,18 @@ class TestLandmarkNormalizer(unittest.TestCase):
             confidence=0.90
         )
 
-        normalized_features = self.normalizer.normalize(hand_features)
+        frame_features = FrameFeatures(left_hand=hand_features)
+        normalized_vector = self.normalizer.normalize(frame_features)
+
+        # Ensure type is np.ndarray and shape is (126,)
+        self.assertIsInstance(normalized_vector, np.ndarray)
+        self.assertEqual(normalized_vector.shape, (126,))
+
+        # Right hand is missing -> last 63 values should be exactly 0
+        np.testing.assert_array_almost_equal(normalized_vector[63:], np.zeros(63, dtype=np.float32))
 
         # Wrist should be at origin
-        norm_coords = normalized_features.landmarks.reshape(21, 3)
+        norm_coords = normalized_vector[:63].reshape(21, 3)
         np.testing.assert_array_almost_equal(norm_coords[0], [0.0, 0.0, 0.0])
         # Since distance is 0, it should not scale, so landmark 9 should also be at [0, 0, 0]
         np.testing.assert_array_almost_equal(norm_coords[9], [0.0, 0.0, 0.0])
@@ -78,7 +84,7 @@ class TestLandmarkNormalizer(unittest.TestCase):
     def test_invalid_types_raise_exception(self) -> None:
         """Tests that invalid input type raises TypeError."""
         with self.assertRaises(TypeError):
-            self.normalizer.normalize("not_a_hand_features_object")
+            self.normalizer.normalize("not_a_frame_features_object")  # type: ignore
 
 
 if __name__ == '__main__':

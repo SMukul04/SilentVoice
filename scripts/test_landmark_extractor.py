@@ -62,19 +62,29 @@ def main() -> None:
             detection_res = detector.detect(frame)
 
             # Extract Landmarks using LandmarkExtractor
-            feature_vectors = extractor.extract(detection_res)
+            frame_features = extractor.extract(detection_res)
 
             # Annotate Frame with Hand Landmarks
             annotated_frame = detector.draw(frame)
 
             # Overlay information on the video frame
+            hands_count = int(frame_features.has_left_hand()) + int(frame_features.has_right_hand())
             overlay_texts = [
                 f"FPS: {fps:.1f}",
                 f"Hands: {detection_res['num_hands']}",
-                f"Extracted Vectors: {len(feature_vectors)}"
+                f"Extracted Hands: {hands_count}"
             ]
-            for idx, h_feat in enumerate(feature_vectors):
-                overlay_texts.append(f"Hand {idx + 1} Shape: {h_feat.landmarks.shape}")
+            if frame_features.left_hand is not None:
+                h_feat = frame_features.left_hand
+                overlay_texts.append(
+                    f"Left Shape: {h_feat.landmarks.shape}"
+                )
+
+            if frame_features.right_hand is not None:
+                h_feat = frame_features.right_hand
+                overlay_texts.append(
+                    f"Right Shape: {h_feat.landmarks.shape}"
+                )
 
             # Draw overlays
             for idx, text in enumerate(overlay_texts):
@@ -84,19 +94,41 @@ def main() -> None:
 
             # Draw handedness labels above the wrist of each detected hand
             height, width = frame.shape[:2]
-            for h_feat in feature_vectors:
+
+            for h_feat in [frame_features.left_hand, frame_features.right_hand]:
+                if h_feat is None:
+                    continue
+
                 if len(h_feat.landmarks) >= 2:
                     x_norm = h_feat.landmarks[0]
                     y_norm = h_feat.landmarks[1]
+
                     px = int(x_norm * width)
                     py = int(y_norm * height)
-                    # Offset text slightly above the wrist and clamp to keep it visible inside frame bounds
+
                     text_x = max(10, min(width - 80, px))
                     text_y = max(25, min(height - 10, py - 20))
-                    
-                    # Draw text with shadow for maximum readability
-                    cv2.putText(annotated_frame, h_feat.handedness, (text_x, text_y), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 0), 3, cv2.LINE_AA)
-                    cv2.putText(annotated_frame, h_feat.handedness, (text_x, text_y), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 0), 2, cv2.LINE_AA)
+
+                    cv2.putText(
+                        annotated_frame,
+                        h_feat.handedness,
+                        (text_x, text_y),
+                        cv2.FONT_HERSHEY_SIMPLEX,
+                        0.7,
+                        (0, 0, 0),
+                        3,
+                        cv2.LINE_AA,
+                    )
+                    cv2.putText(
+                        annotated_frame,
+                        h_feat.handedness,
+                        (text_x, text_y),
+                        cv2.FONT_HERSHEY_SIMPLEX,
+                        0.7,
+                        (0, 255, 0),
+                        2,
+                        cv2.LINE_AA,
+                    )
 
             # Show annotated image
             cv2.imshow("SilentVoice Landmark Extractor Test", annotated_frame)
@@ -105,13 +137,21 @@ def main() -> None:
             if current_time - last_print_time >= 1.0:
                 print("=" * 60)
                 print(f"FPS: {fps:.1f}")
-                print(f"Number of Hands: {len(feature_vectors)}")
+                print(f"Detected Hands : {detection_res['num_hands']}")
+                print(f"Left Hand      : {'Present' if frame_features.has_left_hand() else 'None'}")
+                print(f"Right Hand     : {'Present' if frame_features.has_right_hand() else 'None'}")
+                print(f"Both Hands     : {frame_features.has_both_hands()}")
                 print()
-
-                for idx, h_feat in enumerate(feature_vectors):
-                    # Format values to 4 decimal places for clean reading
+                for label, h_feat in [
+                    ("Left", frame_features.left_hand),
+                    ("Right", frame_features.right_hand),
+                ]:
+                    if h_feat is None:
+                        print(f"{label} Hand : None")
+                        print()
+                        continue
                     formatted_values = [f"{val:.4f}" for val in h_feat.landmarks[:10]]
-                    print(f"Hand {idx + 1}")
+                    print(f"{label} Hand")
                     print("-" * 25)
                     print(f"Handedness : {h_feat.handedness}")
                     print(f"Confidence : {h_feat.confidence:.2f}")

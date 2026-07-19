@@ -5,6 +5,7 @@ import sys
 import time
 import logging
 import cv2
+import numpy as np
 
 # Add the workspace root to sys.path to resolve backend imports
 workspace_root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
@@ -64,17 +65,27 @@ def main() -> None:
             detection_res = detector.detect(frame)
 
             # Extract raw landmarks
-            raw_features_list = extractor.extract(detection_res)
+            raw_frame_features = extractor.extract(detection_res)
 
-            # Normalize landmarks
-            normalized_features_list = [normalizer.normalize(h) for h in raw_features_list]
+            # Normalize landmarks (returns a (126,) array)
+            normalized_vector = normalizer.normalize(raw_frame_features)
+
+            # Split into left and right 63-element halves
+            left_half = normalized_vector[:63]
+            right_half = normalized_vector[63:]
+
+            # Count non-zeros
+            left_non_zero = np.count_nonzero(left_half)
+            right_non_zero = np.count_nonzero(right_half)
 
             # Annotate Frame with Hand Landmarks
             annotated_frame = detector.draw(frame)
 
             # Draw labels near the wrist
             height, width = frame.shape[:2]
-            for h_feat in raw_features_list:
+            for h_feat in [raw_frame_features.left_hand, raw_frame_features.right_hand]:
+                if h_feat is None:
+                    continue
                 if len(h_feat.landmarks) >= 2:
                     x_norm = h_feat.landmarks[0]
                     y_norm = h_feat.landmarks[1]
@@ -90,10 +101,10 @@ def main() -> None:
             overlay_texts = [
                 f"FPS: {fps:.1f}",
                 f"Hands: {detection_res['num_hands']}",
-                f"Normalized Hands: {len(normalized_features_list)}"
+                f"Vector Shape: {normalized_vector.shape}",
+                f"Left Non-Zero: {left_non_zero}/63",
+                f"Right Non-Zero: {right_non_zero}/63"
             ]
-            for idx, h_feat in enumerate(normalized_features_list):
-                overlay_texts.append(f"Hand {idx + 1} ({h_feat.handedness}): {h_feat.confidence:.2f}")
 
             # Draw overlays
             for idx, text in enumerate(overlay_texts):
@@ -107,24 +118,18 @@ def main() -> None:
             # Print stats once per second
             if current_time - last_print_time >= 1.0:
                 print("=" * 60)
-                print(f"Number of detected hands: {len(normalized_features_list)}")
+                print(f"FPS: {fps:.1f}")
+                print(f"Normalized vector shape: {normalized_vector.shape}")
+                print(f"Left half size: {left_half.shape[0]}, non-zeros: {left_non_zero}")
+                print(f"Right half size: {right_half.shape[0]}, non-zeros: {right_non_zero}")
                 
-                for idx, (raw_feat, norm_feat) in enumerate(zip(raw_features_list, normalized_features_list)):
-                    # Get raw wrist coords (first 3 values from raw landmarks)
-                    raw_wrist = [f"{val:.4f}" for val in raw_feat.landmarks[:3]]
-                    # Get normalized wrist coords (first 3 values from norm landmarks)
-                    norm_wrist = [f"{val:.4f}" for val in norm_feat.landmarks[:3]]
-                    # Format first 10 values of normalized feature vector
-                    norm_first_10 = [f"{val:.4f}" for val in norm_feat.landmarks[:10]]
-                    
-                    print(f"Hand {idx + 1} ({norm_feat.handedness})")
-                    print("-" * 25)
-                    print(f"Raw wrist coordinates        : {raw_wrist}")
-                    print(f"Normalized wrist coordinates : {norm_wrist}")
-                    print(f"Feature vector shape         : {norm_feat.landmarks.shape}")
-                    print("First 10 normalized values:")
-                    print(f"[{', '.join(norm_first_10)}...]")
-                    print()
+                left_first_10 = [f"{val:.4f}" for val in left_half[:10]]
+                right_first_10 = [f"{val:.4f}" for val in right_half[:10]]
+                
+                print("Left Hand (first 10 normalized values):")
+                print(f"[{', '.join(left_first_10)}...]")
+                print("Right Hand (first 10 normalized values):")
+                print(f"[{', '.join(right_first_10)}...]")
                 print("=" * 60 + "\n")
                 last_print_time = current_time
 
@@ -135,8 +140,8 @@ def main() -> None:
 
     except KeyboardInterrupt:
         logger.info("Keyboard interrupt received.")
-    except Exception as e:
-        logger.error("An error occurred during execution: %s", e)
+    except Exception:
+        logger.exception("An error occurred during execution:")
     finally:
         logger.info("Cleaning up resources...")
         cv2.destroyAllWindows()

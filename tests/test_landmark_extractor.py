@@ -3,6 +3,7 @@ import numpy as np
 
 from backend.sign_recognition.landmark_extractor import LandmarkExtractor
 from backend.sign_recognition.hand_features import HandFeatures
+from backend.sign_recognition.frame_features import FrameFeatures
 
 
 class TestLandmarkExtractor(unittest.TestCase):
@@ -13,7 +14,7 @@ class TestLandmarkExtractor(unittest.TestCase):
         self.extractor = LandmarkExtractor()
 
     def test_extract_empty_or_failed_results(self) -> None:
-        """Tests that extract returns an empty list for failed or empty results."""
+        """Tests that extract returns an empty FrameFeatures for failed or empty results."""
         # Case 1: success is False
         res1 = {
             "success": False,
@@ -22,14 +23,21 @@ class TestLandmarkExtractor(unittest.TestCase):
             "confidences": [],
             "landmarks": []
         }
-        self.assertEqual(self.extractor.extract(res1), [])
+        features = self.extractor.extract(res1)
+        self.assertIsInstance(features, FrameFeatures)
+        self.assertIsNone(features.left_hand)
+        self.assertIsNone(features.right_hand)
 
         # Case 2: Empty dict
-        self.assertEqual(self.extractor.extract({}), [])
+        features2 = self.extractor.extract({})
+        self.assertIsNone(features2.left_hand)
+        self.assertIsNone(features2.right_hand)
 
         # Case 3: Missing landmarks key
         res3 = {"success": True}
-        self.assertEqual(self.extractor.extract(res3), [])
+        features3 = self.extractor.extract(res3)
+        self.assertIsNone(features3.left_hand)
+        self.assertIsNone(features3.right_hand)
 
     def test_extract_valid_landmarks(self) -> None:
         """Tests extracting features from valid hand landmarks."""
@@ -44,18 +52,19 @@ class TestLandmarkExtractor(unittest.TestCase):
         }
 
         features = self.extractor.extract(res)
-        self.assertEqual(len(features), 1)
-        self.assertIsInstance(features[0], HandFeatures)
-        self.assertEqual(features[0].landmarks.shape, (63,))
-        self.assertEqual(features[0].landmarks.dtype, np.float32)
-        self.assertEqual(features[0].handedness, "Right")
-        self.assertEqual(features[0].confidence, 0.95)
+        self.assertIsInstance(features, FrameFeatures)
+        self.assertIsNone(features.left_hand)
+        self.assertIsInstance(features.right_hand, HandFeatures)
+        self.assertEqual(features.right_hand.landmarks.shape, (63,))
+        self.assertEqual(features.right_hand.landmarks.dtype, np.float32)
+        self.assertEqual(features.right_hand.handedness, "Right")
+        self.assertEqual(features.right_hand.confidence, 0.95)
 
         # Verify values
         expected_vector = []
         for lm in hand_lms:
             expected_vector.extend(lm)
-        np.testing.assert_array_almost_equal(features[0].landmarks, np.array(expected_vector, dtype=np.float32))
+        np.testing.assert_array_almost_equal(features.right_hand.landmarks, np.array(expected_vector, dtype=np.float32))
 
     def test_extract_invalid_landmarks_warning(self) -> None:
         """Tests that malformed landmark lists (not 21 elements) are skipped without crashing."""
@@ -75,12 +84,12 @@ class TestLandmarkExtractor(unittest.TestCase):
         }
 
         features = self.extractor.extract(res)
-        # Should only successfully extract hand0
-        self.assertEqual(len(features), 1)
-        self.assertIsInstance(features[0], HandFeatures)
-        self.assertEqual(features[0].landmarks.shape, (63,))
-        self.assertEqual(features[0].handedness, "Right")
-        self.assertEqual(features[0].confidence, 0.95)
+        # Should only successfully extract hand0 (Right hand)
+        self.assertIsNone(features.left_hand)
+        self.assertIsInstance(features.right_hand, HandFeatures)
+        self.assertEqual(features.right_hand.landmarks.shape, (63,))
+        self.assertEqual(features.right_hand.handedness, "Right")
+        self.assertEqual(features.right_hand.confidence, 0.95)
 
     def test_hand_features_validation(self) -> None:
         """Tests that HandFeatures validates its initialization parameters."""

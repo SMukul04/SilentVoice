@@ -5,6 +5,7 @@ import sys
 import time
 import logging
 import cv2
+import numpy as np
 
 # Add the workspace root to sys.path to resolve backend imports
 workspace_root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
@@ -32,6 +33,24 @@ def main() -> None:
         extractor = LandmarkExtractor()
         normalizer = LandmarkNormalizer()
         frame_buffer = FrameBuffer(buffer_size=30)
+        
+        # Verify invalid input handling
+        logger.info("Verifying invalid input handling...")
+        try:
+            frame_buffer.append("invalid_input_type")  # type: ignore
+        except TypeError as e:
+            logger.info("Successfully verified: TypeError raised for invalid input type: %s", e)
+        
+        try:
+            frame_buffer.append(np.zeros(63))
+        except ValueError as e:
+            logger.info("Successfully verified: ValueError raised for shape (63,): %s", e)
+
+        try:
+            frame_buffer.append(np.zeros((126, 1)))
+        except ValueError as e:
+            logger.info("Successfully verified: ValueError raised for shape (126, 1): %s", e)
+
         camera = Camera(camera_index=0)
         camera.start()
     except CameraError as e:
@@ -67,13 +86,14 @@ def main() -> None:
             detection_res = detector.detect(frame)
 
             # Extract and normalize
-            raw_features_list = extractor.extract(detection_res)
-            normalized_features_list = [normalizer.normalize(h) for h in raw_features_list]
+            raw_frame_features = extractor.extract(detection_res)
+            
+            # Normalize the entire FrameFeatures to (126,) shape
+            normalized_frame = normalizer.normalize(raw_frame_features)
 
-            # Accumulate the primary hand (first hand detected) in the FrameBuffer
-            if normalized_features_list:
-                primary_hand = normalized_features_list[0]
-                frame_buffer.add(primary_hand)
+            # Append the frame if at least one hand is detected
+            if raw_frame_features.left_hand is not None or raw_frame_features.right_hand is not None:
+                frame_buffer.append(normalized_frame)
                 total_added_frames += 1
 
             # Annotate Frame with Hand Landmarks
@@ -81,7 +101,9 @@ def main() -> None:
 
             # Draw labels near the wrist
             height, width = frame.shape[:2]
-            for h_feat in raw_features_list:
+            for h_feat in [raw_frame_features.left_hand, raw_frame_features.right_hand]:
+                if h_feat is None:
+                    continue
                 if len(h_feat.landmarks) >= 2:
                     x_norm = h_feat.landmarks[0]
                     y_norm = h_feat.landmarks[1]
@@ -94,10 +116,11 @@ def main() -> None:
                     cv2.putText(annotated_frame, h_feat.handedness, (text_x, text_y), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 0), 2, cv2.LINE_AA)
 
             # Overlay information on the video frame
+            norm_hands_count = int(raw_frame_features.left_hand is not None) + int(raw_frame_features.right_hand is not None)
             overlay_texts = [
                 f"FPS: {fps:.1f}",
                 f"Hands: {detection_res['num_hands']}",
-                f"Buffer Size: {len(frame_buffer)}/30",
+                f"Buffer Size: {frame_buffer.size()}/30",
                 f"Buffer Full: {frame_buffer.is_full()}"
             ]
             for idx, text in enumerate(overlay_texts):
@@ -112,9 +135,9 @@ def main() -> None:
             if current_time - last_print_time >= 1.0:
                 seq = frame_buffer.get_sequence()
                 print("=" * 60)
-                print(f"Number of detected hands : {len(normalized_features_list)}")
+                print(f"Number of detected hands : {norm_hands_count}")
                 print(f"Total frames added       : {total_added_frames}")
-                print(f"Current buffer size      : {len(frame_buffer)}")
+                print(f"Current buffer size      : {frame_buffer.size()}")
                 print(f"Whether buffer is full   : {frame_buffer.is_full()}")
                 print(f"Sequence shape           : {seq.shape}")
                 if total_added_frames > 30:
@@ -129,8 +152,8 @@ def main() -> None:
 
     except KeyboardInterrupt:
         logger.info("Keyboard interrupt received.")
-    except Exception as e:
-        logger.error("An error occurred during execution: %s", e)
+    except Exception:
+        logger.exception("An error occurred during execution:")
     finally:
         logger.info("Cleaning up resources...")
         cv2.destroyAllWindows()

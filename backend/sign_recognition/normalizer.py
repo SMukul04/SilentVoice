@@ -4,6 +4,7 @@ import logging
 import numpy as np
 
 from backend.sign_recognition.hand_features import HandFeatures
+from backend.sign_recognition.frame_features import FrameFeatures
 
 logger = logging.getLogger(__name__)
 
@@ -19,14 +20,14 @@ class LandmarkNormalizer:
         """Initializes the LandmarkNormalizer."""
         logger.info("Initializing LandmarkNormalizer.")
 
-    def normalize(self, hand_features: HandFeatures) -> HandFeatures:
-        """Normalizes landmarks using translation and scaling.
+    def _normalize_hand(self, hand_features: HandFeatures) -> np.ndarray:
+        """Helper method to normalize a single hand's landmarks.
 
         Args:
             hand_features (HandFeatures): The original hand features object.
 
         Returns:
-            HandFeatures: A new HandFeatures object containing the normalized landmarks.
+            np.ndarray: A normalized flat float32 array of shape (63,).
 
         Raises:
             TypeError: If hand_features is not an instance of HandFeatures.
@@ -66,11 +67,39 @@ class LandmarkNormalizer:
             normalized = translated
 
         # Flatten back to shape (63,) and convert to float32
-        normalized_flat = normalized.flatten().astype(np.float32)
+        return normalized.flatten().astype(np.float32)
 
-        # Return a brand new HandFeatures object to keep original instance immutable
-        return HandFeatures(
-            landmarks=normalized_flat,
-            handedness=hand_features.handedness,
-            confidence=hand_features.confidence
-        )
+    def normalize(self, frame_features: FrameFeatures) -> np.ndarray:
+        """Normalizes both left and right hands from frame features and concatenates them.
+
+        Args:
+            frame_features (FrameFeatures): The frame features object containing left
+                and right hands.
+
+        Returns:
+            np.ndarray: A concatenated NumPy array of shape (126,) containing
+                [left_hand_normalized, right_hand_normalized]. Missing hands are
+                represented by exactly 63 zeros.
+
+        Raises:
+            TypeError: If frame_features is not an instance of FrameFeatures.
+        """
+        if not isinstance(frame_features, FrameFeatures):
+            raise TypeError(
+                f"Expected FrameFeatures object, got {type(frame_features)}"
+            )
+
+        # Process Left Hand
+        if frame_features.left_hand is not None:
+            left_norm = self._normalize_hand(frame_features.left_hand)
+        else:
+            left_norm = np.zeros(63, dtype=np.float32)
+
+        # Process Right Hand
+        if frame_features.right_hand is not None:
+            right_norm = self._normalize_hand(frame_features.right_hand)
+        else:
+            right_norm = np.zeros(63, dtype=np.float32)
+
+        # Concatenate and return
+        return np.concatenate([left_norm, right_norm]).astype(np.float32)

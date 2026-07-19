@@ -5,6 +5,7 @@ from typing import Any, Dict, List, Tuple
 import numpy as np
 
 from backend.sign_recognition.hand_features import HandFeatures
+from backend.sign_recognition.frame_features import FrameFeatures
 
 logger = logging.getLogger(__name__)
 
@@ -13,15 +14,15 @@ class LandmarkExtractor:
     """Extracts and flattens hand landmarks from MediaPipe detector outputs.
 
     This class processes the structured dictionary output from MediaPipeDetector
-    and converts landmark coordinates into HandFeatures objects containing
-    flattened NumPy feature vectors and metadata (handedness, confidence).
+    and converts landmark coordinates into a FrameFeatures object containing
+    HandFeatures for both left and right hands.
     """
 
     def __init__(self) -> None:
         """Initializes the LandmarkExtractor."""
         logger.info("Initializing LandmarkExtractor.")
 
-    def extract(self, detection_result: Dict[str, Any]) -> List[HandFeatures]:
+    def extract(self, detection_result: Dict[str, Any]) -> FrameFeatures:
         """Extracts and flattens hand landmark coordinates from detection results.
 
         Args:
@@ -33,20 +34,21 @@ class LandmarkExtractor:
                 - "confidences" (List[float], optional): List of detection confidence scores.
 
         Returns:
-            List[HandFeatures]: A list of HandFeatures dataclass instances, one per valid detected hand.
-                If no hands are detected or data is invalid, returns an empty list.
+            FrameFeatures: A FrameFeatures instance containing HandFeatures for left and/or right hand,
+                or None for either hand if not detected or invalid.
         """
         if not detection_result or not detection_result.get("success", False):
-            return []
+            return FrameFeatures()
 
         landmarks_list = detection_result.get("landmarks", [])
         if not landmarks_list:
-            return []
+            return FrameFeatures()
 
         handedness_list = detection_result.get("handedness", [])
         confidences_list = detection_result.get("confidences", [])
 
-        extracted_features: List[HandFeatures] = []
+        left_hand = None
+        right_hand = None
 
         for idx, hand_landmarks in enumerate(landmarks_list):
             # Validate input data structure
@@ -118,7 +120,11 @@ class LandmarkExtractor:
                     handedness=handedness,
                     confidence=confidence
                 )
-                extracted_features.append(hand_features)
+                
+                if handedness == "Left":
+                    left_hand = hand_features
+                else:
+                    right_hand = hand_features
 
             except Exception as e:
                 logger.warning(
@@ -128,4 +134,5 @@ class LandmarkExtractor:
                 )
                 continue
 
-        return extracted_features
+        return FrameFeatures(left_hand=left_hand, right_hand=right_hand)
+

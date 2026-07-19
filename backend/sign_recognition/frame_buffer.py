@@ -2,16 +2,13 @@
 
 import logging
 from collections import deque
-from typing import List
 import numpy as np
-
-from backend.sign_recognition.hand_features import HandFeatures
 
 logger = logging.getLogger(__name__)
 
 
 class FrameBuffer:
-    """A sliding window buffer that stores a fixed-length sequence of HandFeatures.
+    """A sliding window buffer that stores a fixed-length sequence of normalized frame features.
 
     This buffer is designed to accumulate normalized landmark vectors for feeding
     into sequence-based models (like LSTM or Transformer) for sign gesture recognition.
@@ -33,29 +30,38 @@ class FrameBuffer:
         self._buffer: deque = deque(maxlen=buffer_size)
         logger.info("Initialized FrameBuffer with buffer_size=%d", buffer_size)
 
-    def add(self, features: HandFeatures) -> None:
-        """Adds a normalized HandFeatures object to the sliding window buffer.
+    def append(self, frame: np.ndarray) -> None:
+        """Appends a normalized frame vector (concatenated left and right hand landmarks)
+        to the sliding window buffer.
 
         Args:
-            features (HandFeatures): The normalized hand features to add.
+            frame (np.ndarray): The normalized hand features array of shape (126,).
 
         Raises:
-            TypeError: If features is not an instance of HandFeatures.
-            ValueError: If landmarks array shape/size is incorrect.
+            TypeError: If frame is not a NumPy array.
+            ValueError: If frame shape/size is incorrect (not (126,)).
         """
-        if not isinstance(features, HandFeatures):
+        if not isinstance(frame, np.ndarray):
             raise TypeError(
-                f"Expected HandFeatures object, got {type(features)}"
+                f"Expected numpy.ndarray, got {type(frame)}"
             )
 
-        if not isinstance(features.landmarks, np.ndarray) or features.landmarks.shape != (63,):
+        if frame.shape != (126,):
             raise ValueError(
-                f"Expected HandFeatures landmarks to have shape (63,), got {getattr(features.landmarks, 'shape', None)}"
+                f"Expected frame shape to be (126,), got {frame.shape}"
             )
 
         # Append to the sliding window. Since maxlen is set on the deque,
         # it will automatically discard the oldest element when limit is reached.
-        self._buffer.append(features)
+        self._buffer.append(frame)
+
+    def add(self, frame: np.ndarray) -> None:
+        """Alias for append to preserve backwards compatibility.
+
+        Args:
+            frame (np.ndarray): The normalized hand features array of shape (126,).
+        """
+        self.append(frame)
 
     def is_full(self) -> bool:
         """Checks if the buffer is full.
@@ -70,20 +76,26 @@ class FrameBuffer:
         self._buffer.clear()
         logger.debug("FrameBuffer cleared.")
 
+    def size(self) -> int:
+        """Returns the current number of frames stored in the buffer.
+
+        Returns:
+            int: The current size of the buffer.
+        """
+        return len(self._buffer)
+
     def get_sequence(self) -> np.ndarray:
         """Returns the current sequence of landmarks as a single NumPy array.
 
         Returns:
-            np.ndarray: A NumPy array of shape (N, 63), where N is the current buffer size.
-                If the buffer is full, the shape will be (buffer_size, 63).
-                If the buffer is empty, returns an empty array of shape (0, 63).
+            np.ndarray: A NumPy array of shape (N, 126), where N is the current buffer size.
+                If the buffer is full, the shape will be (buffer_size, 126).
+                If the buffer is empty, returns an empty array of shape (0, 126).
         """
         if not self._buffer:
-            return np.empty((0, 63), dtype=np.float32)
+            return np.empty((0, 126), dtype=np.float32)
 
-        # Extract landmark arrays from the HandFeatures in the deque
-        landmarks_list = [hf.landmarks for hf in self._buffer]
-        return np.vstack(landmarks_list)
+        return np.vstack(list(self._buffer))
 
     def __len__(self) -> int:
         """Returns the number of elements currently stored in the buffer.
@@ -91,4 +103,5 @@ class FrameBuffer:
         Returns:
             int: The current size of the buffer.
         """
-        return len(self._buffer)
+        return self.size()
+
