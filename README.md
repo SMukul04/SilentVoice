@@ -42,6 +42,24 @@ SilentVoice combines **Computer Vision**, **Deep Learning**, **Speech Recognitio
 
 Unlike traditional sign language translators, SilentVoice focuses on **real-time two-way conversations** instead of one-way translation.
 
+# ✅ Current Progress
+
+The complete preprocessing pipeline for real-time sign language recognition has been implemented and tested.
+
+Completed components:
+
+- Camera Module
+- MediaPipe Multi-Hand Detection
+- Landmark Extraction
+- Left & Right Hand Classification
+- Landmark Normalization
+- 126-Dimensional Feature Representation
+- 30-Frame Sliding Buffer
+- Unit Testing
+- Live Integration Testing
+
+The project is currently entering the **Dataset Collection** phase for training the gesture recognition model.
+
 ---
 
 # 🎯 Objectives
@@ -59,13 +77,25 @@ Unlike traditional sign language translators, SilentVoice focuses on **real-time
 
 ## 🤟 Sign Language Recognition
 
-- Real-time camera capture
-- OpenCV integration
-- MediaPipe Hand Tracking
-- 21 Hand Landmark Detection
+### ✅ Completed
+
+- Real-time Camera Pipeline
+- OpenCV Integration
+- MediaPipe Multi-Hand Tracking
+- Left & Right Hand Detection
+- 21 Landmark Extraction per Hand
+- Handedness Classification
 - Landmark Normalization
-- LSTM-based Gesture Recognition
-- AI Sentence Builder
+- Two-Hand Feature Vector (126 Features)
+- 30-Frame Sliding Buffer
+- Complete Preprocessing Pipeline
+- Unit & Live Integration Tests
+
+### 🚧 In Progress
+
+- Dataset Collection
+- LSTM Gesture Recognition
+- Sentence Builder
 - Live Chat Output
 
 ---
@@ -369,48 +399,68 @@ python app.py
 
 # 🗺 Development Roadmap
 
-## Phase 1
+## ✅ Phase 1 — Foundation
 
 - [x] Project Planning
-- [x] Architecture Design
-- [ ] Repository Setup
-- [ ] Backend Setup
+- [x] System Architecture
+- [x] Repository Setup
+- [x] Backend Structure
+- [x] Camera Module
+- [x] MediaPipe Integration
+- [x] Landmark Extraction
+- [x] FrameFeatures
+- [x] Landmark Normalization
+- [x] FrameBuffer
+- [x] Unit Testing
+- [x] Integration Testing
 
 ---
 
-## Phase 2
+## 🚧 Phase 2 — Dataset & Model
 
-- [ ] MediaPipe Integration
-- [ ] OpenCV Camera
-- [ ] Dataset Preparation
+- [ ] Dataset Collection
+- [ ] Dataset Loader
+- [ ] Data Augmentation
+- [ ] Train/Test Split
 - [ ] LSTM Training
+- [ ] Model Evaluation
+- [ ] Real-Time Prediction
 
 ---
 
-## Phase 3
+## ⏳ Phase 3 — NLP
+
+- [ ] Confidence Filtering
+- [ ] Duplicate Removal
+- [ ] Sentence Builder
+- [ ] Grammar Correction
+
+---
+
+## ⏳ Phase 4 — Speech Processing
 
 - [ ] Whisper Integration
-- [ ] Speech Recognition
-- [ ] Live Chat Window
+- [ ] Speech-to-Text
+- [ ] Text-to-Speech
+- [ ] Conversation Engine
 
 ---
 
-## Phase 4
+## ⏳ Phase 5 — Avatar
 
-- [ ] Blender Avatar
-- [ ] Unity Animator
+- [ ] Text Parser
+- [ ] Sign Dictionary
 - [ ] Animation Queue
-- [ ] Text-to-Sign Module
+- [ ] Unity Avatar
 
 ---
 
-## Phase 5
+## ⏳ Phase 6 — Deployment
 
-- [ ] Deployment
-- [ ] Performance Optimization
+- [ ] Web Interface
+- [ ] Optimization
 - [ ] Documentation
 - [ ] Public Release
-
 ---
 
 # 🌟 Future Enhancements
@@ -437,11 +487,17 @@ Planning             ███████████████████�
 
 Architecture         ████████████████████ 100%
 
-Development          ███░░░░░░░░░░░░░░░░░ 15%
+Preprocessing        ████████████████████ 100%
 
-Testing              ░░░░░░░░░░░░░░░░░░░░ 0%
+Dataset Pipeline     ░░░░░░░░░░░░░░░░░░░░   0%
 
-Deployment           ░░░░░░░░░░░░░░░░░░░░ 0%
+Model Training       ░░░░░░░░░░░░░░░░░░░░   0%
+
+Speech Pipeline      ░░░░░░░░░░░░░░░░░░░░   0%
+
+Avatar Pipeline      ░░░░░░░░░░░░░░░░░░░░   0%
+
+Deployment           ░░░░░░░░░░░░░░░░░░░░   0%
 ```
 
 ---
