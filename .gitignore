@@ -302,3 +302,9 @@ logs/
 # ==========================================================
 .DS_Store
 Thumbs.db
+
+# Dataset files
+datasets/*
+!datasets/raw/.gitkeep
+!datasets/processed/.gitkeep
+!datasets/landmarks/.gitkeep
