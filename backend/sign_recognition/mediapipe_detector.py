@@ -1,18 +1,20 @@
-"""MediaPipe Hands detector module optimized for real-time inference."""
+"""MediaPipe hand detector optimized for real-time inference."""
+
+from __future__ import annotations
 
 import logging
+from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
+
 import cv2
-import numpy as np
 import mediapipe as mp
-import mediapipe.python.solutions.hands as mp_hands
-import mediapipe.python.solutions.drawing_utils as mp_drawing
-import mediapipe.python.solutions.drawing_styles as mp_drawing_styles
+import numpy as np
+
+from mediapipe.tasks.python import vision
+from mediapipe.tasks.python.core import base_options
 
 from backend.config import (
-    HAND_STATIC_IMAGE_MODE,
     HAND_MAX_NUM_HANDS,
-    HAND_MODEL_COMPLEXITY,
     HAND_MIN_DETECTION_CONFIDENCE,
     HAND_MIN_TRACKING_CONFIDENCE,
     SWAP_HANDEDNESS,
@@ -22,103 +24,154 @@ logger = logging.getLogger(__name__)
 
 
 class MediaPipeDetector:
-    """Detects and tracks hands in video frames using MediaPipe Hands.
+    """Detects hands using the MediaPipe Tasks HandLandmarker API.
 
-    This class encapsulates MediaPipe Hands initialization, processing, drawing,
-    and resource cleanup. It is designed to be initialized once and reused
-    for real-time webcam inference.
+    The public output format remains compatible with the existing
+    SilentVoice landmark extraction pipeline.
     """
 
-    def __init__(self) -> None:
-        """Initializes the MediaPipe Hands detector using configuration values."""
-        logger.info("Initializing MediaPipe Hands Detector...")
-        try:
-            self.mp_hands = mp_hands
-            self.mp_drawing = mp_drawing
-            self.mp_drawing_styles = mp_drawing_styles
+    def __init__(
+        self,
+        model_path: str | Path = "models/mediapipe/hand_landmarker.task",
+    ) -> None:
+        """Initialize the MediaPipe Hand Landmarker once for reuse."""
 
-            self.hands = self.mp_hands.Hands(
-                static_image_mode=HAND_STATIC_IMAGE_MODE,
-                max_num_hands=HAND_MAX_NUM_HANDS,
-                model_complexity=HAND_MODEL_COMPLEXITY,
-                min_detection_confidence=HAND_MIN_DETECTION_CONFIDENCE,
+        self.model_path = Path(model_path)
+
+        if not self.model_path.exists():
+            raise FileNotFoundError(
+                f"MediaPipe hand landmarker model not found: {self.model_path}"
+            )
+
+        logger.info("Initializing MediaPipe Hand Landmarker...")
+
+        try:
+            options = vision.HandLandmarkerOptions(
+                base_options=base_options.BaseOptions(
+                    model_asset_path=str(self.model_path)
+                ),
+                running_mode=vision.RunningMode.VIDEO,
+                num_hands=HAND_MAX_NUM_HANDS,
+                min_hand_detection_confidence=HAND_MIN_DETECTION_CONFIDENCE,
+                min_hand_presence_confidence=HAND_MIN_DETECTION_CONFIDENCE,
                 min_tracking_confidence=HAND_MIN_TRACKING_CONFIDENCE,
             )
-            # Store latest raw results from MediaPipe for use in drawing or other extraction steps
-            self._latest_raw_results: Any = None
-            logger.info("MediaPipe Hands Detector successfully initialized.")
+
+            self.hand_landmarker = vision.HandLandmarker.create_from_options(
+                options
+            )
+
+            self._latest_result: Optional[Any] = None
+            self._timestamp_ms = 0
+
+            logger.info(
+                "MediaPipe Hand Landmarker initialized successfully."
+            )
+
         except Exception as e:
-            logger.error("Failed to initialize MediaPipe Hands: %s", e)
-            raise RuntimeError(f"MediaPipe initialization failed: {e}") from e
+            logger.exception("Failed to initialize MediaPipe Hand Landmarker.")
+            raise RuntimeError(
+                f"MediaPipe initialization failed: {e}"
+            ) from e
 
     def detect(self, frame: np.ndarray) -> Dict[str, Any]:
-        """Processes a single BGR frame and returns structured hand detection details.
+        """Process one BGR frame and return hand landmark information.
 
-        Args:
-            frame (np.ndarray): The raw BGR input image frame from a camera or file.
+        Returns a dictionary compatible with the existing SilentVoice
+        LandmarkExtractor:
 
-        Returns:
-            Dict[str, Any]: A structured dictionary containing:
-                - "success" (bool): True if at least one hand is detected.
-                - "num_hands" (int): The number of detected hands (0, 1, or 2).
-                - "handedness" (List[str]): List of handedness labels ('Left' or 'Right').
-                  Note: MediaPipe's handedness is relative to the person in the image.
-                - "landmarks" (List[List[Tuple[float, float, float]]]): List containing 21 (x, y, z)
-                  tuples of landmarks for each detected hand.
+        {
+            "success": bool,
+            "num_hands": int,
+            "handedness": list[str],
+            "confidences": list[float],
+            "landmarks": list[list[tuple[float, float, float]]],
+        }
         """
+
         if frame is None:
+            logger.warning("Received None frame for hand detection.")
+            return self._empty_result()
+
+        if not isinstance(frame, np.ndarray):
+            logger.warning(
+                "Invalid frame type received: %s",
+                type(frame).__name__,
+            )
+            return self._empty_result()
+
+        if frame.size == 0:
             logger.warning("Received empty frame for hand detection.")
-            return {
-                "success": False,
-                "num_hands": 0,
-                "handedness": [],
-                "landmarks": [],
-            }
+            return self._empty_result()
 
         try:
-            # MediaPipe expects RGB images, so convert BGR to RGB
-            rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-            self._latest_raw_results = self.hands.process(rgb_frame)
+            rgb_frame = cv2.cvtColor(
+                frame,
+                cv2.COLOR_BGR2RGB,
+            )
 
-            success = False
-            num_hands = 0
+            mp_image = mp.Image(
+                image_format=mp.ImageFormat.SRGB,
+                data=rgb_frame,
+            )
+
+            self._timestamp_ms += 1
+
+            result = self.hand_landmarker.detect_for_video(
+                mp_image,
+                self._timestamp_ms,
+            )
+
+            self._latest_result = result
+
             handedness_list: List[str] = []
             confidences_list: List[float] = []
-            landmarks_list: List[List[Tuple[float, float, float]]] = []
+            landmarks_list: List[
+                List[Tuple[float, float, float]]
+            ] = []
 
-            if self._latest_raw_results.multi_hand_landmarks:
-                num_hands = len(self._latest_raw_results.multi_hand_landmarks)
-                success = num_hands > 0
+            for index, hand_landmarks in enumerate(result.hand_landmarks):
 
-                # Extract handedness labels and confidences
-                if self._latest_raw_results.multi_handedness:
-                    for idx, hand_classification in enumerate(self._latest_raw_results.multi_handedness):
-                        # classification is a list of category objects; get the label (e.g. Left/Right)
-                        classification = hand_classification.classification[0]
-                        label = classification.label
-                        confidence = float(classification.score)
-                        
-                        # Swap handedness if configured.
-                        # MediaPipe Hands assumes a mirrored (selfie) camera feed, which reports 
-                        # handedness backwards (Left as Right, Right as Left) on non-mirrored webcams.
-                        if SWAP_HANDEDNESS:
-                            if label == "Left":
-                                label = "Right"
-                            elif label == "Right":
-                                label = "Left"
-                                
-                        handedness_list.append(label)
-                        confidences_list.append(confidence)
+                current_hand_landmarks: List[
+                    Tuple[float, float, float]
+                ] = []
 
-                # Extract landmark coordinates
-                for hand_landmarks in self._latest_raw_results.multi_hand_landmarks:
-                    current_hand_landmarks: List[Tuple[float, float, float]] = []
-                    for lm in hand_landmarks.landmark:
-                        current_hand_landmarks.append((lm.x, lm.y, lm.z))
-                    landmarks_list.append(current_hand_landmarks)
+                for landmark in hand_landmarks:
+                    current_hand_landmarks.append(
+                        (
+                            float(landmark.x),
+                            float(landmark.y),
+                            float(landmark.z),
+                        )
+                    )
+
+                landmarks_list.append(current_hand_landmarks)
+
+                label = ""
+                confidence = 0.0
+
+                if index < len(result.handedness):
+                    categories = result.handedness[index]
+
+                    if categories:
+                        category = categories[0]
+
+                        label = str(category.category_name)
+                        confidence = float(category.score)
+
+                if SWAP_HANDEDNESS:
+                    if label == "Left":
+                        label = "Right"
+                    elif label == "Right":
+                        label = "Left"
+
+                handedness_list.append(label)
+                confidences_list.append(confidence)
+
+            num_hands = len(landmarks_list)
 
             return {
-                "success": success,
+                "success": num_hands > 0,
                 "num_hands": num_hands,
                 "handedness": handedness_list,
                 "confidences": confidences_list,
@@ -126,58 +179,126 @@ class MediaPipeDetector:
             }
 
         except Exception as e:
-            logger.error("Error during hand detection processing: %s", e)
-            return {
-                "success": False,
-                "num_hands": 0,
-                "handedness": [],
-                "confidences": [],
-                "landmarks": [],
-            }
+            logger.exception(
+                "Error during MediaPipe hand detection: %s",
+                e,
+            )
+            return self._empty_result()
 
-    def draw(self, frame: np.ndarray, results: Optional[Any] = None) -> np.ndarray:
-        """Draws detected hand landmarks and connections on the given frame.
+    def draw(
+        self,
+        frame: np.ndarray,
+        results: Optional[Any] = None,
+    ) -> np.ndarray:
+        """Draw hand landmarks on a copy of the frame."""
 
-        Args:
-            frame (np.ndarray): The raw BGR frame on which to draw.
-            results (Optional[Any]): The raw MediaPipe Hands results object. If None,
-                uses the stored results from the most recent detect() call.
+        if frame is None:
+            raise ValueError("frame cannot be None")
 
-        Returns:
-            np.ndarray: A copy of the input frame with drawn hand landmarks and connections.
-        """
         annotated_frame = frame.copy()
 
-        # Determine which raw MediaPipe results to draw
-        raw_results = results if results is not None else self._latest_raw_results
+        result = (
+            results
+            if results is not None
+            else self._latest_result
+        )
 
-        if raw_results is not None and hasattr(raw_results, "multi_hand_landmarks"):
-            landmarks = raw_results.multi_hand_landmarks
-            if landmarks:
-                for hand_landmarks in landmarks:
-                    self.mp_drawing.draw_landmarks(
+        if result is None:
+            return annotated_frame
+
+        try:
+            height, width = annotated_frame.shape[:2]
+
+            for hand_landmarks in result.hand_landmarks:
+
+                points = []
+
+                for landmark in hand_landmarks:
+                    x = int(landmark.x * width)
+                    y = int(landmark.y * height)
+
+                    points.append((x, y))
+
+                    cv2.circle(
                         annotated_frame,
-                        hand_landmarks,
-                        self.mp_hands.HAND_CONNECTIONS,
-                        self.mp_drawing_styles.get_default_hand_landmarks_style(),
-                        self.mp_drawing_styles.get_default_hand_connections_style(),
+                        (x, y),
+                        3,
+                        (0, 255, 0),
+                        -1,
                     )
 
-        return annotated_frame
+                for point_a, point_b in self._hand_connections():
+                    if (
+                        point_a < len(points)
+                        and point_b < len(points)
+                    ):
+                        cv2.line(
+                            annotated_frame,
+                            points[point_a],
+                            points[point_b],
+                            (0, 255, 0),
+                            2,
+                        )
+
+            return annotated_frame
+
+        except Exception as e:
+            logger.exception(
+                "Failed to draw hand landmarks: %s",
+                e,
+            )
+            return annotated_frame
 
     def close(self) -> None:
-        """Closes the MediaPipe Hands object and releases its resources."""
-        if hasattr(self, "hands") and self.hands is not None:
-            logger.info("Closing MediaPipe Hands Detector...")
+        """Release MediaPipe resources."""
+
+        if (
+            hasattr(self, "hand_landmarker")
+            and self.hand_landmarker is not None
+        ):
             try:
-                self.hands.close()
+                self.hand_landmarker.close()
+                logger.info(
+                    "MediaPipe Hand Landmarker closed."
+                )
             except Exception as e:
-                logger.error("Error closing MediaPipe Hands instance: %s", e)
+                logger.warning(
+                    "Error while closing MediaPipe Hand Landmarker: %s",
+                    e,
+                )
 
     def __enter__(self) -> "MediaPipeDetector":
-        """Enables context manager usage."""
         return self
 
-    def __exit__(self, exc_type: Any, exc_val: Any, exc_tb: Any) -> None:
-        """Enables context manager cleanup."""
+    def __exit__(
+        self,
+        exc_type: Any,
+        exc_val: Any,
+        exc_tb: Any,
+    ) -> None:
         self.close()
+
+    @staticmethod
+    def _empty_result() -> Dict[str, Any]:
+        """Return the standard empty detection result."""
+
+        return {
+            "success": False,
+            "num_hands": 0,
+            "handedness": [],
+            "confidences": [],
+            "landmarks": [],
+        }
+
+    @staticmethod
+    def _hand_connections() -> List[Tuple[int, int]]:
+        """Return the standard MediaPipe hand landmark connections."""
+
+        return [
+            (0, 1), (1, 2), (2, 3), (3, 4),
+            (0, 5), (5, 6), (6, 7), (7, 8),
+            (5, 9), (9, 10), (10, 11), (11, 12),
+            (9, 13), (13, 14), (14, 15), (15, 16),
+            (13, 17), (17, 18), (18, 19), (19, 20),
+            (0, 17),
+        ]
