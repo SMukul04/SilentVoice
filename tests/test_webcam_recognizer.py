@@ -7,6 +7,7 @@ import unittest
 import numpy as np
 
 from backend.realtime.webcam_recognizer import WebcamRecognizer
+from backend.realtime.prediction_stabilizer import PredictionStabilizer
 
 
 class FakeEngine:
@@ -50,6 +51,26 @@ class FakePipeline:
         self.close_calls += 1
 
 
+class FakeStabilizer:
+    def __init__(self) -> None:
+        self.received: list[dict[str, object]] = []
+        self.reset_calls = 0
+
+    @property
+    def history_size(self) -> int:
+        return len(self.received)
+
+    def add_prediction(self, prediction: dict[str, object]) -> dict[str, object]:
+        self.received.append(prediction)
+        return {**prediction, "predicted_class": "stable_alive"}
+
+    def is_stable(self) -> bool:
+        return bool(self.received)
+
+    def reset(self) -> None:
+        self.received.clear(); self.reset_calls += 1
+
+
 class FakeCapture:
     def __init__(self, opened: bool = True) -> None:
         self.opened = opened
@@ -85,15 +106,21 @@ class FakeCV2:
 
 
 class TestWebcamRecognizer(unittest.TestCase):
-    def make_recognizer(self, *, num_hands: int = 1, ready_after: int = 32, mirror: bool = True) -> tuple[WebcamRecognizer, FakePipeline, FakeEngine, FakeCV2]:
+    def make_recognizer(self, *, num_hands: int = 1, ready_after: int = 32, mirror: bool = True, stabilizer=None) -> tuple[WebcamRecognizer, FakePipeline, FakeEngine, FakeCV2]:
         pipeline, engine, cv = FakePipeline(num_hands), FakeEngine(ready_after), FakeCV2()
-        return WebcamRecognizer(pipeline=pipeline, inference_engine=engine, cv2_module=cv, mirror=mirror), pipeline, engine, cv
+        return WebcamRecognizer(pipeline=pipeline, inference_engine=engine, cv2_module=cv, mirror=mirror, stabilizer=stabilizer), pipeline, engine, cv
 
     def test_component_initialization(self) -> None:
         recognizer, pipeline, engine, _ = self.make_recognizer()
         self.assertIs(recognizer.pipeline, pipeline)
         self.assertIs(recognizer.inference_engine, engine)
+        self.assertIsInstance(recognizer.stabilizer, PredictionStabilizer)
         self.assertTrue(recognizer.mirror)
+
+    def test_custom_stabilizer_dependency_injection(self) -> None:
+        stabilizer = FakeStabilizer()
+        recognizer, _, _, _ = self.make_recognizer(stabilizer=stabilizer)
+        self.assertIs(recognizer.stabilizer, stabilizer)
 
     def test_invalid_camera_handling(self) -> None:
         with self.assertRaises(ValueError):
@@ -125,20 +152,35 @@ class TestWebcamRecognizer(unittest.TestCase):
         recognizer.process_frame(np.zeros((4, 5, 3), dtype=np.uint8))
         _, state = recognizer.process_frame(np.zeros((4, 5, 3), dtype=np.uint8))
         self.assertEqual(engine.predict_calls, 1)
+        self.assertEqual(state["prediction"]["predicted_class"], "unknown")
+        self.assertFalse(state["is_stable"])
+        recognizer.process_frame(np.zeros((4, 5, 3), dtype=np.uint8))
+        _, state = recognizer.process_frame(np.zeros((4, 5, 3), dtype=np.uint8))
         self.assertEqual(state["prediction"]["predicted_class"], "alive")
+        self.assertTrue(state["is_stable"])
+
+    def test_raw_prediction_passes_through_stabilizer(self) -> None:
+        stabilizer = FakeStabilizer()
+        recognizer, _, engine, _ = self.make_recognizer(ready_after=1, stabilizer=stabilizer)
+        _, state = recognizer.process_frame(np.zeros((4, 5, 3), dtype=np.uint8))
+        self.assertEqual(engine.predict_calls, 1)
+        self.assertEqual(stabilizer.received[0]["predicted_class"], "alive")
+        self.assertEqual(state["last_prediction"]["predicted_class"], "stable_alive")
 
     def test_prediction_state_persistence(self) -> None:
         recognizer, pipeline, _, _ = self.make_recognizer(ready_after=1)
         recognizer.process_frame(np.zeros((4, 5, 3), dtype=np.uint8))
         pipeline.num_hands = 0
         _, state = recognizer.process_frame(np.zeros((4, 5, 3), dtype=np.uint8))
-        self.assertEqual(state["last_prediction"]["predicted_class"], "alive")
+        self.assertEqual(state["last_prediction"]["predicted_class"], "unknown")
 
     def test_reset_behavior(self) -> None:
-        recognizer, _, engine, _ = self.make_recognizer(ready_after=1)
+        stabilizer = FakeStabilizer()
+        recognizer, _, engine, _ = self.make_recognizer(ready_after=1, stabilizer=stabilizer)
         recognizer.process_frame(np.zeros((4, 5, 3), dtype=np.uint8))
         recognizer.reset()
         self.assertEqual(engine.reset_calls, 1)
+        self.assertEqual(stabilizer.reset_calls, 1)
         self.assertIsNone(recognizer.last_prediction)
 
     def test_mirror_frame_behavior(self) -> None:

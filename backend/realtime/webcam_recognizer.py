@@ -10,6 +10,7 @@ import numpy as np
 
 from backend.inference.inference_engine import InferenceEngine
 from backend.realtime.landmark_pipeline import RealTimeLandmarkPipeline
+from backend.realtime.prediction_stabilizer import PredictionStabilizer
 
 
 logger = logging.getLogger(__name__)
@@ -27,6 +28,7 @@ class WebcamRecognizer:
         show_landmarks: bool = True,
         pipeline: RealTimeLandmarkPipeline | Any | None = None,
         inference_engine: InferenceEngine | Any | None = None,
+        stabilizer: PredictionStabilizer | Any | None = None,
         cv2_module: Any = cv2,
     ) -> None:
         """Initialize reusable recognition dependencies without opening a camera.
@@ -60,12 +62,20 @@ class WebcamRecognizer:
             inference_engine.load()
         self.inference_engine = inference_engine
         self.pipeline = pipeline if pipeline is not None else RealTimeLandmarkPipeline()
+        self.stabilizer = stabilizer if stabilizer is not None else PredictionStabilizer(
+            window_size=5,
+            confidence_threshold=self.confidence_threshold,
+            min_consistent_predictions=3,
+        )
 
         for component, method in ((self.pipeline, "process_frame"), (self.inference_engine, "add_landmarks"),
                                   (self.inference_engine, "is_ready"), (self.inference_engine, "predict"),
                                   (self.inference_engine, "reset")):
             if not callable(getattr(component, method, None)):
                 raise TypeError(f"Injected component must provide callable {method}()")
+        for method in ("add_prediction", "reset", "is_stable"):
+            if not callable(getattr(self.stabilizer, method, None)):
+                raise TypeError(f"Injected stabilizer must provide callable {method}()")
 
         self.last_prediction: dict[str, Any] | None = None
         self.last_confidence: float | None = None
@@ -100,6 +110,7 @@ class WebcamRecognizer:
     def reset(self) -> None:
         """Clear model sequence state and the persistent display prediction."""
         self.inference_engine.reset()
+        self.stabilizer.reset()
         self.last_prediction = None
         self.last_confidence = None
 
@@ -126,7 +137,8 @@ class WebcamRecognizer:
             features = pipeline_result.get("features")
             self.inference_engine.add_landmarks(features)
             if self.inference_engine.is_ready():
-                prediction = self.inference_engine.predict()
+                raw_prediction = self.inference_engine.predict()
+                prediction = self.stabilizer.add_prediction(raw_prediction)
                 self.last_prediction = prediction
                 self.last_confidence = float(prediction["confidence"])
 
@@ -134,6 +146,8 @@ class WebcamRecognizer:
             "num_hands": num_hands,
             "prediction": prediction,
             "last_prediction": self.last_prediction,
+            "is_stable": self.stabilizer.is_stable(),
+            "stabilizer_history_size": getattr(self.stabilizer, "history_size", 0),
             "sequence_progress": self.sequence_progress,
         }
 
@@ -151,6 +165,8 @@ class WebcamRecognizer:
             status = "No hands detected"
         elif self.last_prediction is None:
             status = "Sign: Collecting frames"
+        elif not state["is_stable"]:
+            status = "Sign: Stabilizing..."
         else:
             status = f"Sign: {self.last_prediction['predicted_class']}"
 
