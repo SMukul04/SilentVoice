@@ -46,3 +46,11 @@ class PredictionResponse(BaseModel):
             if val < 0.0 or val > 1.0:
                 raise ValueError("Probability values must be between 0.0 and 1.0")
         return v
+
+
+class APIErrorResponse(BaseModel):
+    """Schema for consistent error responses across the API."""
+    
+    success: bool = Field(False, description="Always false for error responses")
+    error: str = Field(..., description="High-level error category")
+    detail: str = Field(..., description="Client-safe error details")

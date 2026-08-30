@@ -1,12 +1,16 @@
 """FastAPI application entry point for SilentVoice."""
 
-from fastapi import FastAPI, Depends, HTTPException
+import logging
+from fastapi import FastAPI, Depends, Request
 from fastapi.responses import JSONResponse
+from fastapi.exceptions import RequestValidationError
 
-from backend.app.schemas import PredictionRequest, PredictionResponse
+from backend.app.schemas import PredictionRequest, PredictionResponse, APIErrorResponse
 from backend.services.model_service import ModelService
 from backend.services.prediction_service import PredictionService
 
+
+logger = logging.getLogger(__name__)
 
 app = FastAPI(
     title="SilentVoice API",
@@ -20,6 +24,48 @@ _prediction_service = PredictionService(model_service=_model_service)
 
 def get_prediction_service() -> PredictionService:
     return _prediction_service
+
+
+@app.exception_handler(RequestValidationError)
+async def validation_exception_handler(request: Request, exc: RequestValidationError):
+    """Handle FastAPI/Pydantic validation errors (HTTP 422)."""
+    return JSONResponse(
+        status_code=422,
+        content=APIErrorResponse(
+            success=False,
+            error="Validation error",
+            detail="Invalid prediction request"
+        ).model_dump()
+    )
+
+
+@app.exception_handler(FileNotFoundError)
+async def model_missing_exception_handler(request: Request, exc: FileNotFoundError):
+    """Handle model loading failures (HTTP 503)."""
+    logger.exception("Model unavailable")
+    return JSONResponse(
+        status_code=503,
+        content=APIErrorResponse(
+            success=False,
+            error="Model unavailable",
+            detail="The recognition model is currently unavailable."
+        ).model_dump()
+    )
+
+
+@app.exception_handler(Exception)
+async def generic_exception_handler(request: Request, exc: Exception):
+    """Handle all other unexpected errors (HTTP 500)."""
+    logger.exception("Unexpected backend failure")
+    return JSONResponse(
+        status_code=500,
+        content=APIErrorResponse(
+            success=False,
+            error="Prediction failed",
+            detail="Unable to process the prediction."
+        ).model_dump()
+    )
+
 
 @app.get("/")
 def read_root() -> dict[str, str]:
@@ -39,27 +85,21 @@ def predict(
     service: PredictionService = Depends(get_prediction_service)
 ) -> PredictionResponse:
     """Accept one landmark vector and return a prediction if the sequence is ready."""
-    try:
-        status = service.add_landmarks(request.features)
+    status = service.add_landmarks(request.features)
+    
+    if not status.get("sequence_ready", False):
+        # Sequence not ready, return a placeholder Response
+        return PredictionResponse(
+            predicted_index=0,
+            predicted_class="unknown",
+            confidence=0.0,
+            probabilities=[],
+            sequence_ready=False,
+            stable=False
+        )
         
-        if not status.get("sequence_ready", False):
-            # Sequence not ready, return a placeholder Response
-            return PredictionResponse(
-                predicted_index=0,
-                predicted_class="unknown",
-                confidence=0.0,
-                probabilities=[],
-                sequence_ready=False,
-                stable=False
-            )
-            
-        prediction = service.predict()
-        return PredictionResponse(**prediction)
-        
-    except Exception as e:
-        import logging
-        logging.getLogger(__name__).exception("Prediction failed")
-        raise HTTPException(status_code=500, detail=str(e))
+    prediction = service.predict()
+    return PredictionResponse(**prediction)
 
 
 @app.post("/predict/reset")
@@ -72,4 +112,3 @@ def reset_prediction(
         "success": True,
         "message": "Prediction state reset"
     }
-
