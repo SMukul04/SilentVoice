@@ -21,13 +21,13 @@ def mock_prediction_service():
             self.sequence_count = 0
             self.ready = False
             self.raise_on_predict = False
-            
+
         def add_landmarks(self, features):
             self.sequence_count += 1
             if self.sequence_count >= 32:
                 self.ready = True
             return {"sequence_ready": self.ready, "sequence_length": self.sequence_count}
-            
+
         def predict(self):
             if self.raise_on_predict:
                 raise RuntimeError("Simulated model error")
@@ -39,11 +39,11 @@ def mock_prediction_service():
                 "sequence_ready": True,
                 "stable": True
             }
-            
+
         def reset(self):
             self.sequence_count = 0
             self.ready = False
-            
+
     return MockService()
 
 
@@ -77,9 +77,9 @@ def test_invalid_feature_count(client: TestClient) -> None:
 def test_invalid_feature_values(client: TestClient) -> None:
     """Test 4: POST /predict with invalid feature values."""
     # NaN
-    response = client.post("/predict", json={"features": [float('nan')] * 126})
+    response = client.post("/predict", json={"features": ["NaN"] * 126})
     assert response.status_code == 422
-    
+
     # string
     response = client.post("/predict", json={"features": ["str"] * 126})
     assert response.status_code == 422
@@ -100,7 +100,7 @@ def test_sequence_filling_and_prediction(client: TestClient) -> None:
         response = client.post("/predict", json={"features": [0.1] * 126})
         assert response.status_code == 200
         assert response.json()["sequence_ready"] is False
-        
+
     # The 32nd request should trigger a prediction
     response = client.post("/predict", json={"features": [0.1] * 126})
     assert response.status_code == 200
@@ -114,11 +114,11 @@ def test_valid_prediction_response_structure(client: TestClient) -> None:
     # Fast-forward to 31 frames
     for _ in range(31):
         client.post("/predict", json={"features": [0.1] * 126})
-        
+
     response = client.post("/predict", json={"features": [0.1] * 126})
     assert response.status_code == 200
     data = response.json()
-    
+
     assert "predicted_index" in data
     assert "predicted_class" in data
     assert "confidence" in data
@@ -130,26 +130,29 @@ def test_valid_prediction_response_structure(client: TestClient) -> None:
 def test_reset_endpoint(client: TestClient) -> None:
     """Test 9: POST /predict/reset."""
     client.post("/predict", json={"features": [0.1] * 126})
-    
+
     response = client.post("/predict/reset")
     assert response.status_code == 200
     assert response.json() == {"success": True, "message": "Prediction state reset"}
-    
+
     # Verify sequence was reset by sending another request
     response2 = client.post("/predict", json={"features": [0.1] * 126})
     assert response2.json()["sequence_ready"] is False
 
 
-def test_prediction_error(client: TestClient, mock_prediction_service) -> None:
+def test_prediction_error(mock_prediction_service) -> None:
     """Test 10: Verify prediction/model errors return HTTP 500."""
     mock_prediction_service.raise_on_predict = True
-    
-    # Fast-forward to ready state
-    for _ in range(32):
-        response = client.post("/predict", json={"features": [0.1] * 126})
-        
+
+    app.dependency_overrides[get_prediction_service] = lambda: mock_prediction_service
+    with TestClient(app, raise_server_exceptions=False) as client:
+        # Fast-forward to ready state
+        for _ in range(32):
+            response = client.post("/predict", json={"features": [0.1] * 126})
+
     assert response.status_code == 500
     assert "detail" in response.json()
+    app.dependency_overrides.clear()
 
 
 def test_model_service_is_reused() -> None:
@@ -166,37 +169,37 @@ def test_real_silentvoice_integration() -> None:
     model_path = Path("models/checkpoints/best_model.keras")
     metadata_path = Path("datasets/landmarks/metadata.json")
     test_data_path = Path("datasets/landmarks/test.npz")
-    
+
     if not (model_path.exists() and metadata_path.exists() and test_data_path.exists()):
         pytest.skip("Required model, metadata, or test data files are missing")
-        
+
     # We will use the actual app without overriding dependencies
     # But since it's a singleton, let's reset it first just in case
     app.dependency_overrides.clear()
     real_client = TestClient(app)
-    
+
     real_client.post("/predict/reset")
-    
+
     test_data = np.load(str(test_data_path))
     X = test_data["X"]
     if len(X) == 0:
         pytest.skip("Test dataset is empty")
-        
+
     sequence = X[0]
-    
+
     # Send 31 frames
     for i in range(31):
         payload = {"features": sequence[i].tolist()}
         response = real_client.post("/predict", json=payload)
         assert response.status_code == 200
         assert response.json()["sequence_ready"] is False
-        
+
     # Send the 32nd frame
     payload = {"features": sequence[31].tolist()}
     response = real_client.post("/predict", json=payload)
     assert response.status_code == 200
     data = response.json()
-    
+
     assert data["sequence_ready"] is True
     assert "predicted_class" in data
     assert "confidence" in data

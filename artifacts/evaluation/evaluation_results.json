@@ -1,0 +1,23 @@
+{
+    "test_loss": 0.2431328147649765,
+    "test_accuracy": 0.9230769276618958,
+    "total_test_samples": 13,
+    "model_path": "models\\checkpoints\\best_model.keras",
+    "test_data_path": "datasets\\landmarks\\test.npz",
+    "number_of_classes": 13,
+    "per_class_accuracy": {
+        "alive": 1.0,
+        "clean": 1.0,
+        "dead": 0.0,
+        "deep": 1.0,
+        "dirty": 1.0,
+        "hard": 1.0,
+        "heavy": 1.0,
+        "high": 1.0,
+        "low": 1.0,
+        "shallow": 1.0,
+        "soft": 1.0,
+        "strong": 1.0,
+        "weak": 1.0
+    }
+}

@@ -67,10 +67,31 @@ async def generic_exception_handler(request: Request, exc: Exception):
     )
 
 
+from fastapi.staticfiles import StaticFiles
+from fastapi.templating import Jinja2Templates
+from pathlib import Path
+
+# Configure static files and templates
+frontend_dir = Path("frontend")
+app.mount("/static", StaticFiles(directory=frontend_dir / "static"), name="static")
+app.mount("/models", StaticFiles(directory=Path("models")), name="models")
+templates = Jinja2Templates(directory=frontend_dir / "templates")
+
+
 @app.get("/")
 def read_root() -> dict[str, str]:
     """Return the API welcome message."""
     return {"message": "Welcome to SilentVoice API"}
+
+
+@app.get("/app")
+def serve_frontend(request: Request):
+    """Serve the SilentVoice frontend application."""
+    return templates.TemplateResponse(
+        request=request,
+        name="index.html",
+        context={}
+    )
 
 
 @app.get("/health")

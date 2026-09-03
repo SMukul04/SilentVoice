@@ -308,3 +308,7 @@ datasets/*
 !datasets/raw/.gitkeep
 !datasets/processed/.gitkeep
 !datasets/landmarks/.gitkeep
+
+# Temporary project artifacts
+tmpp*/
+project_structure.txt
