@@ -1,3 +1,6 @@
+import { HandLandmarker, FilesetResolver, DrawingUtils } from "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.3/vision_bundle.mjs";
+import { LandmarkExtractor } from "./landmark_extractor.js";
+
 /**
  * SilentVoice Frontend Dashboard Prototype Logic
  * Handles real-time video, Speech Recognition (with fallback), simulation routines, and state indicators.
@@ -5,8 +8,8 @@
 
 document.addEventListener('DOMContentLoaded', () => {
     // DOM Elements
-    const btnCamera = document.getElementById('btnCamera');
-    const btnCameraText = document.getElementById('btnCameraText');
+    const btnStartRecognition = document.getElementById('btnStartRecognition');
+    const btnStopRecognition = document.getElementById('btnStopRecognition');
     const btnSpeak = document.getElementById('btnSpeak');
     const btnSpeakText = document.getElementById('btnSpeakText');
     const btnClear = document.getElementById('btnClear');
@@ -15,6 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const cameraStatusBadge = document.getElementById('cameraStatusBadge');
     const cameraStatusDot = document.getElementById('cameraStatusDot');
     const cameraStatusText = document.getElementById('cameraStatusText');
+    const handsDetectedText = document.getElementById('handsDetectedText');
     
     const avatarStatusBadge = document.getElementById('avatarStatusBadge');
     const avatarStatusDot = document.getElementById('avatarStatusDot');
@@ -57,23 +61,21 @@ document.addEventListener('DOMContentLoaded', () => {
     let isListening = false;
     let cameraStream = null;
     let recognition = null;
-    let fpsInterval = null;
-    let simulationInterval = null;
     let avatarTimer = null;
+    let lastFrameTimestamp = 0;
     
-    // Simulated gesture glossary for Deaf communication
-    const simulatedGestures = [
-        "Hello",
-        "Thank you",
-        "Nice to meet you",
-        "How are you",
-        "Yes",
-        "No",
-        "I need help",
-        "SilentVoice",
-        "Awesome",
-        "I love you"
-    ];
+    // MediaPipe Variables
+    let handLandmarker = null;
+    let extractor = new LandmarkExtractor();
+    let lastVideoTime = -1;
+    let animationFrameId = null;
+    let isMediaPipeReady = false;
+    let isPredictionRequestPending = false;
+    
+    // Canvas Elements
+    const landmarkCanvas = document.getElementById('landmarkCanvas');
+    const canvasCtx = landmarkCanvas ? landmarkCanvas.getContext('2d') : null;
+    const drawingUtils = canvasCtx ? new DrawingUtils(canvasCtx) : null;
 
     // Initialize timestamps on load to reflect current local time
     initializeTimestamps();
@@ -90,112 +92,307 @@ document.addEventListener('DOMContentLoaded', () => {
         showNotification("Settings applied. Model configured to " + selectedModel.value.toUpperCase());
     });
 
-    // 2. Camera Toggle Handler
-    btnCamera.addEventListener('click', toggleCamera);
+    // 2. Camera Controls Handlers
+    btnStartRecognition.addEventListener('click', startCamera);
+    btnStopRecognition.addEventListener('click', stopCamera);
 
-    async function toggleCamera() {
-        if (!isCameraActive) {
-            try {
-                // Request real camera stream
-                const constraints = {
-                    video: { width: 640, height: 360, facingMode: "user" }
-                };
-                
-                cameraStream = await navigator.mediaDevices.getUserMedia(constraints);
-                webcamVideo.srcObject = cameraStream;
-                webcamVideo.classList.remove('d-none');
-                cameraPlaceholder.classList.add('d-none');
-                
-                // Update States
-                isCameraActive = true;
-                btnCameraText.textContent = "Stop Camera";
-                btnCamera.classList.add('active');
-                
-                // Camera Status Bar / Pill Updates
-                cameraStatusDot.classList.add('active');
-                cameraStatusText.textContent = "Live Feed";
-                barCameraDot.classList.add('active');
-                barCameraText.textContent = "Connected";
-                barCameraText.className = "text-success";
-                
-                // Avatar status goes online when camera is on
-                avatarStatusDot.classList.add('active');
-                avatarStatusText.textContent = "Online";
-                barAvatarDot.classList.add('active');
-                barAvatarText.textContent = "Online";
-                barAvatarText.className = "text-success";
-                avatarImage.classList.remove('d-none');
-                avatarPlaceholder.classList.add('d-none');
-                avatarStateBadge.textContent = "ACTIVE";
-                avatarStateBadge.className = "badge bg-success bg-opacity-25 text-success border border-success border-opacity-25";
-                
-                // Start Simulated Recognition Stats Loop
-                startSimulation();
-                showNotification("Camera feed and 3D Avatar connected successfully.");
-                
-            } catch (err) {
-                console.error("Camera access failed:", err);
-                // Graceful fallback for browsers/environments without webcam
-                alert("Could not access camera (or permission denied). Running simulated video feed placeholder.");
-                
-                // Simulate Active Camera anyway for demonstration
-                isCameraActive = true;
-                btnCameraText.textContent = "Stop Camera";
-                btnCamera.classList.add('active');
-                
-                cameraStatusDot.classList.add('active');
-                cameraStatusText.textContent = "Simulated Camera";
-                barCameraDot.classList.add('warning');
-                barCameraText.textContent = "Simulated";
-                barCameraText.className = "text-warning";
-                
-                // Avatar status goes online
-                avatarStatusDot.classList.add('active');
-                avatarStatusText.textContent = "Online";
-                barAvatarDot.classList.add('active');
-                barAvatarText.textContent = "Online";
-                barAvatarText.className = "text-success";
-                avatarImage.classList.remove('d-none');
-                avatarPlaceholder.classList.add('d-none');
-                avatarStateBadge.textContent = "ACTIVE";
-                avatarStateBadge.className = "badge bg-success bg-opacity-25 text-success border border-success border-opacity-25";
-                
-                startSimulation();
-            }
-        } else {
-            // Stop Camera
-            if (cameraStream) {
-                cameraStream.getTracks().forEach(track => track.stop());
-            }
-            webcamVideo.srcObject = null;
-            webcamVideo.classList.add('d-none');
-            cameraPlaceholder.classList.remove('d-none');
+    async function startCamera() {
+        if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+            showNotification("Camera access is not supported by this browser.");
+            return;
+        }
+
+        try {
+            cameraStatusText.textContent = "Starting camera...";
+            
+            // Request real camera stream
+            const constraints = {
+                video: true,
+                audio: false
+            };
+            
+            cameraStream = await navigator.mediaDevices.getUserMedia(constraints);
+            webcamVideo.srcObject = cameraStream;
+            webcamVideo.classList.remove('d-none');
+            cameraPlaceholder.classList.add('d-none');
             
             // Update States
-            isCameraActive = false;
-            btnCameraText.textContent = "Start Camera";
-            btnCamera.classList.remove('active');
+            isCameraActive = true;
+            btnStartRecognition.disabled = true;
+            btnStopRecognition.disabled = false;
             
             // Camera Status Bar / Pill Updates
-            cameraStatusDot.classList.remove('active');
+            cameraStatusDot.classList.add('active');
+            cameraStatusText.textContent = "Camera active";
+            barCameraDot.classList.add('active');
+            barCameraText.textContent = "Connected";
+            barCameraText.className = "text-success";
+            
+            // Avatar status goes online when camera is on
+            avatarStatusDot.classList.add('active');
+            avatarStatusText.textContent = "Online";
+            barAvatarDot.classList.add('active');
+            barAvatarText.textContent = "Online";
+            barAvatarText.className = "text-success";
+            avatarImage.classList.remove('d-none');
+            avatarPlaceholder.classList.add('d-none');
+            avatarStateBadge.textContent = "ACTIVE";
+            avatarStateBadge.className = "badge bg-success bg-opacity-25 text-success border border-success border-opacity-25";
+            
+            // Initialize MediaPipe and Start Processing Loop
+            await initializeMediaPipe();
+            
+            // Show canvas
+            if (landmarkCanvas) {
+                landmarkCanvas.width = webcamVideo.clientWidth || 640;
+                landmarkCanvas.height = webcamVideo.clientHeight || 360;
+                landmarkCanvas.classList.remove('d-none');
+            }
+            
+            lastVideoTime = -1;
+            // Wait for video to be ready before drawing
+            if (webcamVideo.readyState >= 2) {
+                renderLoop();
+                scheduleNextVideoFrame();
+            } else {
+                webcamVideo.addEventListener("loadeddata", () => {
+                    renderLoop();
+                    scheduleNextVideoFrame();
+                }, { once: true });
+            }
+            
+        } catch (err) {
+            let errorMsg = "Unable to access the camera.";
+            if (err.name === "NotAllowedError" || err.name === "PermissionDeniedError") {
+                errorMsg = "Camera permission was denied.";
+            } else if (err.name === "NotFoundError" || err.name === "DevicesNotFoundError") {
+                errorMsg = "No camera was found.";
+            } else if (err.name === "NotReadableError" || err.name === "TrackStartError") {
+                errorMsg = "The camera is currently unavailable.";
+            } else if (err.name === "SecurityError") {
+                errorMsg = "Camera access is blocked by security settings.";
+            }
+            showNotification(errorMsg);
+            
             cameraStatusText.textContent = "Camera Off";
-            barCameraDot.classList.remove('active', 'warning');
-            barCameraText.textContent = "Disconnected";
-            barCameraText.className = "text-muted";
+        }
+    }
+
+    function stopCamera() {
+        if (animationFrameId) {
+            cancelAnimationFrame(animationFrameId);
+            animationFrameId = null;
+        }
+        
+        if (cameraStream) {
+            cameraStream.getTracks().forEach(track => track.stop());
+        }
+        webcamVideo.srcObject = null;
+        webcamVideo.classList.add('d-none');
+        cameraPlaceholder.classList.remove('d-none');
+        
+        if (landmarkCanvas) {
+            landmarkCanvas.classList.add('d-none');
+            if (canvasCtx) {
+                canvasCtx.clearRect(0, 0, landmarkCanvas.width, landmarkCanvas.height);
+            }
+        }
+        
+        // Reset Backend Prediction State
+        fetch('/predict/reset', { method: 'POST' }).catch(err => console.error("Reset failed", err));
+        
+        // Reset UI Outputs
+        signOutput.textContent = "Waiting...";
+        confidenceOutput.textContent = "--";
+        confidenceProgress.style.width = "0%";
+        fpsOutput.textContent = "0.0";
+        if (handsDetectedText) handsDetectedText.textContent = "Hands detected: 0";
+        isPredictionRequestPending = false;
+        
+        // Update States
+        isCameraActive = false;
+        btnStartRecognition.disabled = false;
+        btnStopRecognition.disabled = true;
+        
+        // Camera Status Bar / Pill Updates
+        cameraStatusDot.classList.remove('active');
+        cameraStatusText.textContent = "Camera stopped";
+        barCameraDot.classList.remove('active', 'warning');
+        barCameraText.textContent = "Disconnected";
+        barCameraText.className = "text-muted";
+        
+        // Avatar Status Bar / Pill Offline
+        avatarStatusDot.classList.remove('active');
+        avatarStatusText.textContent = "Offline";
+        barAvatarDot.classList.remove('active');
+        barAvatarText.textContent = "Offline";
+        barAvatarText.className = "text-muted";
+        avatarImage.classList.add('d-none');
+        avatarPlaceholder.classList.remove('d-none');
+        avatarStateBadge.textContent = "IDLE";
+        avatarStateBadge.className = "badge bg-purple bg-opacity-25 text-purple border border-purple border-opacity-25";
+        avatarDetailedStatus.textContent = "Waiting for input...";
+    }
+
+    async function initializeMediaPipe() {
+        if (handLandmarker) {
+            isMediaPipeReady = true;
+            return;
+        }
+        
+        try {
+            showNotification("Loading MediaPipe HandLandmarker...");
+            const vision = await FilesetResolver.forVisionTasks(
+                "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.3/wasm"
+            );
             
-            // Avatar Status Bar / Pill Offline
-            avatarStatusDot.classList.remove('active');
-            avatarStatusText.textContent = "Offline";
-            barAvatarDot.classList.remove('active');
-            barAvatarText.textContent = "Offline";
-            barAvatarText.className = "text-muted";
-            avatarImage.classList.add('d-none');
-            avatarPlaceholder.classList.remove('d-none');
-            avatarStateBadge.textContent = "IDLE";
-            avatarStateBadge.className = "badge bg-purple bg-opacity-25 text-purple border border-purple border-opacity-25";
-            avatarDetailedStatus.textContent = "Waiting for input...";
+            handLandmarker = await HandLandmarker.createFromOptions(vision, {
+                baseOptions: {
+                    modelAssetPath: "/models/mediapipe/hand_landmarker.task",
+                    delegate: "GPU"
+                },
+                runningMode: "VIDEO",
+                numHands: 2,
+                minHandDetectionConfidence: 0.5,
+                minHandPresenceConfidence: 0.5,
+                minTrackingConfidence: 0.5
+            });
             
-            stopSimulation();
+            isMediaPipeReady = true;
+            showNotification("MediaPipe HandLandmarker loaded successfully.");
+        } catch (error) {
+            console.error("Failed to load MediaPipe:", error);
+            showNotification("Failed to load HandLandmarker model.");
+        }
+    }
+    
+    let latestResults = null;
+    let isDetecting = false;
+    let rVFCId = null;
+
+    function renderLoop() {
+        if (!isCameraActive) return;
+        
+        if (landmarkCanvas && webcamVideo.videoWidth) {
+            if (landmarkCanvas.width !== webcamVideo.videoWidth) {
+                landmarkCanvas.width = webcamVideo.videoWidth;
+            }
+            if (landmarkCanvas.height !== webcamVideo.videoHeight) {
+                landmarkCanvas.height = webcamVideo.videoHeight;
+            }
+        }
+        
+        if (canvasCtx && landmarkCanvas) {
+            canvasCtx.save();
+            canvasCtx.clearRect(0, 0, landmarkCanvas.width, landmarkCanvas.height);
+            
+            if (latestResults && latestResults.landmarks) {
+                for (const landmarks of latestResults.landmarks) {
+                    drawingUtils.drawConnectors(landmarks, HandLandmarker.HAND_CONNECTIONS, {
+                        color: "#bc34fa",
+                        lineWidth: 3
+                    });
+                    drawingUtils.drawLandmarks(landmarks, {
+                        color: "#0dcaf0",
+                        lineWidth: 2,
+                        radius: 3
+                    });
+                }
+            }
+            canvasCtx.restore();
+        }
+        
+        animationFrameId = window.requestAnimationFrame(renderLoop);
+    }
+
+    async function onVideoFrame(now, metadata) {
+        if (!isCameraActive || !isMediaPipeReady) return;
+        
+        // Drop stale frames: only process if we are not already busy processing a previous frame
+        if (!isDetecting) {
+            isDetecting = true;
+            
+            let startTimeMs = metadata ? metadata.presentationTime : performance.now();
+            
+            if (lastFrameTimestamp > 0) {
+                const elapsed = startTimeMs - lastFrameTimestamp;
+                if (elapsed > 0) {
+                    const fps = 1000 / elapsed;
+                    fpsOutput.textContent = fps.toFixed(1);
+                }
+            }
+            lastFrameTimestamp = startTimeMs;
+            
+            // Yield to the browser's event loop via setTimeout(0)
+            // This ensures the browser has a chance to visually paint this video frame to the screen
+            // BEFORE we block the main thread with MediaPipe's synchronous detectForVideo.
+            await new Promise(resolve => setTimeout(resolve, 0));
+            
+            if (isCameraActive) {
+                // Synchronously process the exact frame presentation time
+                latestResults = handLandmarker.detectForVideo(webcamVideo, startTimeMs);
+                
+                const extracted = extractor.extract(latestResults);
+                
+                if (handsDetectedText) {
+                    handsDetectedText.textContent = `Hands detected: ${extracted.handsDetected}`;
+                }
+                
+                if (!isPredictionRequestPending) {
+                    isPredictionRequestPending = true;
+                    
+                    fetch('/predict', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ features: Array.from(extracted.features) })
+                    })
+                    .then(res => {
+                        if (!res.ok) throw new Error("Backend error " + res.status);
+                        return res.json();
+                    })
+                    .then(data => {
+                        isPredictionRequestPending = false;
+                        if (data.sequence_ready) {
+                            signOutput.textContent = data.predicted_class;
+                            const confPct = (data.confidence * 100).toFixed(2);
+                            confidenceOutput.textContent = confPct + "%";
+                            confidenceProgress.style.width = confPct + "%";
+                        } else {
+                            signOutput.textContent = "Collecting frames...";
+                            confidenceOutput.textContent = "--";
+                            confidenceProgress.style.width = "0%";
+                        }
+                    })
+                    .catch(err => {
+                        isPredictionRequestPending = false;
+                        console.error("Prediction error:", err);
+                        signOutput.textContent = "Prediction service unavailable.";
+                        confidenceOutput.textContent = "--";
+                    });
+                }
+            }
+            
+            isDetecting = false;
+        }
+        
+        scheduleNextVideoFrame();
+    }
+    
+    function scheduleNextVideoFrame() {
+        if (!isCameraActive) return;
+        
+        if ('requestVideoFrameCallback' in webcamVideo) {
+            rVFCId = webcamVideo.requestVideoFrameCallback(onVideoFrame);
+        } else {
+            // Fallback for older browsers
+            rVFCId = requestAnimationFrame((now) => {
+                if (lastVideoTime !== webcamVideo.currentTime) {
+                    lastVideoTime = webcamVideo.currentTime;
+                    onVideoFrame(now, { presentationTime: now });
+                } else {
+                    scheduleNextVideoFrame();
+                }
+            });
         }
     }
 
@@ -268,45 +465,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // 4. Live Simulation loop for Left Panel metrics and gestures
-    function startSimulation() {
-        // Fluctuate FPS and Confidence values
-        fpsInterval = setInterval(() => {
-            const randomFps = (29.2 + Math.random() * 1.3).toFixed(1);
-            const randomConfidence = Math.floor(94 + Math.random() * 6);
-            
-            fpsOutput.textContent = randomFps;
-            confidenceOutput.textContent = randomConfidence + "%";
-            confidenceProgress.style.width = randomConfidence + "%";
-        }, 300);
-
-        // Every 8 seconds, simulate gesture recognition and append to chat
-        simulationInterval = setInterval(() => {
-            const randomGestureIndex = Math.floor(Math.random() * simulatedGestures.length);
-            const recognizedSign = simulatedGestures[randomGestureIndex];
-            
-            // Set recognized sign
-            signOutput.textContent = recognizedSign;
-            signOutput.classList.add('glow-text-blue');
-            setTimeout(() => {
-                signOutput.classList.remove('glow-text-blue');
-            }, 1000);
-
-            // Append "Deaf" sign message to conversation
-            appendChatMessage("Deaf", recognizedSign);
-        }, 7500);
-    }
-
-    function stopSimulation() {
-        clearInterval(fpsInterval);
-        clearInterval(simulationInterval);
-        
-        // Reset metrics outputs
-        signOutput.textContent = "--";
-        confidenceOutput.textContent = "0%";
-        confidenceProgress.style.width = "0%";
-        fpsOutput.textContent = "0.0";
-    }
 
     // 5. Avatar translation simulator
     function simulateAvatarResponse(sentence) {
@@ -447,4 +605,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const bsToast = new bootstrap.Toast(toast, { delay: 3000 });
         bsToast.show();
     }
+
+    // 7. Page Cleanup
+    window.addEventListener('beforeunload', () => {
+        if (cameraStream) {
+            cameraStream.getTracks().forEach(track => track.stop());
+        }
+    });
 });

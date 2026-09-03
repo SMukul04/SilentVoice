@@ -27,20 +27,26 @@
                 <div>
                     <div class="d-flex justify-content-between align-items-center mb-3">
                         <h4 class="m-0 text-white"><i class="fa-solid fa-hand-spock me-2 text-info"></i>Sign Language Recognition</h4>
-                        <span class="status-pill" id="cameraStatusBadge">
-                            <span class="status-dot" id="cameraStatusDot"></span>
-                            <span id="cameraStatusText">Camera Off</span>
-                        </span>
+                        <div class="d-flex gap-2">
+                            <span class="status-pill bg-dark bg-opacity-50" id="handsDetectedBadge">
+                                <span id="handsDetectedText">Hands detected: 0</span>
+                            </span>
+                            <span class="status-pill" id="cameraStatusBadge">
+                                <span class="status-dot" id="cameraStatusDot"></span>
+                                <span id="cameraStatusText">Camera Off</span>
+                            </span>
+                        </div>
                     </div>
 
                     <!-- Camera Feed Card -->
                     <div class="feed-viewport mb-4" id="cameraContainer">
-                        <!-- Simulated Grid & Scanning lines -->
-                        <div class="feed-grid"></div>
-                        <div class="feed-scan-line"></div>
+                        <!-- Simulated Grid & Scanning lines removed for real-time clarity -->
                         
                         <!-- Real Webcam Video element (hidden by default) -->
                         <video id="webcamVideo" class="video-element d-none" autoplay playsinline muted></video>
+                        
+                        <!-- Overlay Canvas for Drawing Landmarks -->
+                        <canvas id="landmarkCanvas" class="video-element d-none" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none;"></canvas>
                         
                         <!-- Fallback / Static Placeholder -->
                         <div class="feed-placeholder-content" id="cameraPlaceholder">
@@ -190,9 +196,13 @@
                     <i class="fa-solid fa-microphone"></i>
                     <span id="btnSpeakText">Start Speaking</span>
                 </button>
-                <button class="control-btn control-btn-purple" id="btnCamera" title="Toggle webcam gesture tracking">
+                <button class="control-btn control-btn-purple" id="btnStartRecognition" title="Start webcam gesture tracking">
                     <i class="fa-solid fa-camera"></i>
-                    <span id="btnCameraText">Start Camera</span>
+                    <span>Start Recognition</span>
+                </button>
+                <button class="control-btn control-btn-danger" id="btnStopRecognition" title="Stop webcam gesture tracking" disabled>
+                    <i class="fa-solid fa-stop"></i>
+                    <span>Stop Recognition</span>
                 </button>
                 <button class="control-btn control-btn-gray" id="btnClear" title="Clear chat conversation">
                     <i class="fa-solid fa-trash-can"></i>
