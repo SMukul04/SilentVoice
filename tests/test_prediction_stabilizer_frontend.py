@@ -62,9 +62,10 @@ def test_confirmation_counter_resets_on_change(stabilizer_js_content):
     assert "this.stablePrediction !== previousStable" in stabilizer_js_content
     assert "this.stablePredictionCount = this.stablePrediction ? 1 : 0" in stabilizer_js_content
 
-def test_meaningful_transition_allows_reconfirmation(stabilizer_js_content):
-    """Test 10b: Meaningful transition resets lastConfirmedPrediction."""
-    assert "this.lastConfirmedPrediction = null" in stabilizer_js_content
+def test_temporary_instability_preserves_guard(stabilizer_js_content):
+    """Test 10b: Temporary instability does NOT reset lastConfirmedPrediction."""
+    # Ensure lastConfirmedPrediction is NOT cleared when stablePrediction changes
+    assert "this.lastConfirmedPrediction = null" not in stabilizer_js_content.split("Confirmation logic")[1].split("}")[0]
 
 def test_duplicate_confirmation_prevention(stabilizer_js_content):
     """Test 11: Duplicate confirmation prevention exists."""

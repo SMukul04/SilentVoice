@@ -62,9 +62,6 @@ export class PredictionStabilizer {
             if (this.stablePrediction !== previousStable) {
                 // Stable prediction changed, reset consecutive confirmation count
                 this.stablePredictionCount = this.stablePrediction ? 1 : 0;
-                // A meaningful transition occurred, so clear the last confirmed state
-                // to allow the same sign to be newly confirmed later.
-                this.lastConfirmedPrediction = null;
             } else if (this.stablePrediction) {
                 // Stable prediction stayed the same
                 this.stablePredictionCount++;
