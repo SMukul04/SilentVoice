@@ -62,8 +62,8 @@ def test_confidence_displayed(app_js_content):
 
 
 def test_predicted_class_displayed(app_js_content):
-    """Test 10: Predicted class is displayed from the backend response."""
-    assert "signOutput.textContent = data.predicted_class" in app_js_content
+    """Test 10: Predicted class is utilized from the backend response."""
+    assert "data.predicted_class" in app_js_content
 
 
 def test_backend_error_handled(app_js_content):

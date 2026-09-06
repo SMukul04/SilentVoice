@@ -1,5 +1,6 @@
 import { HandLandmarker, FilesetResolver, DrawingUtils } from "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.3/vision_bundle.mjs";
 import { LandmarkExtractor } from "./landmark_extractor.js";
+import { PredictionStabilizer } from "./prediction_stabilizer.js";
 
 /**
  * SilentVoice Frontend Dashboard Prototype Logic
@@ -67,6 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // MediaPipe Variables
     let handLandmarker = null;
     let extractor = new LandmarkExtractor();
+    let stabilizer = new PredictionStabilizer();
     let lastVideoTime = -1;
     let animationFrameId = null;
     let isMediaPipeReady = false;
@@ -202,6 +204,7 @@ document.addEventListener('DOMContentLoaded', () => {
         fetch('/predict/reset', { method: 'POST' }).catch(err => console.error("Reset failed", err));
         
         // Reset UI Outputs
+        stabilizer.reset();
         signOutput.textContent = "Waiting...";
         confidenceOutput.textContent = "--";
         confidenceProgress.style.width = "0%";
@@ -338,6 +341,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     handsDetectedText.textContent = `Hands detected: ${extracted.handsDetected}`;
                 }
                 
+                if (extracted.handsDetected === 0) {
+                    stabilizer.reset();
+                }
+                
                 if (!isPredictionRequestPending) {
                     isPredictionRequestPending = true;
                     
@@ -353,8 +360,17 @@ document.addEventListener('DOMContentLoaded', () => {
                     .then(data => {
                         isPredictionRequestPending = false;
                         if (data.sequence_ready) {
-                            signOutput.textContent = data.predicted_class;
-                            const confPct = (data.confidence * 100).toFixed(2);
+                            const result = stabilizer.addPrediction(data.predicted_class, data.confidence);
+                            
+                            if (result.confirmedPrediction) {
+                                signOutput.textContent = "✓ " + result.confirmedPrediction;
+                            } else if (result.stablePrediction) {
+                                signOutput.textContent = "Potential sign: " + result.stablePrediction;
+                            } else {
+                                signOutput.textContent = "Analyzing...";
+                            }
+                            
+                            const confPct = (result.rawConfidence * 100).toFixed(2);
                             confidenceOutput.textContent = confPct + "%";
                             confidenceProgress.style.width = confPct + "%";
                         } else {
