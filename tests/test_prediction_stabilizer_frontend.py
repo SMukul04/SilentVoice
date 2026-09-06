@@ -106,10 +106,9 @@ def test_stop_no_hand_resets(app_js_content):
     assert "stabilizer.reset()" in app_js_content
     assert "extracted.handsDetected === 0" in app_js_content
 
-def test_no_sentence_building(app_js_content):
-    """Test 19: No sentence-building logic is introduced."""
-    # Implicitly checked by absence, but we can verify no new loops or text buffers
-    assert "sentence" not in app_js_content.split("isPredictionRequestPending")[1] # After fetch block
+def test_sentence_building_now_delegated(app_js_content):
+    """Test 19: Sentence-building logic is delegated to SentenceBuilder."""
+    assert "sentenceBuilder" in app_js_content.split("isPredictionRequestPending")[1]
 
 def test_no_second_predict_loop(app_js_content):
     """Test 20: No second /predict loop is introduced."""

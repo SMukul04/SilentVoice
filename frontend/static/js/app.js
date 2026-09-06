@@ -1,6 +1,7 @@
 import { HandLandmarker, FilesetResolver, DrawingUtils } from "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.3/vision_bundle.mjs";
 import { LandmarkExtractor } from "./landmark_extractor.js";
 import { PredictionStabilizer } from "./prediction_stabilizer.js";
+import { SentenceBuilder } from "./sentence_builder.js";
 
 /**
  * SilentVoice Frontend Dashboard Prototype Logic
@@ -45,6 +46,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const confidenceProgress = document.getElementById('confidenceProgress');
     const fpsOutput = document.getElementById('fpsOutput');
     
+    // Sentence UI Elements
+    const sentenceOutput = document.getElementById('sentenceOutput');
+    const btnClearSentence = document.getElementById('btnClearSentence');
+    
     const avatarStateBadge = document.getElementById('avatarStateBadge');
     const avatarDetailedStatus = document.getElementById('avatarDetailedStatus');
     
@@ -69,6 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let handLandmarker = null;
     let extractor = new LandmarkExtractor();
     let stabilizer = new PredictionStabilizer();
+    let sentenceBuilder = new SentenceBuilder();
     let lastVideoTime = -1;
     let animationFrameId = null;
     let isMediaPipeReady = false;
@@ -93,6 +99,16 @@ document.addEventListener('DOMContentLoaded', () => {
         barModelText.textContent = selectedModelText.split(' ')[0] + " (" + selectedModel.value.toUpperCase() + ")";
         showNotification("Settings applied. Model configured to " + selectedModel.value.toUpperCase());
     });
+
+    // Sentence Controls
+    if (btnClearSentence) {
+        btnClearSentence.addEventListener('click', () => {
+            sentenceBuilder.clear();
+            if (sentenceOutput) {
+                sentenceOutput.textContent = "";
+            }
+        });
+    }
 
     // 2. Camera Controls Handlers
     btnStartRecognition.addEventListener('click', startCamera);
@@ -361,6 +377,13 @@ document.addEventListener('DOMContentLoaded', () => {
                         isPredictionRequestPending = false;
                         if (data.sequence_ready) {
                             const result = stabilizer.addPrediction(data.predicted_class, data.confidence);
+                            
+                            if (result.isNewConfirmation) {
+                                sentenceBuilder.addWord(result.confirmedPrediction);
+                                if (sentenceOutput) {
+                                    sentenceOutput.textContent = sentenceBuilder.getSentence();
+                                }
+                            }
                             
                             if (result.confirmedPrediction) {
                                 signOutput.textContent = "✓ " + result.confirmedPrediction;
