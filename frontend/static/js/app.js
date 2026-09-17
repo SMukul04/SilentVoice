@@ -115,8 +115,12 @@ document.addEventListener('DOMContentLoaded', () => {
     btnStopRecognition.addEventListener('click', stopCamera);
 
     async function startCamera() {
+        if (isCameraActive) return;
+        btnStartRecognition.disabled = true;
+
         if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
             showNotification("Camera access is not supported by this browser.");
+            btnStartRecognition.disabled = false;
             return;
         }
 
@@ -193,6 +197,7 @@ document.addEventListener('DOMContentLoaded', () => {
             showNotification(errorMsg);
             
             cameraStatusText.textContent = "Camera Off";
+            btnStartRecognition.disabled = false;
         }
     }
 
@@ -200,6 +205,15 @@ document.addEventListener('DOMContentLoaded', () => {
         if (animationFrameId) {
             cancelAnimationFrame(animationFrameId);
             animationFrameId = null;
+        }
+        
+        if (rVFCId) {
+            if ('cancelVideoFrameCallback' in webcamVideo) {
+                webcamVideo.cancelVideoFrameCallback(rVFCId);
+            } else {
+                cancelAnimationFrame(rVFCId);
+            }
+            rVFCId = null;
         }
         
         if (cameraStream) {
@@ -375,6 +389,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     })
                     .then(data => {
                         isPredictionRequestPending = false;
+                        if (!isCameraActive) return;
+                        
                         if (data.sequence_ready) {
                             const result = stabilizer.addPrediction(data.predicted_class, data.confidence);
                             
