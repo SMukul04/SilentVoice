@@ -114,3 +114,8 @@ def test_sentence_building_now_delegated(app_js_content):
 def test_no_second_predict_loop(app_js_content):
     """Test 20: No second /predict loop is introduced."""
     assert app_js_content.count("fetch('/predict'") == 1 or app_js_content.count("fetch(\"/predict\"") == 1
+
+def test_clear_confirmed_on_change(stabilizer_js_content):
+    """Test 21: UI state transition drops confirmedPrediction when stablePrediction changes without NO_HAND."""
+    assert "this.stablePrediction !== this.confirmedPrediction" in stabilizer_js_content
+    assert "this.confirmedPrediction = null" in stabilizer_js_content

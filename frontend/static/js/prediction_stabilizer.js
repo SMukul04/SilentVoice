@@ -67,6 +67,11 @@ export class PredictionStabilizer {
                 this.stablePredictionCount++;
             }
 
+            // Clear confirmed prediction if the current stable prediction no longer matches it
+            if (this.stablePrediction !== this.confirmedPrediction) {
+                this.confirmedPrediction = null;
+            }
+
             // If consecutive updates reach the requirement, trigger confirmation
             if (this.stablePrediction && this.stablePredictionCount >= this.CONFIRMED_PREDICTIONS) {
                 this.confirmedPrediction = this.stablePrediction;
