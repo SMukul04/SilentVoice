@@ -133,3 +133,8 @@ def reset_prediction(
         "success": True,
         "message": "Prediction state reset"
     }
+
+
+from backend.api.speech_routes import router as speech_router
+app.include_router(speech_router)
+
