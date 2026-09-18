@@ -2,16 +2,19 @@
 
 import logging
 from fastapi import APIRouter, UploadFile, File, HTTPException
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, Response
+from pydantic import BaseModel
 
 from backend.schemas.speech import (
     AudioInput, 
     SpeechToTextResult,
     SpeechError,
     AudioInputError,
-    TranscriptionError
+    TranscriptionError,
+    SynthesisError
 )
 from backend.services.whisper_speech_service import WhisperSpeechService
+from backend.services.edge_tts_speech_service import EdgeTTSSpeechService
 
 logger = logging.getLogger(__name__)
 
@@ -77,3 +80,26 @@ async def transcribe_audio(file: UploadFile = File(...)) -> SpeechToTextResult:
     except Exception as e:
         logger.exception("Unexpected error during speech route execution")
         raise HTTPException(status_code=500, detail="Internal server error during transcription.")
+
+class SynthesizeRequest(BaseModel):
+    text: str
+
+_tts_service = EdgeTTSSpeechService(voice="en-US-AriaNeural")
+
+@router.post("/synthesize")
+def synthesize_text(request: SynthesizeRequest) -> Response:
+    """Synthesize text into audio."""
+    if not request.text or not request.text.strip():
+        raise HTTPException(status_code=400, detail="Text cannot be empty.")
+        
+    try:
+        result = _tts_service.synthesize(request.text)
+        return Response(content=result.audio_data, media_type=result.content_type)
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    except SynthesisError as e:
+        logger.error(f"Synthesis error: {e}")
+        raise HTTPException(status_code=500, detail="Synthesis failed. See server logs.")
+    except Exception as e:
+        logger.exception("Unexpected error during synthesis route execution")
+        raise HTTPException(status_code=500, detail="Internal server error during synthesis.")

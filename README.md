@@ -1,544 +1,242 @@
-<div align="center">
+# SilentVoice
+"Giving Every Gesture a Voice."
 
-# 🤟 SilentVoice
+## Project Status
+**Current Phase:** Phase 3 — Frontend Recognition Experience (Completed)
+**Current Status:** Early Development Checkpoint. The project currently features an AI-powered real-time Indian Sign Language (ISL) recognition system. The implemented model supports a 13-class development subset and is not yet a final production model.
 
-### *Giving Every Gesture a Voice.*
+## Overview
+SilentVoice is an AI-Powered Real-Time Indian Sign Language Recognition and Future Bidirectional Communication System. Its goal is to bridge the communication gap by translating real-time sign language into text and, eventually, providing full bidirectional communication features.
 
-**An AI-Powered Real-Time Bidirectional Communication System for Deaf and Hearing Individuals**
+## Current Capabilities
+- **Real-Time Sign Recognition:** Detects and classifies 13 development ISL signs in real-time.
+- **Webcam Interface:** Accessible directly through a modern web browser.
+- **Browser-Side MediaPipe Integration:** Extracts hand landmarks (21 landmarks per hand, up to 2 hands) locally in the browser to reduce latency.
+- **Temporal Sequence Recognition:** Uses a 32-frame buffer to capture the temporal dynamics of signs.
+- **Temporal Stabilization:** Filters out unstable predictions to ensure accurate sentence building.
+- **Sentence Builder:** Combines confirmed signs into a complete sentence string.
+- **Frontend Controls:** Start, stop, and restart camera controls with a clear sentence function.
+- **Real-Time Metrics:** Displays real-time FPS, hand detection count, and prediction status.
 
-<p align="center">
-  <img src="https://img.shields.io/badge/Status-In%20Development-blue?style=for-the-badge" />
-  <img src="https://img.shields.io/badge/Python-3.11+-3776AB?style=for-the-badge&logo=python&logoColor=white" />
-  <img src="https://img.shields.io/badge/OpenCV-Computer%20Vision-5C3EE8?style=for-the-badge&logo=opencv&logoColor=white" />
-  <img src="https://img.shields.io/badge/MediaPipe-Hand%20Tracking-FF6F00?style=for-the-badge" />
-  <img src="https://img.shields.io/badge/TensorFlow-LSTM-FF6F00?style=for-the-badge&logo=tensorflow&logoColor=white" />
-  <img src="https://img.shields.io/badge/OpenAI-Whisper-000000?style=for-the-badge" />
-  <img src="https://img.shields.io/badge/Unity-3D%20Avatar-000000?style=for-the-badge&logo=unity" />
-</p>
+## Current Recognition Pipeline
+1. **Camera Capture:** The user's webcam feed is captured.
+2. **Browser Video Stream:** Displayed in the HTML frontend.
+3. **MediaPipe Hand Landmarker:** Extracts 21 landmarks per hand.
+4. **Landmark Normalization:** Normalizes coordinates relative to the hand's bounding box.
+5. **126-Dimensional Feature Vector:** Combines coordinates for two hands (missing hands are zero-padded).
+6. **32-Frame Temporal Sequence:** Buffers 32 frames to capture movement.
+7. **FastAPI `/predict`:** Sends the sequence to the backend prediction REST API.
+8. **LSTM Recognition Model:** Evaluates the temporal sequence.
+9. **Raw Prediction:** The model returns a raw sign classification.
+10. **Temporal Stabilizer:** Filters out unstable predictions by requiring consecutive matches.
+11. **Stable / Confirmed Sign:** Only verified signs are accepted.
+12. **Sentence Builder:** Appends confirmed signs to the ongoing text.
+13. **Sentence Output:** Text is displayed to the user.
 
-<p align="center">
-  <a href="#-features">Features</a> •
-  <a href="#-system-architecture">Architecture</a> •
-  <a href="#-tech-stack">Tech Stack</a> •
-  <a href="#-roadmap">Roadmap</a> •
-  <a href="#-installation">Installation</a> •
-  <a href="#-project-structure">Project Structure</a>
-</p>
+*Note: Raw predictions are not immediately added to the sentence. The temporal stabilization reduces unstable predictions, and only new confirmed predictions are appended to the sentence. Removing hands acts as a recognition boundary/reset.*
 
-</div>
-
----
-
-# 📖 Overview
-
-**SilentVoice** is an AI-powered accessibility platform that enables **real-time communication between deaf and hearing individuals**.
-
-The system provides **bidirectional translation** by converting:
-
-- 🤟 **Sign Language → Text → Speech**
-- 🎤 **Speech → Text → 3D Sign Language Avatar**
-
-SilentVoice combines **Computer Vision**, **Deep Learning**, **Speech Recognition**, **Natural Language Processing**, and **3D Avatar Animation** to create an inclusive communication experience.
-
-Unlike traditional sign language translators, SilentVoice focuses on **real-time two-way conversations** instead of one-way translation.
-
-# ✅ Current Progress
-
-The complete preprocessing pipeline for real-time sign language recognition has been implemented and tested.
-
-Completed components:
-
-- Camera Module
-- MediaPipe Multi-Hand Detection
-- Landmark Extraction
-- Left & Right Hand Classification
-- Landmark Normalization
-- 126-Dimensional Feature Representation
-- 30-Frame Sliding Buffer
-- Unit Testing
-- Live Integration Testing
-
-The project is currently entering the **Dataset Collection** phase for training the gesture recognition model.
-
----
-
-# 🎯 Objectives
-
-- Enable seamless communication between deaf and hearing individuals.
-- Recognize sign language in real time.
-- Convert speech into text instantly.
-- Display sign language using a realistic 3D avatar.
-- Create an intuitive live conversation interface.
-- Promote accessibility using Artificial Intelligence.
-
----
-
-# ✨ Features
-
-## 🤟 Sign Language Recognition
-
-### ✅ Completed
-
-- Real-time Camera Pipeline
-- OpenCV Integration
-- MediaPipe Multi-Hand Tracking
-- Left & Right Hand Detection
-- 21 Landmark Extraction per Hand
-- Handedness Classification
-- Landmark Normalization
-- Two-Hand Feature Vector (126 Features)
-- 30-Frame Sliding Buffer
-- Complete Preprocessing Pipeline
-- Unit & Live Integration Tests
-
-### 🚧 In Progress
-
-- Dataset Collection
-- LSTM Gesture Recognition
-- Sentence Builder
-- Live Chat Output
-
----
-
-## 🎤 Speech Recognition
-
-- Real-time microphone input
-- Voice Activity Detection
-- OpenAI Whisper Speech-to-Text
-- Low-latency transcription
-- Automatic Chat Updates
-
----
-
-## 🔊 Text to Speech
-
-- Coqui TTS
-- Natural Voice Generation
-- Sign-to-Speech Communication
-
----
-
-## 👤 Text to Sign Language Avatar
-
-- Sentence Parsing
-- Word Tokenization
-- Sign Dictionary
-- Animation Queue
-- Unity Animator
-- Blender Avatar
-- Smooth Transition Between Signs
-
----
-
-## 💬 Live Chat
-
-- Real-Time Conversation Window
-- Bidirectional Communication
-- Timestamped Messages
-- Conversation History
-
----
-
-# 🏗 System Architecture
-
-```text
-                    SilentVoice
-
-                 Hearing Person
-                       │
-               Speech / Text Input
-                       │
-              Whisper Speech Recognition
-                       │
-                   Chat Engine
-                       │
-                       ▼
-────────────────────────────────────────────────────────────
-
-                    Backend Controller
-
-────────────────────────────────────────────────────────────
-                       ▲
-                       │
-                 Chat Engine
-                       │
-        Sign Language Recognition (LSTM)
-                       │
-             MediaPipe + OpenCV
-                       │
-                 Deaf Person
+## Architecture
 ```
-
----
-
-# 🧠 AI Pipelines
-
-## Module 1 — Sign → Text
-
-```text
 Camera
-   │
-OpenCV
-   │
-MediaPipe Hands
-   │
-21 Hand Landmarks
-   │
-Feature Engineering
-   │
+  ↓
+Browser Video Stream
+  ↓
+MediaPipe Hand Landmarker
+  ↓
+21 landmarks × up to 2 hands
+  ↓
 Landmark Normalization
-   │
-30 Frame Buffer
-   │
-LSTM
-   │
-Predicted Sign
-   │
+  ↓
+126-Dimensional Feature Vector
+  ↓
+32-Frame Temporal Sequence
+  ↓
+FastAPI /predict
+  ↓
+LSTM Recognition Model
+  ↓
+Raw Prediction
+  ↓
+Temporal Stabilizer
+  ↓
+Stable / Confirmed Sign
+  ↓
 Sentence Builder
-   │
-Chat Window
+  ↓
+Sentence Output
 ```
 
----
+## Current Model/Dataset Checkpoint
+The currently implemented model is a **DEVELOPMENT CHECKPOINT** only.
+- **Sequence Length:** 32 frames
+- **Feature Dimension:** 126
+- **Current Classes:** 13 (alive, clean, dead, deep, dirty, hard, heavy, high, low, shallow, soft, strong, weak)
+- **Dataset Size:** 104 total samples (78 training, 13 validation, 13 test)
+- **Test Accuracy:** Approximately 92.3% on the 13-sample test set. *This is an early development evaluation and does NOT represent a production-quality/final accuracy claim.*
 
-## Module 2 — Sentence Builder
+## Tech Stack
+**Backend:**
+- Python 3.11+
+- FastAPI
+- Uvicorn
+- Jinja2
 
-```text
-Predicted Signs
-      │
-Duplicate Filter
-      │
-Confidence Filter
-      │
-Sentence Builder
-      │
-Grammar Correction
-      │
-Chat Window
-```
-
----
-
-## Module 3 — Speech → Text
-
-```text
-Microphone
-      │
-Voice Activity Detection
-      │
-OpenAI Whisper
-      │
-Speech-to-Text
-      │
-Chat Window
-```
-
----
-
-## Module 4 — Text → Sign Avatar
-
-```text
-Speech / Text
-      │
-Sentence Parser
-      │
-Tokenizer
-      │
-Sign Dictionary
-      │
-Animation Manager
-      │
-Unity Animator
-      │
-3D Avatar
-```
-
----
-
-# 🛠 Tech Stack
-
-## Programming
-
-- Python
-- JavaScript
-- C#
-
----
-
-## Frontend
-
+**Frontend:**
 - HTML
 - CSS
-- Bootstrap
-- JavaScript
+- Vanilla JavaScript
 
----
-
-## Backend
-
-- Flask
-- REST API
-
----
-
-## Computer Vision
-
-- OpenCV
+**Computer Vision:**
 - MediaPipe
+- OpenCV
 
----
-
-## Deep Learning
-
-- TensorFlow
-- Keras
+**Machine Learning:**
+- TensorFlow/Keras
 - LSTM
+- NumPy
 
----
-
-## Speech Processing
-
-- OpenAI Whisper
-- Coqui TTS
-
----
-
-## Avatar
-
-- Unity
-- Blender
-- Ready Player Me
-
----
-
-## Database
-
-- SQLite
-
-Future
-
-- MongoDB
-
----
-
-# 📂 Project Structure
-
-```text
-SilentVoice-AI/
-
-├── backend/
-│   ├── sign_recognition/
-│   ├── speech_recognition/
-│   ├── sentence_builder/
-│   ├── avatar_controller/
-│   ├── models/
-│   └── app.py
-│
-├── frontend/
-│
-├── unity/
-│
-├── blender/
-│
-├── datasets/
-│
-├── docs/
-│
-├── requirements.txt
-│
-├── README.md
-│
-└── LICENSE
+## Project Structure
+```
+SilentVoice/
+├── backend/            # FastAPI application and routing
+├── frontend/           # Vanilla JS, CSS, and HTML templates
+├── models/             # LSTM model architecture and saved weights
+├── datasets/           # Development dataset pipeline and samples
+├── tests/              # Automated unit and integration tests
+├── artifacts/          # Generated artifacts and logs
+├── README.md           # Project documentation
+└── requirements.txt    # Python dependencies
 ```
 
----
+## How to Run Locally
 
-# 📸 Screenshots
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/SMukul04/SilentVoice.git
+   cd SilentVoice
+   ```
 
-> Screenshots will be added during development.
+2. **Create a virtual environment:**
+   ```bash
+   python -m venv .venv
+   ```
 
-| Home | Sign Recognition | Avatar |
-|------|------------------|---------|
-| Coming Soon | Coming Soon | Coming Soon |
+3. **Activate the virtual environment (Windows PowerShell):**
+   ```powershell
+   .venv\Scripts\Activate.ps1
+   ```
 
----
+4. **Install dependencies:**
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-# 🎥 Demo
+5. **Run the application:**
+   ```bash
+   python -m uvicorn backend.app.main:app --reload
+   ```
 
-Demo video will be available after the first stable release.
+6. **Access the web interface:**
+   Navigate to [http://127.0.0.1:8000/app](http://127.0.0.1:8000/app) in your browser.
 
----
+## Testing
+The project includes a robust suite of automated tests covering multiple areas, including:
+- MediaPipe detector and landmark extraction
+- Frontend landmark extraction and prediction integration
+- Prediction stabilizer and sentence builder
+- Webcam frontend and controls
+- Prediction API and backend integration
+- Validation and error handling
 
-# 🚀 Installation
-
-Clone the repository
-
+To run the tests:
 ```bash
-git clone https://github.com/<YOUR_USERNAME>/SilentVoice-AI.git
+python -m pytest tests backend
 ```
 
-Move inside the project
+## Development Roadmap
 
-```bash
-cd SilentVoice-AI
-```
+**Phase 1 — Foundation**
+- [x] Repository setup
+- [x] Backend foundation
+- [x] Camera/preprocessing pipeline
+- [x] MediaPipe hand tracking
+- [x] Landmark extraction
+- [x] Landmark normalization
+- [x] 126-dimensional feature representation
+- [x] Temporal buffering
+- [x] Dataset pipeline foundation
+- [x] Automated testing
 
-Install dependencies
+**Phase 2 — Recognition**
+- [x] Dataset loader
+- [x] Development dataset
+- [x] LSTM model
+- [x] Model evaluation
+- [x] Backend prediction API
+- [x] Real-time prediction
 
-```bash
-pip install -r requirements.txt
-```
+**Phase 3 — Frontend Recognition Experience**
+- [x] Frontend setup
+- [x] Webcam interface
+- [x] Browser MediaPipe extraction
+- [x] Prediction integration
+- [x] Temporal stabilization
+- [x] Sign confirmation
+- [x] Sentence builder
+- [x] Start/Stop/Restart controls
+- [x] Final frontend verification
 
-Run
+**Phase 4 — Recognition Quality Upgrade**
+- [ ] Expand to 50-class ISL dataset
+- [ ] Video-based dataset pipeline
+- [ ] Improve temporal sequence generation
+- [ ] Data augmentation
+- [ ] Class balancing
+- [ ] Model tuning
+- [ ] Robust evaluation
+- [ ] Unknown/rejection handling
+- [ ] Production-quality accuracy evaluation
 
-```bash
-python app.py
-```
+**Phase 5 — Bidirectional Communication**
+- [ ] Speech-to-text
+- [ ] Text-to-speech
+- [ ] Conversation interface
+- [ ] Text-to-sign translation
 
----
+**Phase 6 — 3D Avatar**
+- [ ] Sign dictionary
+- [ ] Sentence parser
+- [ ] Animation system
+- [ ] Unity/3D avatar integration
 
-# 🗺 Development Roadmap
-
-## ✅ Phase 1 — Foundation
-
-- [x] Project Planning
-- [x] System Architecture
-- [x] Repository Setup
-- [x] Backend Structure
-- [x] Camera Module
-- [x] MediaPipe Integration
-- [x] Landmark Extraction
-- [x] FrameFeatures
-- [x] Landmark Normalization
-- [x] FrameBuffer
-- [x] Unit Testing
-- [x] Integration Testing
-
----
-
-## 🚧 Phase 2 — Dataset & Model
-
-- [ ] Dataset Collection
-- [ ] Dataset Loader
-- [ ] Data Augmentation
-- [ ] Train/Test Split
-- [ ] LSTM Training
-- [ ] Model Evaluation
-- [ ] Real-Time Prediction
-
----
-
-## ⏳ Phase 3 — NLP
-
-- [ ] Confidence Filtering
-- [ ] Duplicate Removal
-- [ ] Sentence Builder
-- [ ] Grammar Correction
-
----
-
-## ⏳ Phase 4 — Speech Processing
-
-- [ ] Whisper Integration
-- [ ] Speech-to-Text
-- [ ] Text-to-Speech
-- [ ] Conversation Engine
-
----
-
-## ⏳ Phase 5 — Avatar
-
-- [ ] Text Parser
-- [ ] Sign Dictionary
-- [ ] Animation Queue
-- [ ] Unity Avatar
-
----
-
-## ⏳ Phase 6 — Deployment
-
-- [ ] Web Interface
-- [ ] Optimization
+**Phase 7 — Deployment**
+- [ ] Performance optimization
+- [ ] Production deployment
 - [ ] Documentation
-- [ ] Public Release
----
+- [ ] Release
 
-# 🌟 Future Enhancements
+## Future Enhancements
+The following features are planned for future development but are not yet implemented:
+- Production 50-class video-trained Transformer/LSTM model
+- Whisper speech recognition (Speech-to-text)
+- Coqui TTS (Text-to-speech)
+- Unity/Blender/Ready Player Me 3D Avatar integration
+- Live bidirectional chat and grammar correction
+- Mobile application and Cloud deployment
+- Video calling
 
-- Continuous Sign Language Recognition
-- Transformer-based Gesture Recognition
-- Indian Sign Language Support
-- Multi-language Translation
-- Facial Expression Recognition
-- Emotion Detection
-- Offline Mode
-- Mobile Application
-- Video Call Integration
-- Cloud Deployment
-- AI Grammar Correction
-- Personalized Avatar
+## Limitations / Current Development Status
+- **Limited Classes:** The current recognition model supports only 13 development classes.
+- **Small Dataset:** The current evaluation dataset is small, serving as an early proof-of-concept.
+- **Accuracy Claims:** The reported test accuracy is an early development checkpoint and should not be interpreted as production accuracy.
+- **Future Targets:** The final target is video-based ISL recognition with a substantially larger dataset/class set.
+- **Pending Features:** Speech and 3D avatar pipelines are planned but not yet implemented.
 
----
+## Contributing
+Contributions are welcome. Please ensure that tests are run locally and that pull requests align with the development roadmap before submission.
 
-# 📊 Project Status
+## License
+[MIT License](LICENSE)
 
-```text
-Planning             ████████████████████ 100%
-
-Architecture         ████████████████████ 100%
-
-Preprocessing        ████████████████████ 100%
-
-Dataset Pipeline     ░░░░░░░░░░░░░░░░░░░░   0%
-
-Model Training       ░░░░░░░░░░░░░░░░░░░░   0%
-
-Speech Pipeline      ░░░░░░░░░░░░░░░░░░░░   0%
-
-Avatar Pipeline      ░░░░░░░░░░░░░░░░░░░░   0%
-
-Deployment           ░░░░░░░░░░░░░░░░░░░░   0%
-```
-
----
-
-# 🤝 Contributing
-
-Contributions are welcome!
-
-If you'd like to improve SilentVoice:
-
-1. Fork the repository
-2. Create a feature branch
-3. Commit your changes
-4. Open a Pull Request
-
----
-
-# 📜 License
-
-This project is licensed under the **MIT License**.
-
----
-
-# 👨‍💻 Author
-
-**Mukul Singh**
-
-AI & Machine Learning Enthusiast
-
-GitHub: https://github.com/SMukul04
-
-LinkedIn: https://www.linkedin.com/in/mukul-singh-11b71030b/
-
----
-
-<div align="center">
-
-## ⭐ If you found this project useful, consider giving it a Star!
-
-### Together, let's build a more accessible and inclusive world through AI.
-
-**SilentVoice — Giving Every Gesture a Voice.**
-
-</div>
+## Author
+[SMukul04](https://github.com/SMukul04)
