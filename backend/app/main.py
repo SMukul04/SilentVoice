@@ -29,12 +29,17 @@ def get_prediction_service() -> PredictionService:
 @app.exception_handler(RequestValidationError)
 async def validation_exception_handler(request: Request, exc: RequestValidationError):
     """Handle FastAPI/Pydantic validation errors (HTTP 422)."""
+    if request.url.path.startswith("/predict"):
+        detail = "Invalid prediction request"
+    else:
+        detail = "Invalid request payload"
+        
     return JSONResponse(
         status_code=422,
         content=APIErrorResponse(
             success=False,
             error="Validation error",
-            detail="Invalid prediction request"
+            detail=detail
         ).model_dump()
     )
 
@@ -57,12 +62,17 @@ async def model_missing_exception_handler(request: Request, exc: FileNotFoundErr
 async def generic_exception_handler(request: Request, exc: Exception):
     """Handle all other unexpected errors (HTTP 500)."""
     logger.exception("Unexpected backend failure")
+    
+    is_predict = request.url.path.startswith("/predict")
+    error = "Prediction failed" if is_predict else "Internal server error"
+    detail = "Unable to process the prediction." if is_predict else "An unexpected error occurred."
+    
     return JSONResponse(
         status_code=500,
         content=APIErrorResponse(
             success=False,
-            error="Prediction failed",
-            detail="Unable to process the prediction."
+            error=error,
+            detail=detail
         ).model_dump()
     )
 
