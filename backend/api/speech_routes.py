@@ -15,6 +15,8 @@ from backend.schemas.speech import (
 )
 from backend.services.whisper_speech_service import WhisperSpeechService
 from backend.services.edge_tts_speech_service import EdgeTTSSpeechService
+from backend.schemas.speech_session import SpeechSession, SessionState
+from backend.services.speech_session_service import SpeechSessionService, SessionNotFoundError, InvalidStateTransitionError
 
 logger = logging.getLogger(__name__)
 
@@ -103,3 +105,54 @@ def synthesize_text(request: SynthesizeRequest) -> Response:
     except Exception as e:
         logger.exception("Unexpected error during synthesis route execution")
         raise HTTPException(status_code=500, detail="Internal server error during synthesis.")
+
+
+# ==============================================================================
+# Session Management API
+# ==============================================================================
+
+_session_service = SpeechSessionService()
+
+@router.post("/sessions", response_model=SpeechSession)
+def create_session():
+    """Create a new speech session."""
+    return _session_service.create_session()
+
+@router.get("/sessions/{session_id}", response_model=SpeechSession)
+def get_session(session_id: str):
+    """Retrieve an existing speech session."""
+    try:
+        return _session_service.get_session(session_id)
+    except SessionNotFoundError as e:
+        raise HTTPException(status_code=404, detail=str(e))
+
+class TransitionRequest(BaseModel):
+    state: SessionState
+
+@router.post("/sessions/{session_id}/transition", response_model=SpeechSession)
+def transition_session(session_id: str, request: TransitionRequest):
+    """Transition a session to a new state."""
+    try:
+        return _session_service.transition_state(session_id, request.state)
+    except SessionNotFoundError as e:
+        raise HTTPException(status_code=404, detail=str(e))
+    except InvalidStateTransitionError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+@router.post("/sessions/{session_id}/reset", response_model=SpeechSession)
+def reset_session(session_id: str):
+    """Reset an active session to IDLE."""
+    try:
+        return _session_service.reset_session(session_id)
+    except SessionNotFoundError as e:
+        raise HTTPException(status_code=404, detail=str(e))
+    except InvalidStateTransitionError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+@router.post("/sessions/{session_id}/close", response_model=SpeechSession)
+def close_session(session_id: str):
+    """Close a session."""
+    try:
+        return _session_service.close_session(session_id)
+    except SessionNotFoundError as e:
+        raise HTTPException(status_code=404, detail=str(e))

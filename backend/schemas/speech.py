@@ -29,6 +29,18 @@ class SynthesisError(SpeechError):
     """Raised when Text-to-Speech synthesis fails."""
     pass
 
+class SessionError(SpeechError):
+    """Base exception for speech session errors."""
+    pass
+
+class SessionNotFoundError(SessionError):
+    """Raised when a requested session does not exist."""
+    pass
+
+class InvalidStateTransitionError(SessionError):
+    """Raised when an invalid state transition is attempted."""
+    pass
+
 
 # ==============================================================================
 # Models
