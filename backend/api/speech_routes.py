@@ -11,8 +11,12 @@ from backend.schemas.speech import (
     SpeechError,
     AudioInputError,
     TranscriptionError,
-    SynthesisError
+    SynthesisError,
+    SessionNotFoundError,
+    InvalidStateTransitionError
 )
+from backend.schemas.speech_integration import SessionTranscriptionResponse
+from backend.services.speech_communication_service import SpeechCommunicationService
 from backend.services.whisper_speech_service import WhisperSpeechService
 from backend.services.edge_tts_speech_service import EdgeTTSSpeechService
 from backend.schemas.speech_session import SpeechSession, SessionState
@@ -106,12 +110,81 @@ def synthesize_text(request: SynthesizeRequest) -> Response:
         logger.exception("Unexpected error during synthesis route execution")
         raise HTTPException(status_code=500, detail="Internal server error during synthesis.")
 
+# ==============================================================================
+# Speech Communication / Orchestration API
+# ==============================================================================
+
+_session_service = SpeechSessionService()
+
+_communication_service = SpeechCommunicationService(
+    session_service=_session_service,
+    stt_service=_speech_service,
+    tts_service=_tts_service
+)
+
+@router.post("/sessions/{session_id}/transcribe", response_model=SessionTranscriptionResponse)
+async def session_transcribe(session_id: str, file: UploadFile = File(...)):
+    """Transcribe audio within a session."""
+    if not file:
+        raise HTTPException(status_code=400, detail="No audio file provided.")
+        
+    try:
+        audio_bytes = await file.read()
+        if not audio_bytes:
+            raise HTTPException(status_code=400, detail="Audio file is empty.")
+            
+        audio_input = AudioInput(
+            data=audio_bytes,
+            content_type=file.content_type or "application/octet-stream"
+        )
+        
+        return _communication_service.transcribe_session(session_id, audio_input)
+        
+    except SessionNotFoundError as e:
+        raise HTTPException(status_code=404, detail=str(e))
+    except InvalidStateTransitionError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    except AudioInputError as e:
+        logger.warning(f"Audio input error: {e}")
+        raise HTTPException(status_code=400, detail=str(e))
+    except TranscriptionError as e:
+        logger.error(f"Transcription error: {e}")
+        raise HTTPException(status_code=500, detail="Transcription failed. See server logs.")
+    except Exception as e:
+        logger.exception("Unexpected error during session transcribe")
+        raise HTTPException(status_code=500, detail="Internal server error during transcription.")
+
+@router.post("/sessions/{session_id}/synthesize")
+def session_synthesize(session_id: str, request: SynthesizeRequest) -> Response:
+    """Synthesize text into audio within a session."""
+    if not request.text or not request.text.strip():
+        raise HTTPException(status_code=400, detail="Text cannot be empty.")
+        
+    try:
+        result = _communication_service.synthesize_session(session_id, request.text)
+        
+        response = Response(content=result.audio_data, media_type=result.content_type)
+        response.headers["X-Session-ID"] = session_id
+        response.headers["X-Session-State"] = SessionState.COMPLETED.value
+        return response
+        
+    except SessionNotFoundError as e:
+        raise HTTPException(status_code=404, detail=str(e))
+    except InvalidStateTransitionError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    except SynthesisError as e:
+        logger.error(f"Synthesis error: {e}")
+        raise HTTPException(status_code=500, detail="Synthesis failed. See server logs.")
+    except Exception as e:
+        logger.exception("Unexpected error during session synthesize")
+        raise HTTPException(status_code=500, detail="Internal server error during synthesis.")
+
 
 # ==============================================================================
 # Session Management API
 # ==============================================================================
-
-_session_service = SpeechSessionService()
 
 @router.post("/sessions", response_model=SpeechSession)
 def create_session():
