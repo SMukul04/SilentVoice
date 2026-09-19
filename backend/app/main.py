@@ -146,5 +146,8 @@ def reset_prediction(
 
 
 from backend.api.speech_routes import router as speech_router
+from backend.api.text_sign_routes import router as text_sign_router
+
 app.include_router(speech_router)
+app.include_router(text_sign_router)
 
