@@ -2,6 +2,7 @@ import { HandLandmarker, FilesetResolver, DrawingUtils } from "https://cdn.jsdel
 import { LandmarkExtractor } from "./landmark_extractor.js";
 import { PredictionStabilizer } from "./prediction_stabilizer.js";
 import { SentenceBuilder } from "./sentence_builder.js";
+import { TextSignUI } from "./text_sign_ui.js";
 
 /**
  * SilentVoice Frontend Dashboard Prototype Logic
@@ -9,6 +10,10 @@ import { SentenceBuilder } from "./sentence_builder.js";
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Initialize Text-to-Sign UI
+    const textSignUI = new TextSignUI();
+    textSignUI.init();
+
     // DOM Elements
     const btnStartRecognition = document.getElementById('btnStartRecognition');
     const btnStopRecognition = document.getElementById('btnStopRecognition');
