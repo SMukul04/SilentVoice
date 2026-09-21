@@ -4,7 +4,7 @@ from abc import ABC, abstractmethod
 from enum import Enum
 from typing import List, Optional
 
-from backend.schemas.avatar_animation import AnimationAsset
+from backend.schemas.avatar_animation import AnimationAsset, AnimationAvailability
 
 
 class AvatarRuntimeState(str, Enum):
@@ -32,6 +32,11 @@ class RuntimeNotInitializedError(AvatarRuntimeError):
 
 class InvalidRuntimeStateError(AvatarRuntimeError):
     """Raised when a state transition or operation is invalid for the current state."""
+    pass
+
+
+class AnimationPlaybackError(AvatarRuntimeError):
+    """Raised when an animation asset cannot be played (e.g. unavailable)."""
     pass
 
 
@@ -95,6 +100,7 @@ class MockAvatarRuntimeService(AvatarRuntimeService):
             # Re-initialize clears errors
             pass
         self._state = AvatarRuntimeState.READY
+        self._current_animation = None
 
     def play_animation(self, asset: AnimationAsset) -> None:
         if self._state == AvatarRuntimeState.UNINITIALIZED:
@@ -103,29 +109,37 @@ class MockAvatarRuntimeService(AvatarRuntimeService):
         if self._state == AvatarRuntimeState.ERROR:
             raise InvalidRuntimeStateError("Cannot play animation: runtime is in an ERROR state.")
             
+        if asset.availability == AnimationAvailability.UNAVAILABLE:
+            raise AnimationPlaybackError(f"Cannot play unavailable asset for sign: {asset.sign_id}")
+            
         self._state = AvatarRuntimeState.PLAYING
         self._current_animation = asset
         self._playback_history.append(asset)
         
-        # For mock deterministic testing, we just jump to STOPPED if we wanted, 
-        # or we stay PLAYING. The architecture allows either, but keeping it 
-        # PLAYING helps tests verify what was just played.
-        # We'll immediately transition to READY to represent playback finishing
-        # in an instantaneous mock, or stay PLAYING to show it's active. 
-        # Let's say it immediately finishes and goes back to READY for sequence deterministic testing.
-        self._state = AvatarRuntimeState.READY
+        # State remains PLAYING until a real provider finishes.
 
     def play_sequence(self, assets: List[AnimationAsset]) -> None:
         if self._state == AvatarRuntimeState.UNINITIALIZED:
             raise RuntimeNotInitializedError("Cannot play sequence: runtime is not initialized.")
             
+        if self._state == AvatarRuntimeState.ERROR:
+            raise InvalidRuntimeStateError("Cannot play sequence: runtime is in an ERROR state.")
+            
+        if not assets:
+            # no-op for empty sequences
+            return
+            
+        # Validate all assets before playing
+        for asset in assets:
+            if asset.availability == AnimationAvailability.UNAVAILABLE:
+                raise AnimationPlaybackError(f"Cannot play sequence with unavailable asset: {asset.sign_id}")
+            
         self._state = AvatarRuntimeState.PLAYING
         for asset in assets:
-            # We don't call self.play_animation to avoid state toggling during iteration.
             self._current_animation = asset
             self._playback_history.append(asset)
             
-        self._state = AvatarRuntimeState.READY
+        # State remains PLAYING until a real provider finishes.
 
     def stop(self) -> None:
         if self._state == AvatarRuntimeState.UNINITIALIZED:

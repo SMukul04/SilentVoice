@@ -7,7 +7,8 @@ from backend.services.avatar_runtime_service import (
     MockAvatarRuntimeService,
     AvatarRuntimeState,
     RuntimeNotInitializedError,
-    InvalidRuntimeStateError
+    InvalidRuntimeStateError,
+    AnimationPlaybackError
 )
 
 
@@ -32,6 +33,7 @@ def test_runtime_initialize():
     runtime = MockAvatarRuntimeService()
     runtime.initialize()
     assert runtime.get_state() == AvatarRuntimeState.READY
+    assert runtime.get_current_animation() is None
     
     # Re-initialization should be idempotent for READY state
     runtime.initialize()
@@ -46,8 +48,8 @@ def test_runtime_play_animation():
     asset = create_mock_asset("HELLO")
     runtime.play_animation(asset)
     
-    # Mock completes immediately and returns to READY
-    assert runtime.get_state() == AvatarRuntimeState.READY
+    # Mock leaves state as PLAYING
+    assert runtime.get_state() == AvatarRuntimeState.PLAYING
     assert runtime.get_current_animation() == asset
     
     history = runtime.get_history()
@@ -56,7 +58,7 @@ def test_runtime_play_animation():
 
 
 def test_runtime_play_sequence():
-    """Test sequences strictly preserve order and repeats."""
+    """Test sequences strictly preserve order and repeats, and leave state PLAYING."""
     runtime = MockAvatarRuntimeService()
     runtime.initialize()
     
@@ -68,7 +70,9 @@ def test_runtime_play_sequence():
     
     runtime.play_sequence(assets)
     
-    assert runtime.get_state() == AvatarRuntimeState.READY
+    assert runtime.get_state() == AvatarRuntimeState.PLAYING
+    # The current animation should be the last one in the sequence
+    assert runtime.get_current_animation() == assets[-1]
     
     history = runtime.get_history()
     assert len(history) == 3
@@ -77,10 +81,49 @@ def test_runtime_play_sequence():
     assert history[2].sign_id == "HELLO"
 
 
-def test_runtime_stop_lifecycle():
-    """Test stopping the runtime."""
+def test_runtime_empty_sequence():
+    """Test playing an empty sequence."""
     runtime = MockAvatarRuntimeService()
     runtime.initialize()
+    
+    runtime.play_sequence([])
+    
+    # State should remain READY, no-op
+    assert runtime.get_state() == AvatarRuntimeState.READY
+    assert runtime.get_current_animation() is None
+    assert len(runtime.get_history()) == 0
+
+
+def test_runtime_unavailable_asset():
+    """Test that unavailable assets are explicitly rejected."""
+    runtime = MockAvatarRuntimeService()
+    runtime.initialize()
+    
+    unavailable_asset = AnimationAsset(
+        sign_id="UNKNOWN",
+        asset_id="unknown",
+        availability=AnimationAvailability.UNAVAILABLE
+    )
+    
+    with pytest.raises(AnimationPlaybackError):
+        runtime.play_animation(unavailable_asset)
+        
+    # State should still be READY
+    assert runtime.get_state() == AvatarRuntimeState.READY
+    assert runtime.get_current_animation() is None
+    
+    # Sequence with unavailable asset
+    with pytest.raises(AnimationPlaybackError):
+        runtime.play_sequence([create_mock_asset("HELLO"), unavailable_asset])
+
+
+def test_runtime_stop_lifecycle():
+    """Test stopping the runtime clears the current animation."""
+    runtime = MockAvatarRuntimeService()
+    runtime.initialize()
+    
+    runtime.play_animation(create_mock_asset("HELLO"))
+    assert runtime.get_current_animation() is not None
     
     runtime.stop()
     assert runtime.get_state() == AvatarRuntimeState.STOPPED
