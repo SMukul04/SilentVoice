@@ -1,0 +1,12 @@
+This file represents the location where the 'Y_Bot.fbx' avatar model should be placed.
+
+### Avatar Information
+* **Model:** Y Bot
+* **Source:** Mixamo (Adobe)
+* **License:** Adobe Mixamo ToU
+* **Setup:**
+  1. Download Y_Bot.fbx from Mixamo.
+  2. Place it in this directory (`avatar/unity/Assets/Models/Avatar/`).
+  3. In Unity, set Animation Type to "Humanoid".
+  4. Create Avatar Definition from this model.
+  5. Verify finger articulations are mapped correctly.

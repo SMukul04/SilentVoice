@@ -140,3 +140,19 @@ Actual avatar/animation imports will later require:
 3D avatar -> Humanoid rig configuration -> Avatar definition -> Animation clips -> Animation metadata -> Animation registry
 ```
 Before importing, we must verify rig compatibility, humanoid retargeting, root motion requirements, clip boundaries, frame rate, hand/finger bones, and animation loop settings.
+
+## 11. Phase 8.3 Proof of Concept Assets
+
+### Avatar
+* **Avatar Source:** Mixamo (Adobe)
+* **Avatar Selected:** Y Bot
+* **License:** Adobe Mixamo ToU (Free for commercial/non-commercial use; redistribution of raw model restricted, but WebGL embed is allowed).
+* **Humanoid Rig Status:** Supported (Fully articulated humanoid rig including fingers, mapped via Unity Humanoid Avatar definition).
+* **File Location:** `avatar/unity/Assets/Models/Avatar/Y_Bot.fbx` (Documented via placeholder due to acquisition environment limits).
+
+### ISL Animation
+* **ISL Source Targeted:** IIIT-B Indian Sign Language Interpreter project.
+* **Status:** BLOCKED.
+* **Blocker Reason:** A genuine ISL animation file (FBX/GLB) from the IIIT-B dataset cannot be legally acquired or imported in the current automated environment without direct access, request approval, or manual download.
+* **Resolution:** As per strict requirements (generic gesture ≠ ISL), NO fake or generic animation has been substituted. The `animation_registry.json` remains completely empty.
+* **Proof-of-Concept Target:** Pending manual acquisition of a genuine ISL sign from the IIIT-B dataset.
