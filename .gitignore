@@ -312,3 +312,6 @@ datasets/*
 # Temporary project artifacts
 tmpp*/
 project_structure.txt
+
+# Unity Avatars
+avatar/unity/Assets/Models/Avatar/Y_Bot.fbx

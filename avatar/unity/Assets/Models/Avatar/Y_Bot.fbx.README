@@ -1,12 +1,27 @@
-This file represents the location where the 'Y_Bot.fbx' avatar model should be placed.
+# Y Bot Avatar Model
+
+The visual humanoid avatar model has been successfully acquired and is located in this directory:
+`avatar/unity/Assets/Models/Avatar/Y_Bot.fbx`
 
 ### Avatar Information
 * **Model:** Y Bot
 * **Source:** Mixamo (Adobe)
-* **License:** Adobe Mixamo ToU
-* **Setup:**
-  1. Download Y_Bot.fbx from Mixamo.
-  2. Place it in this directory (`avatar/unity/Assets/Models/Avatar/`).
-  3. In Unity, set Animation Type to "Humanoid".
-  4. Create Avatar Definition from this model.
-  5. Verify finger articulations are mapped correctly.
+* **License:** Adobe Mixamo ToU (Free for commercial/non-commercial use in applications; raw file redistribution restricted, but runtime WebGL embedding is permitted).
+* **Asset Type:** Visual Humanoid Avatar ONLY (This is NOT an ISL animation).
+
+### Unity Manual Setup Instructions
+Because Unity Editor validation is blocked in the automated environment, the following steps must be completed manually by the developer in the Unity GUI:
+
+1. **Import Settings:** Select `Y_Bot.fbx` in the Project window.
+2. **Rig Configuration:** Set **Animation Type** to `Humanoid`.
+3. **Avatar Definition:** Select `Create From This Model` and apply.
+4. **Bone Verification:** Click `Configure...` on the Avatar and verify that the Humanoid Rig maps all essential bones correctly, specifically ensuring that **hands and individual finger bones** are mapped.
+5. **Animator Controller:** 
+   - Create a base `Animator Controller`.
+   - Create an empty animation state named `ISL_Playback`.
+   - Assign a dummy clip named `ISL_Placeholder` to this state.
+   - Attach this `Animator Controller` to the `Y_Bot` GameObject in the scene.
+6. **Component Wiring:**
+   - Attach `AvatarAnimationPlayer.cs` and `AvatarRuntime.cs` to the avatar hierarchy.
+   - Assign the `Y_Bot`'s `Animator` to the `AvatarAnimationPlayer`'s `_animator` field.
+   - Assign the `AnimationAssetResolver` to the `_resolver` field.
