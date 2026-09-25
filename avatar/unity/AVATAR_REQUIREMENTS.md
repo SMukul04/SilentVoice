@@ -156,3 +156,31 @@ Before importing, we must verify rig compatibility, humanoid retargeting, root m
 * **Blocker Reason:** A genuine ISL animation file (FBX/GLB) from the IIIT-B dataset cannot be legally acquired or imported in the current automated environment without direct access, request approval, or manual download.
 * **Resolution:** As per strict requirements (generic gesture ≠ ISL), NO fake or generic animation has been substituted. The `animation_registry.json` remains completely empty.
 * **Proof-of-Concept Target:** Pending manual acquisition of a genuine ISL sign from the IIIT-B dataset.
+
+## 12. Animation Import Workflow
+
+### Step-by-step Import
+1. Obtain legitimate ISL animation (e.g., from IIIT-B dataset).
+2. Place source file in `Assets/Resources/Animations/ISL/`.
+3. Import into Unity.
+4. Configure Rig as **Humanoid** where applicable.
+5. Configure Avatar (Copy from Other Avatar, pointing to the Y Bot Avatar).
+6. Verify bone mapping for proper retargeting.
+7. Set animation clip range (ensure boundaries match the semantic action).
+8. Disable looping unless explicitly required by the sign.
+9. Verify hand/finger articulation in the Unity preview.
+10. Register the `sign_id` / `asset_id` / `clip_name` in `animation_registry.json`.
+11. Preview playback directly on the Y Bot model.
+
+### Asset Metadata Documentation
+For each future real animation, the following metadata must be documented:
+* `source`
+* `source_url`
+* `license`
+* `original_asset_name`
+* `sign_id`
+* `asset_id`
+* `clip_name`
+* `variant`
+* `loop`
+* `speed`
