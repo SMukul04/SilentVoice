@@ -1,0 +1,9 @@
+# Placeholder for Unity Scene (Main.unity)
+# Unity is currently unavailable in this environment, so a real YAML scene cannot be serialized.
+
+# Scene Architecture Concept:
+# SilentVoiceAvatar
+# ├── Main Camera
+# ├── Directional Light
+# └── AvatarRuntime (Script: AvatarRuntime.cs, AvatarController.cs, WebGLBridge.cs)
+#     └── PlaceholderAvatar (Script: AvatarAnimationPlayer.cs)
