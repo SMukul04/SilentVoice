@@ -2,12 +2,18 @@ using UnityEngine;
 
 namespace Avatar.Animation
 {
+    public struct ResolvedAnimationAsset
+    {
+        public AnimationClip clip;
+        public AnimationRegistryEntry metadata;
+    }
+
     public class AnimationAssetResolver : MonoBehaviour
     {
         [SerializeField] private AnimationRegistry _registry;
         
-        // Resolves an asset_id to an AnimationClip
-        public AnimationClip Resolve(string assetId)
+        // Resolves an asset_id to an AnimationClip and its metadata
+        public ResolvedAnimationAsset? Resolve(string assetId)
         {
             if (_registry == null)
             {
@@ -33,7 +39,7 @@ namespace Avatar.Animation
                 return null;
             }
 
-            return clip;
+            return new ResolvedAnimationAsset { clip = clip, metadata = entry };
         }
     }
 }

@@ -184,3 +184,32 @@ For each future real animation, the following metadata must be documented:
 * `variant`
 * `loop`
 * `speed`
+
+## 13. Phase 8.5 Playback Workflow Integration
+
+### Pipeline Architecture
+The integration defines a seamless, purely data-driven flow:
+```text
+asset_id
+  ↓
+AnimationAssetResolver
+  ↓
+AnimationClip
+  ↓
+AnimatorOverrideController
+  ↓
+Animator
+  ↓
+AvatarAnimationPlayer
+  ↓
+real animation completion boundary
+```
+
+### Constraints & Limitations
+* **Genuine ISL Assets Only:** Animation assets must be strictly genuine ISL assets (no generic gestures). 
+* **Runtime Asset Path:** Assets must be strictly stored and loaded under `Assets/Resources/Animations/ISL/`.
+* **Provider-Neutral Registry:** The metadata `animation_registry.json` must remain completely separate from application logic and explicitly must NOT contain fake entries.
+* **Explicit Playback Failure:** If an asset cannot be resolved, playback fails explicitly. The runtime transitions to `ERROR` and stops attempting playback, avoiding silent fallbacks.
+* **No Fake Timers:** `WaitForSeconds` or `Invoke` based completion simulations are forbidden. The completion boundary must be driven natively by Unity animation events on the actual clip data.
+* **Completion Flow:** The required flow for tracking animation completion is strictly: `Animation Event` -> `AvatarAnimationPlayer.OnAnimationComplete()` -> `OnPlaybackComplete` UnityEvent -> `AvatarRuntime.OnAnimationComplete()`.
+* **Verification Blocked:** Unity Editor/runtime verification remains pending since the Editor is not available in the automated environment. Assigning components to game objects (such as linking the `Animator` to `AvatarAnimationPlayer` or generating the base `AnimatorController` with an `ISL_Placeholder` state) must be completed manually via the Unity GUI later.
