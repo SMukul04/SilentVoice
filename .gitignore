@@ -315,3 +315,18 @@ project_structure.txt
 
 # Unity Avatars
 avatar/unity/Assets/Models/Avatar/Y_Bot.fbx
+# Unity generated IDE/project files
+*.csproj
+*.sln
+*.slnx
+
+
+# Unity generated folders
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+[Uu]ser[Ss]ettings/
+
