@@ -1,0 +1,50 @@
+request:
+  request_id: "silentvoice-isl-initial-001"
+  status: "NOT_SENT"
+  source: "IIIT-B Virtual ISL Interpreter"
+  source_url: "https://cognitive.iiitb.ac.in/isli/"
+  purpose: "Request explicit permission and applicable terms for selected ISL animation assets."
+
+requested_assets:
+  - sign_id: "PLEASE"
+    requested_name: "PLEASE"
+    status: "REQUESTED"
+  - sign_id: "HELLO"
+    requested_name: "HELLO"
+    status: "REQUESTED"
+  - sign_id: "THANK_YOU"
+    requested_name: "THANK YOU"
+    status: "REQUESTED"
+  - sign_id: "YES"
+    requested_name: "YES"
+    status: "REQUESTED"
+  - sign_id: "NO"
+    requested_name: "NO"
+    status: "REQUESTED"
+
+permissions_requested:
+  use_in_project: "PENDING"
+  modification_or_retargeting: "PENDING"
+  redistribution_in_application: "PENDING"
+  redistribution_of_source_assets: "PENDING"
+  public_demo_use: "PENDING"
+  academic_demo_use: "PENDING"
+  commercial_use: "PENDING"
+
+licensing:
+  license: "UNKNOWN"
+  asset_level_license_verified: false
+  redistribution_rights_verified: false
+  modification_rights_verified: false
+  attribution_requirements_verified: false
+  third_party_dependencies_checked: false
+
+evidence:
+  evidence_status: "NOT_RECEIVED"
+  evidence_reference: ""
+  notes: "No permission or license evidence has been received yet."
+
+silentvoice_status:
+  production_approved: false
+  registry_updated: false
+  production_assets_added: false
