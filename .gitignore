@@ -330,3 +330,5 @@ avatar/unity/Assets/Models/Avatar/Y_Bot.fbx
 [Ll]ogs/
 [Uu]ser[Ss]ettings/
 
+# Local third-party ISL animation experiments
+avatar/unity/Assets/Animations/ISL_Test/
