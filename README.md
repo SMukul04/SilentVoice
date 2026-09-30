@@ -8,7 +8,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Project-Completed-success?style=for-the-badge" alt="Project Completed">
+  <img src="https://img.shields.io/badge/Project-Completed-success?style=for-the-badge" alt="Project Ongoing">
   <img src="https://img.shields.io/badge/Indian%20Sign%20Language-ISL-blue?style=for-the-badge" alt="ISL">
   <img src="https://img.shields.io/badge/Real--Time-Recognition-orange?style=for-the-badge" alt="Real Time">
   <img src="https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge" alt="MIT License">
