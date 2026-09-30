@@ -577,36 +577,6 @@ The system separates:
 
 This makes the system easier to maintain and extend.
 
----
-
-# 📸 Application Preview
-
-Add screenshots of your actual application here.
-
-Recommended structure:
-
-```text
-docs/
-└── screenshots/
-    ├── home.png
-    ├── recognition.png
-    └── result.png
-```
-
-Then add:
-
-```markdown
-## 🖥️ Interface
-
-![SilentVoice Interface](docs/screenshots/home.png)
-
-![Real-Time Recognition](docs/screenshots/recognition.png)
-
-![Recognition Result](docs/screenshots/result.png)
-```
-
----
-
 # 🎯 Project Highlights
 
 | Area | Implementation |
