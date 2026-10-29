@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 using Avatar.Animation;
 
 namespace Avatar.Core
@@ -14,6 +15,8 @@ namespace Avatar.Core
 
     public class AvatarRuntime : MonoBehaviour
     {
+        public UnityEvent<string> OnRuntimeAnimationComplete = new UnityEvent<string>();
+
         private AvatarRuntimeState _state = AvatarRuntimeState.UNINITIALIZED;
         private AvatarAnimationPlayer _animationPlayer;
         private string _currentAnimation;
@@ -79,6 +82,7 @@ namespace Avatar.Core
             _state = AvatarRuntimeState.UNINITIALIZED;
             _currentAnimation = null;
             _animationPlayer.Stop();
+            Initialize();
         }
 
         public AvatarRuntimeState GetState()
@@ -95,8 +99,9 @@ namespace Avatar.Core
         {
             if (_state == AvatarRuntimeState.PLAYING)
             {
-                // To be wired to SequentialPlaybackService logic in controller
                 Debug.Log($"Animation {_currentAnimation} complete.");
+                _state = AvatarRuntimeState.READY;
+                OnRuntimeAnimationComplete?.Invoke(_currentAnimation);
             }
         }
     }
