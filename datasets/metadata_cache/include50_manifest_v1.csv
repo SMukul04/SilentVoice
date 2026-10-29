@@ -1,0 +1,959 @@
+split,video_path,normalized_path,label,category,hf_row_count,hf_labels,hf_parent_labels,hf_label_matches_path
+train,Places/23. Court/MVI_3612.MOV,places/23. court/mvi_3612.video,23. Court,Places,1,23. Court,Places,True
+train,Greetings/48. Hello/MVI_0089.MOV,greetings/48. hello/mvi_0089.video,48. Hello,Greetings,1,48. Hello,Greetings,True
+train,Animals/4. Bird/MVI_3040.MOV,animals/4. bird/mvi_3040.video,4. Bird,Animals,1,4. Bird,Animals,True
+train,Adjectives/94. good/MVI_9269.MOV,adjectives/94. good/mvi_9269.video,94. good,Adjectives,1,94. good,Adjectives,True
+train,Electronics/54. Cell phone/MVI_9100.MOV,electronics/54. cell phone/mvi_9100.video,54. Cell phone,Electronics,1,54. Cell phone,Electronics,True
+train,Home/28. Window/MVI_4364.MOV,home/28. window/mvi_4364.video,28. Window,Home,1,28. Window,Home,True
+train,Adjectives/87. hot/MVI_5137.MOV,adjectives/87. hot/mvi_5137.video,87. hot,Adjectives,2,4. Bird | 87. hot,Adjectives | Animals,True
+train,Days_and_Time/67. Monday/MVI_5009.MOV,days_and_time/67. monday/mvi_5009.video,67. Monday,Days_and_Time,1,67. Monday,Days_and_Time,True
+train,Places/28. Store or Shop/MVI_3310.MOV,places/28. store or shop/mvi_3310.video,28. Store or Shop,Places,1,28. Store or Shop,Places,True
+train,Means_of_Transportation/16. train ticket/MVI_3134.MOV,means_of_transportation/16. train ticket/mvi_3134.video,16. train ticket,Means_of_Transportation,1,16. train ticket,Means_of_Transportation,True
+train,Places/35. Bank/MVI_3582.MOV,places/35. bank/mvi_3582.video,35. Bank,Places,1,35. Bank,Places,True
+train,Greetings/48. Hello/MVI_9955.MOV,greetings/48. hello/mvi_9955.video,48. Hello,Greetings,1,48. Hello,Greetings,True
+train,People/66. Brother/MVI_8631.MOV,people/66. brother/mvi_8631.video,66. Brother,People,1,66. Brother,People,True
+train,People/77. Boy/MVI_5285.MOV,people/77. boy/mvi_5285.video,77. Boy,People,1,77. Boy,People,True
+train,Adjectives/97. dry/MVI_9523.MOV,adjectives/97. dry/mvi_9523.video,97. dry,Adjectives,1,97. dry,Adjectives,True
+train,Greetings/48. Hello/MVI_9984.MOV,greetings/48. hello/mvi_9984.video,48. Hello,Greetings,1,48. Hello,Greetings,True
+train,Jobs/84. Teacher/MVI_4744.MOV,jobs/84. teacher/mvi_4744.video,84. Teacher,Jobs,1,84. Teacher,Jobs,True
+train,Means_of_Transportation/11. Car/MVI_4177.MOV,means_of_transportation/11. car/mvi_4177.video,11. Car,Means_of_Transportation,1,11. Car,Means_of_Transportation,True
+train,Adjectives/3. happy/MVI_9455.MOV,adjectives/3. happy/mvi_9455.video,3. happy,Adjectives,1,3. happy,Adjectives,True
+train,Colours/47. Red/MVI_4018.MOV,colours/47. red/mvi_4018.video,47. Red,Colours,1,47. Red,Colours,True
+train,Days_and_Time/86. Time/MVI_4667.MOV,days_and_time/86. time/mvi_4667.video,86. Time,Days_and_Time,1,86. Time,Days_and_Time,True
+train,Clothes/42. T-Shirt/MVI_3850.MOV,clothes/42. t-shirt/mvi_3850.video,42. T-Shirt,Clothes,1,42. T-Shirt,Clothes,True
+train,Clothes/44. Shoes/MVI_4009.MOV,clothes/44. shoes/mvi_4009.video,44. Shoes,Clothes,1,44. Shoes,Clothes,True
+train,Places/23. Court/MVI_3366.MOV,places/23. court/mvi_3366.video,23. Court,Places,1,23. Court,Places,True
+train,Colours/55. White/MVI_5061.MOV,colours/55. white/mvi_5061.video,55. White,Colours,1,55. White,Colours,True
+train,Places/19. House/MVI_3351.MOV,places/19. house/mvi_3351.video,19. House,Places,1,19. House,Places,True
+train,Seasons/61. Summer/MVI_4567.MOV,seasons/61. summer/mvi_4567.video,61. Summer,Seasons,1,61. Summer,Seasons,True
+train,Colours/47. Red/MVI_4899.MOV,colours/47. red/mvi_4899.video,47. Red,Colours,1,47. Red,Colours,True
+train,People/77. Boy/MVI_3814.MOV,people/77. boy/mvi_3814.video,77. Boy,People,1,77. Boy,People,True
+train,Colours/55. White/MVI_4923.MOV,colours/55. white/mvi_4923.video,55. White,Colours,1,55. White,Colours,True
+train,Greetings/51. Good Morning/MVI_0047.MOV,greetings/51. good morning/mvi_0047.video,51. Good Morning,Greetings,1,51. Good Morning,Greetings,True
+train,Home/40. Paint/MVI_4414.MOV,home/40. paint/mvi_4414.video,40. Paint,Home,1,40. Paint,Home,True
+train,Places/19. House/MVI_3352.MOV,places/19. house/mvi_3352.video,19. House,Places,1,19. House,Places,True
+train,Clothes/37. Hat/MVI_3688.MOV,clothes/37. hat/mvi_3688.video,37. Hat,Clothes,1,37. Hat,Clothes,True
+train,Adjectives/84. small little/MVI_9398.MOV,adjectives/84. small little/mvi_9398.video,84. small little,Adjectives,1,84. small little,Adjectives,True
+train,Seasons/64. Fall/MVI_5436.MOV,seasons/64. fall/mvi_5436.video,64. Fall,Seasons,1,64. Fall,Seasons,True
+train,Adjectives/78. long/MVI_9299.MOV,adjectives/78. long/mvi_9299.video,78. long,Adjectives,1,78. long,Adjectives,True
+train,Adjectives/79. short/MVI_5189.MOV,adjectives/79. short/mvi_5189.video,79. short,Adjectives,1,79. short,Adjectives,True
+train,Society/2. Death/MVI_4258.MOV,society/2. death/mvi_4258.video,2. Death,Society,1,2. Death,Society,True
+train,Adjectives/84. small little/MVI_5126.MOV,adjectives/84. small little/mvi_5126.video,84. small little,Adjectives,1,84. small little,Adjectives,True
+train,Home/40. Paint/MVI_8818.MOV,home/40. paint/mvi_8818.video,40. Paint,Home,1,40. Paint,Home,True
+train,People/66. Brother/MVI_5096.MOV,people/66. brother/mvi_5096.video,66. Brother,People,1,66. Brother,People,True
+train,Adjectives/91. new/MVI_5308.MOV,adjectives/91. new/mvi_5308.video,91. new,Adjectives,1,91. new,Adjectives,True
+train,People/77. Boy/MVI_4109.MOV,people/77. boy/mvi_4109.video,77. Boy,People,1,77. Boy,People,True
+train,Pronouns/44. it/MVI_0013.MOV,pronouns/44. it/mvi_0013.video,44. it,Pronouns,1,44. it,Pronouns,True
+train,Seasons/61. Summer/MVI_5424.MOV,seasons/61. summer/mvi_5424.video,61. Summer,Seasons,1,61. Summer,Seasons,True
+train,Pronouns/40. I/MVI_0013.MOV,pronouns/40. i/mvi_0013.video,40. I,Pronouns,1,40. I,Pronouns,True
+train,Pronouns/46. you (plural)/MVI_0022.MOV,pronouns/46. you (plural)/mvi_0022.video,46. you (plural),Pronouns,1,46. you (plural),Pronouns,True
+train,Animals/4. Bird/MVI_8567.MOV,animals/4. bird/mvi_8567.video,4. Bird,Animals,1,4. Bird,Animals,True
+train,Jobs/84. Teacher/MVI_8866.MOV,jobs/84. teacher/mvi_8866.video,84. Teacher,Jobs,1,84. Teacher,Jobs,True
+train,Colours/47. Red/MVI_5185.MOV,colours/47. red/mvi_5185.video,47. Red,Colours,1,47. Red,Colours,True
+train,Places/19. House/MVI_3268.MOV,places/19. house/mvi_3268.video,19. House,Places,1,19. House,Places,True
+train,Home/34. Pen/MVI_8794.MOV,home/34. pen/mvi_8794.video,34. Pen,Home,1,34. Pen,Home,True
+train,Adjectives/3. happy/MVI_5341.MOV,adjectives/3. happy/mvi_5341.video,3. happy,Adjectives,1,3. happy,Adjectives,True
+train,Pronouns/40. I/MVI_0001.MOV,pronouns/40. i/mvi_0001.video,40. I,Pronouns,1,40. I,Pronouns,True
+train,Animals/1. Dog/MVI_3003.MOV,animals/1. dog/mvi_3003.video,1. Dog,Animals,1,1. Dog,Animals,True
+train,Society/2. Death/MVI_8930.MOV,society/2. death/mvi_8930.video,2. Death,Society,1,2. Death,Society,True
+train,Animals/4. Bird/MVI_2989.MOV,animals/4. bird/mvi_2989.video,4. Bird,Animals,1,4. Bird,Animals,True
+train,People/66. Brother/MVI_4076.MOV,people/66. brother/mvi_4076.video,66. Brother,People,2,4. Bird | 66. Brother,Animals | People,True
+train,Home/28. Window/MVI_4362.MOV,home/28. window/mvi_4362.video,28. Window,Home,1,28. Window,Home,True
+train,People/78. Girl/MVI_3818.MOV,people/78. girl/mvi_3818.video,78. Girl,People,1,78. Girl,People,True
+train,Places/19. House/MVI_3270.MOV,places/19. house/mvi_3270.video,19. House,Places,1,19. House,Places,True
+train,Greetings/51. Good Morning/MVI_0043.MOV,greetings/51. good morning/mvi_0043.video,51. Good Morning,Greetings,1,51. Good Morning,Greetings,True
+train,Means_of_Transportation/11. Car/MVI_3209.MOV,means_of_transportation/11. car/mvi_3209.video,11. Car,Means_of_Transportation,1,11. Car,Means_of_Transportation,True
+train,Society/14. Election/MVI_8969.MOV,society/14. election/mvi_8969.video,14. Election,Society,1,14. Election,Society,True
+train,People/77. Boy/MVI_3816.MOV,people/77. boy/mvi_3816.video,77. Boy,People,1,77. Boy,People,True
+train,Means_of_Transportation/16. train ticket/MVI_3196.MOV,means_of_transportation/16. train ticket/mvi_3196.video,16. train ticket,Means_of_Transportation,1,16. train ticket,Means_of_Transportation,True
+train,Greetings/55. Thank you/MVI_0062.MOV,greetings/55. thank you/mvi_0062.video,55. Thank you,Greetings,1,55. Thank you,Greetings,True
+train,Clothes/37. Hat/MVI_4197.MOV,clothes/37. hat/mvi_4197.video,37. Hat,Clothes,1,37. Hat,Clothes,True
+train,Greetings/51. Good Morning/MVI_0098.MOV,greetings/51. good morning/mvi_0098.video,51. Good Morning,Greetings,1,51. Good Morning,Greetings,True
+train,Society/14. Election/MVI_8712.MOV,society/14. election/mvi_8712.video,14. Election,Society,1,14. Election,Society,True
+train,Means_of_Transportation/16. train ticket/MVI_3224.MOV,means_of_transportation/16. train ticket/mvi_3224.video,16. train ticket,Means_of_Transportation,1,16. train ticket,Means_of_Transportation,True
+train,Adjectives/83. big large/MVI_5123.MOV,adjectives/83. big large/mvi_5123.video,83. big large,Adjectives,1,83. big large,Adjectives,True
+train,Places/28. Store or Shop/MVI_3553.MOV,places/28. store or shop/mvi_3553.video,28. Store or Shop,Places,1,28. Store or Shop,Places,True
+train,Places/28. Store or Shop/MVI_3635.MOV,places/28. store or shop/mvi_3635.video,28. Store or Shop,Places,1,28. Store or Shop,Places,True
+train,Home/28. Window/MVI_9014.MOV,home/28. window/mvi_9014.video,28. Window,Home,1,28. Window,Home,True
+train,Adjectives/91. new/MVI_9500.MOV,adjectives/91. new/mvi_9500.video,91. new,Adjectives,1,91. new,Adjectives,True
+train,Jobs/84. Teacher/MVI_8864.MOV,jobs/84. teacher/mvi_8864.video,84. Teacher,Jobs,1,84. Teacher,Jobs,True
+train,Places/35. Bank/MVI_3501.MOV,places/35. bank/mvi_3501.video,35. Bank,Places,1,35. Bank,Places,True
+train,People/77. Boy/MVI_4110.MOV,people/77. boy/mvi_4110.video,77. Boy,People,1,77. Boy,People,True
+train,Animals/4. Bird/MVI_3072.MOV,animals/4. bird/mvi_3072.video,4. Bird,Animals,1,4. Bird,Animals,True
+train,Places/23. Court/MVI_3455.MOV,places/23. court/mvi_3455.video,23. Court,Places,1,23. Court,Places,True
+train,People/66. Brother/MVI_4957.MOV,people/66. brother/mvi_4957.video,66. Brother,People,1,66. Brother,People,True
+train,Adjectives/3. happy/MVI_5343.MOV,adjectives/3. happy/mvi_5343.video,3. happy,Adjectives,1,3. happy,Adjectives,True
+train,Adjectives/78. long/MVI_9458.MOV,adjectives/78. long/mvi_9458.video,78. long,Adjectives,1,78. long,Adjectives,True
+train,Adjectives/79. short/MVI_9461.MOV,adjectives/79. short/mvi_9461.video,79. short,Adjectives,1,79. short,Adjectives,True
+train,Places/23. Court/MVI_3534.MOV,places/23. court/mvi_3534.video,23. Court,Places,1,23. Court,Places,True
+train,Adjectives/2. quiet/MVI_9453.MOV,adjectives/2. quiet/mvi_9453.video,2. quiet,Adjectives,1,2. quiet,Adjectives,True
+train,Adjectives/1. loud/MVI_9368.MOV,adjectives/1. loud/mvi_9368.video,1. loud,Adjectives,1,1. loud,Adjectives,True
+train,Animals/5. Cow/MVI_3015.MOV,animals/5. cow/mvi_3015.video,5. Cow,Animals,1,5. Cow,Animals,True
+train,Animals/1. Dog/MVI_2979.MOV,animals/1. dog/mvi_2979.video,1. Dog,Animals,1,1. Dog,Animals,True
+train,Adjectives/94. good/MVI_9510.MOV,adjectives/94. good/mvi_9510.video,94. good,Adjectives,1,94. good,Adjectives,True
+train,Pronouns/46. you (plural)/MVI_9947.MOV,pronouns/46. you (plural)/mvi_9947.video,46. you (plural),Pronouns,1,46. you (plural),Pronouns,True
+train,Greetings/55. Thank you/MVI_9986.MOV,greetings/55. thank you/mvi_9986.video,55. Thank you,Greetings,1,55. Thank you,Greetings,True
+train,People/61. Father/MVI_4223.MOV,people/61. father/mvi_4223.video,61. Father,People,1,61. Father,People,True
+train,People/78. Girl/MVI_4113.MOV,people/78. girl/mvi_4113.video,78. Girl,People,1,78. Girl,People,True
+train,Greetings/55. Thank you/MVI_0007.MOV,greetings/55. thank you/mvi_0007.video,55. Thank you,Greetings,1,55. Thank you,Greetings,True
+train,Pronouns/46. you (plural)/MVI_0082.MOV,pronouns/46. you (plural)/mvi_0082.video,46. you (plural),Pronouns,1,46. you (plural),Pronouns,True
+train,Colours/55. White/MVI_3743.MOV,colours/55. white/mvi_3743.video,55. White,Colours,1,55. White,Colours,True
+train,Adjectives/97. dry/MVI_9522.MOV,adjectives/97. dry/mvi_9522.video,97. dry,Adjectives,1,97. dry,Adjectives,True
+train,Clothes/44. Shoes/MVI_4887.MOV,clothes/44. shoes/mvi_4887.video,44. Shoes,Clothes,1,44. Shoes,Clothes,True
+train,Clothes/42. T-Shirt/MVI_4003.MOV,clothes/42. t-shirt/mvi_4003.video,42. T-Shirt,Clothes,1,42. T-Shirt,Clothes,True
+train,Jobs/91. Priest/MVI_4488.MOV,jobs/91. priest/mvi_4488.video,91. Priest,Jobs,1,91. Priest,Jobs,True
+train,Home/40. Paint/MVI_4928.MOV,home/40. paint/mvi_4928.video,40. Paint,Home,1,40. Paint,Home,True
+train,Home/34. Pen/MVI_4389.MOV,home/34. pen/mvi_4389.video,34. Pen,Home,1,34. Pen,Home,True
+train,Adjectives/1. loud/MVI_9370.MOV,adjectives/1. loud/mvi_9370.video,1. loud,Adjectives,1,1. loud,Adjectives,True
+train,Adjectives/91. new/MVI_5148.MOV,adjectives/91. new/mvi_5148.video,91. new,Adjectives,1,91. new,Adjectives,True
+train,Adjectives/1. loud/MVI_5179.MOV,adjectives/1. loud/mvi_5179.video,1. loud,Adjectives,1,1. loud,Adjectives,True
+train,Animals/4. Bird/MVI_3094.MOV,animals/4. bird/mvi_3094.video,4. Bird,Animals,1,4. Bird,Animals,True
+train,Greetings/51. Good Morning/MVI_9932.MOV,greetings/51. good morning/mvi_9932.video,51. Good Morning,Greetings,1,51. Good Morning,Greetings,True
+train,Adjectives/84. small little/MVI_5128.MOV,adjectives/84. small little/mvi_5128.video,84. small little,Adjectives,1,84. small little,Adjectives,True
+train,Home/28. Window/MVI_4881.MOV,home/28. window/mvi_4881.video,28. Window,Home,1,28. Window,Home,True
+train,Electronics/53. Fan/MVI_4965.MOV,electronics/53. fan/mvi_4965.video,53. Fan,Electronics,1,53. Fan,Electronics,True
+train,Adjectives/97. dry/MVI_9521.MOV,adjectives/97. dry/mvi_9521.video,97. dry,Adjectives,1,97. dry,Adjectives,True
+train,Adjectives/3. happy/MVI_5265.MOV,adjectives/3. happy/mvi_5265.video,3. happy,Adjectives,1,3. happy,Adjectives,True
+train,Places/23. Court/MVI_3531.MOV,places/23. court/mvi_3531.video,23. Court,Places,1,23. Court,Places,True
+train,Adjectives/3. happy/MVI_5342.MOV,adjectives/3. happy/mvi_5342.video,3. happy,Adjectives,1,3. happy,Adjectives,True
+train,Adjectives/1. loud/MVI_9450.MOV,adjectives/1. loud/mvi_9450.video,1. loud,Adjectives,1,1. loud,Adjectives,True
+train,Adjectives/84. small little/MVI_5288.MOV,adjectives/84. small little/mvi_5288.video,84. small little,Adjectives,1,84. small little,Adjectives,True
+train,Colours/47. Red/MVI_5038.MOV,colours/47. red/mvi_5038.video,47. Red,Colours,1,47. Red,Colours,True
+train,Colours/47. Red/MVI_3867.MOV,colours/47. red/mvi_3867.video,47. Red,Colours,1,47. Red,Colours,True
+train,Means_of_Transportation/16. train ticket/MVI_3254.MOV,means_of_transportation/16. train ticket/mvi_3254.video,16. train ticket,Means_of_Transportation,1,16. train ticket,Means_of_Transportation,True
+train,Days_and_Time/67. Monday/MVI_5011.MOV,days_and_time/67. monday/mvi_5011.video,67. Monday,Days_and_Time,1,67. Monday,Days_and_Time,True
+train,Adjectives/83. big large/MVI_9476.MOV,adjectives/83. big large/mvi_9476.video,83. big large,Adjectives,1,83. big large,Adjectives,True
+train,Clothes/42. T-Shirt/MVI_5021.MOV,clothes/42. t-shirt/mvi_5021.video,42. T-Shirt,Clothes,1,42. T-Shirt,Clothes,True
+train,Society/14. Election/MVI_4840.MOV,society/14. election/mvi_4840.video,14. Election,Society,1,14. Election,Society,True
+train,Adjectives/79. short/MVI_9382.MOV,adjectives/79. short/mvi_9382.video,79. short,Adjectives,1,79. short,Adjectives,True
+train,Places/28. Store or Shop/MVI_3308.MOV,places/28. store or shop/mvi_3308.video,28. Store or Shop,Places,1,28. Store or Shop,Places,True
+train,Days_and_Time/78. Year/MVI_5048.MOV,days_and_time/78. year/mvi_5048.video,78. Year,Days_and_Time,1,78. Year,Days_and_Time,True
+train,Greetings/55. Thank you/MVI_9949.MOV,greetings/55. thank you/mvi_9949.video,55. Thank you,Greetings,1,55. Thank you,Greetings,True
+train,People/61. Father/MVI_3765.MOV,people/61. father/mvi_3765.video,61. Father,People,1,61. Father,People,True
+train,Greetings/48. Hello/MVI_9916.MOV,greetings/48. hello/mvi_9916.video,48. Hello,Greetings,1,48. Hello,Greetings,True
+train,Pronouns/46. you (plural)/MVI_0083.MOV,pronouns/46. you (plural)/mvi_0083.video,46. you (plural),Pronouns,1,46. you (plural),Pronouns,True
+train,Colours/55. White/MVI_5062.MOV,colours/55. white/mvi_5062.video,55. White,Colours,2,23. Court | 55. White,Colours | Places,True
+train,Places/23. Court/MVI_3610.MOV,places/23. court/mvi_3610.video,23. Court,Places,1,23. Court,Places,True
+train,Means_of_Transportation/11. Car/MVI_3175.MOV,means_of_transportation/11. car/mvi_3175.video,11. Car,Means_of_Transportation,1,11. Car,Means_of_Transportation,True
+train,Adjectives/94. good/MVI_9270.MOV,adjectives/94. good/mvi_9270.video,94. good,Adjectives,1,94. good,Adjectives,True
+train,Society/14. Election/MVI_4305.MOV,society/14. election/mvi_4305.video,14. Election,Society,1,14. Election,Society,True
+train,Places/19. House/MVI_3437.MOV,places/19. house/mvi_3437.video,19. House,Places,1,19. House,Places,True
+train,Seasons/64. Fall/MVI_4580.MOV,seasons/64. fall/mvi_4580.video,64. Fall,Seasons,1,64. Fall,Seasons,True
+train,Animals/1. Dog/MVI_3030.MOV,animals/1. dog/mvi_3030.video,1. Dog,Animals,1,1. Dog,Animals,True
+train,Adjectives/78. long/MVI_5188.MOV,adjectives/78. long/mvi_5188.video,78. long,Adjectives,1,78. long,Adjectives,True
+train,Days_and_Time/86. Time/MVI_4670.MOV,days_and_time/86. time/mvi_4670.video,86. Time,Days_and_Time,1,86. Time,Days_and_Time,True
+train,Colours/47. Red/MVI_4207.MOV,colours/47. red/mvi_4207.video,47. Red,Colours,1,47. Red,Colours,True
+train,People/61. Father/MVI_3912.MOV,people/61. father/mvi_3912.video,61. Father,People,1,61. Father,People,True
+train,Home/34. Pen/MVI_9033.MOV,home/34. pen/mvi_9033.video,34. Pen,Home,1,34. Pen,Home,True
+train,People/61. Father/MVI_4062.MOV,people/61. father/mvi_4062.video,61. Father,People,1,61. Father,People,True
+train,Means_of_Transportation/16. train ticket/MVI_3164.MOV,means_of_transportation/16. train ticket/mvi_3164.video,16. train ticket,Means_of_Transportation,1,16. train ticket,Means_of_Transportation,True
+train,Greetings/48. Hello/MVI_0037.MOV,greetings/48. hello/mvi_0037.video,48. Hello,Greetings,1,48. Hello,Greetings,True
+train,Pronouns/46. you (plural)/MVI_9946.MOV,pronouns/46. you (plural)/mvi_9946.video,46. you (plural),Pronouns,1,46. you (plural),Pronouns,True
+train,Home/40. Paint/MVI_4926.MOV,home/40. paint/mvi_4926.video,40. Paint,Home,1,40. Paint,Home,True
+train,People/61. Father/MVI_3763.MOV,people/61. father/mvi_3763.video,61. Father,People,1,61. Father,People,True
+train,Adjectives/78. long/MVI_9378.MOV,adjectives/78. long/mvi_9378.video,78. long,Adjectives,1,78. long,Adjectives,True
+train,Greetings/48. Hello/MVI_9954.MOV,greetings/48. hello/mvi_9954.video,48. Hello,Greetings,1,48. Hello,Greetings,True
+train,Pronouns/40. I/MVI_9881.MOV,pronouns/40. i/mvi_9881.video,40. I,Pronouns,1,40. I,Pronouns,True
+train,Jobs/91. Priest/MVI_5345.MOV,jobs/91. priest/mvi_5345.video,91. Priest,Jobs,1,91. Priest,Jobs,True
+train,Seasons/64. Fall/MVI_9134.MOV,seasons/64. fall/mvi_9134.video,64. Fall,Seasons,1,64. Fall,Seasons,True
+train,Places/19. House/MVI_3516.MOV,places/19. house/mvi_3516.video,19. House,Places,1,19. House,Places,True
+train,Animals/4. Bird/MVI_3071.MOV,animals/4. bird/mvi_3071.video,4. Bird,Animals,1,4. Bird,Animals,True
+train,People/78. Girl/MVI_4114.MOV,people/78. girl/mvi_4114.video,78. Girl,People,1,78. Girl,People,True
+train,People/61. Father/MVI_5081.MOV,people/61. father/mvi_5081.video,61. Father,People,1,61. Father,People,True
+train,Adjectives/1. loud/MVI_5336.MOV,adjectives/1. loud/mvi_5336.video,1. loud,Adjectives,1,1. loud,Adjectives,True
+train,Places/35. Bank/MVI_3500.MOV,places/35. bank/mvi_3500.video,35. Bank,Places,1,35. Bank,Places,True
+train,Home/28. Window/MVI_8769.MOV,home/28. window/mvi_8769.video,28. Window,Home,1,28. Window,Home,True
+train,Places/23. Court/MVI_3370.MOV,places/23. court/mvi_3370.video,23. Court,Places,1,23. Court,Places,True
+train,Days_and_Time/78. Year/MVI_9176.MOV,days_and_time/78. year/mvi_9176.video,78. Year,Days_and_Time,1,78. Year,Days_and_Time,True
+train,Colours/54. Black/MVI_5058.MOV,colours/54. black/mvi_5058.video,54. Black,Colours,1,54. Black,Colours,True
+train,Clothes/42. T-Shirt/MVI_8606.MOV,clothes/42. t-shirt/mvi_8606.video,42. T-Shirt,Clothes,1,42. T-Shirt,Clothes,True
+train,People/61. Father/MVI_5227.MOV,people/61. father/mvi_5227.video,61. Father,People,1,61. Father,People,True
+train,Seasons/61. Summer/MVI_4990.MOV,seasons/61. summer/mvi_4990.video,61. Summer,Seasons,1,61. Summer,Seasons,True
+train,Places/28. Store or Shop/MVI_3474.MOV,places/28. store or shop/mvi_3474.video,28. Store or Shop,Places,1,28. Store or Shop,Places,True
+train,Adjectives/94. good/MVI_9512.MOV,adjectives/94. good/mvi_9512.video,94. good,Adjectives,1,94. good,Adjectives,True
+train,Jobs/91. Priest/MVI_4490.MOV,jobs/91. priest/mvi_4490.video,91. Priest,Jobs,1,91. Priest,Jobs,True
+train,Animals/1. Dog/MVI_3059.MOV,animals/1. dog/mvi_3059.video,1. Dog,Animals,1,1. Dog,Animals,True
+train,People/66. Brother/MVI_5095.MOV,people/66. brother/mvi_5095.video,66. Brother,People,1,66. Brother,People,True
+train,Jobs/91. Priest/MVI_5342.MOV,jobs/91. priest/mvi_5342.video,91. Priest,Jobs,1,91. Priest,Jobs,True
+train,Means_of_Transportation/11. Car/MVI_3210.MOV,means_of_transportation/11. car/mvi_3210.video,11. Car,Means_of_Transportation,1,11. Car,Means_of_Transportation,True
+train,Electronics/53. Fan/MVI_4536.MOV,electronics/53. fan/mvi_4536.video,53. Fan,Electronics,1,53. Fan,Electronics,True
+train,Pronouns/40. I/MVI_9959.MOV,pronouns/40. i/mvi_9959.video,40. I,Pronouns,1,40. I,Pronouns,True
+train,Society/2. Death/MVI_4257.MOV,society/2. death/mvi_4257.video,2. Death,Society,1,2. Death,Society,True
+train,Means_of_Transportation/11. Car/MVI_3117.MOV,means_of_transportation/11. car/mvi_3117.video,11. Car,Means_of_Transportation,1,11. Car,Means_of_Transportation,True
+train,Colours/47. Red/MVI_3721.MOV,colours/47. red/mvi_3721.video,47. Red,Colours,1,47. Red,Colours,True
+train,People/78. Girl/MVI_3817.MOV,people/78. girl/mvi_3817.video,78. Girl,People,1,78. Girl,People,True
+train,Seasons/64. Fall/MVI_5001.MOV,seasons/64. fall/mvi_5001.video,64. Fall,Seasons,1,64. Fall,Seasons,True
+train,Adjectives/78. long/MVI_9460.MOV,adjectives/78. long/mvi_9460.video,78. long,Adjectives,1,78. long,Adjectives,True
+train,Places/35. Bank/MVI_3502.MOV,places/35. bank/mvi_3502.video,35. Bank,Places,1,35. Bank,Places,True
+train,Days_and_Time/78. Year/MVI_5491.MOV,days_and_time/78. year/mvi_5491.video,78. Year,Days_and_Time,1,78. Year,Days_and_Time,True
+train,Means_of_Transportation/16. train ticket/MVI_8596.MOV,means_of_transportation/16. train ticket/mvi_8596.video,16. train ticket,Means_of_Transportation,1,16. train ticket,Means_of_Transportation,True
+train,Colours/55. White/MVI_3745.MOV,colours/55. white/mvi_3745.video,55. White,Colours,1,55. White,Colours,True
+train,Adjectives/79. short/MVI_9380.MOV,adjectives/79. short/mvi_9380.video,79. short,Adjectives,1,79. short,Adjectives,True
+train,Adjectives/2. quiet/MVI_9451.MOV,adjectives/2. quiet/mvi_9451.video,2. quiet,Adjectives,1,2. quiet,Adjectives,True
+train,Places/23. Court/MVI_3452.MOV,places/23. court/mvi_3452.video,23. Court,Places,1,23. Court,Places,True
+train,Adjectives/83. big large/MVI_9316.MOV,adjectives/83. big large/mvi_9316.video,83. big large,Adjectives,1,83. big large,Adjectives,True
+train,Society/14. Election/MVI_4304.MOV,society/14. election/mvi_4304.video,14. Election,Society,1,14. Election,Society,True
+train,Places/19. House/MVI_3350.MOV,places/19. house/mvi_3350.video,19. House,Places,1,19. House,Places,True
+train,Animals/4. Bird/MVI_3037.MOV,animals/4. bird/mvi_3037.video,4. Bird,Animals,1,4. Bird,Animals,True
+train,Home/28. Window/MVI_8767.MOV,home/28. window/mvi_8767.video,28. Window,Home,1,28. Window,Home,True
+train,Adjectives/79. short/MVI_9221.MOV,adjectives/79. short/mvi_9221.video,79. short,Adjectives,1,79. short,Adjectives,True
+train,Days_and_Time/67. Monday/MVI_5446.MOV,days_and_time/67. monday/mvi_5446.video,67. Monday,Days_and_Time,1,67. Monday,Days_and_Time,True
+train,People/66. Brother/MVI_5244.MOV,people/66. brother/mvi_5244.video,66. Brother,People,1,66. Brother,People,True
+train,People/66. Brother/MVI_3781.MOV,people/66. brother/mvi_3781.video,66. Brother,People,1,66. Brother,People,True
+train,Places/28. Store or Shop/Extra/MVI_3636.MOV,places/28. store or shop/extra/mvi_3636.video,28. Store or Shop,Places,0,,,
+train,Adjectives/83. big large/MVI_5204.MOV,adjectives/83. big large/mvi_5204.video,83. big large,Adjectives,1,83. big large,Adjectives,True
+train,Places/35. Bank/Extra/MVI_3339.MOV,places/35. bank/extra/mvi_3339.video,35. Bank,Places,0,,,
+train,Clothes/44. Shoes/MVI_5028.MOV,clothes/44. shoes/mvi_5028.video,44. Shoes,Clothes,1,44. Shoes,Clothes,True
+train,Adjectives/3. happy/MVI_9540.MOV,adjectives/3. happy/mvi_9540.video,3. happy,Adjectives,1,3. happy,Adjectives,True
+train,Days_and_Time/78. Year/MVI_5492.MOV,days_and_time/78. year/mvi_5492.video,78. Year,Days_and_Time,1,78. Year,Days_and_Time,True
+train,Means_of_Transportation/16. train ticket/MVI_3162.MOV,means_of_transportation/16. train ticket/mvi_3162.video,16. train ticket,Means_of_Transportation,1,16. train ticket,Means_of_Transportation,True
+train,Animals/1. Dog/MVI_3002.MOV,animals/1. dog/mvi_3002.video,1. Dog,Animals,1,1. Dog,Animals,True
+train,Jobs/84. Teacher/MVI_5310.MOV,jobs/84. teacher/mvi_5310.video,84. Teacher,Jobs,1,84. Teacher,Jobs,True
+train,Society/2. Death/MVI_8661.MOV,society/2. death/mvi_8661.video,2. Death,Society,1,2. Death,Society,True
+train,Seasons/64. Fall/MVI_4579.MOV,seasons/64. fall/mvi_4579.video,64. Fall,Seasons,1,64. Fall,Seasons,True
+train,Pronouns/46. you (plural)/MVI_0023.MOV,pronouns/46. you (plural)/mvi_0023.video,46. you (plural),Pronouns,1,46. you (plural),Pronouns,True
+train,Days_and_Time/67. Monday/MVI_5010.MOV,days_and_time/67. monday/mvi_5010.video,67. Monday,Days_and_Time,1,67. Monday,Days_and_Time,True
+train,Means_of_Transportation/11. Car/MVI_4178.MOV,means_of_transportation/11. car/mvi_4178.video,11. Car,Means_of_Transportation,1,11. Car,Means_of_Transportation,True
+train,Electronics/54. Cell phone/MVI_5391.MOV,electronics/54. cell phone/mvi_5391.video,54. Cell phone,Electronics,1,54. Cell phone,Electronics,True
+train,Days_and_Time/86. Time/MVI_9203.MOV,days_and_time/86. time/mvi_9203.video,86. Time,Days_and_Time,1,86. Time,Days_and_Time,True
+train,Jobs/91. Priest/MVI_5343.MOV,jobs/91. priest/mvi_5343.video,91. Priest,Jobs,1,91. Priest,Jobs,True
+train,People/66. Brother/MVI_4230.MOV,people/66. brother/mvi_4230.video,66. Brother,People,1,66. Brother,People,True
+train,People/61. Father/MVI_3910.MOV,people/61. father/mvi_3910.video,61. Father,People,1,61. Father,People,True
+train,Means_of_Transportation/11. Car/MVI_3147.MOV,means_of_transportation/11. car/mvi_3147.video,11. Car,Means_of_Transportation,1,11. Car,Means_of_Transportation,True
+train,Pronouns/46. you (plural)/MVI_9908.MOV,pronouns/46. you (plural)/mvi_9908.video,46. you (plural),Pronouns,1,46. you (plural),Pronouns,True
+train,Colours/55. White/MVI_4922.MOV,colours/55. white/mvi_4922.video,55. White,Colours,1,55. White,Colours,True
+train,Adjectives/78. long/MVI_5266.MOV,adjectives/78. long/mvi_5266.video,78. long,Adjectives,1,78. long,Adjectives,True
+train,Clothes/37. Hat/MVI_5008.MOV,clothes/37. hat/mvi_5008.video,37. Hat,Clothes,1,37. Hat,Clothes,True
+train,People/78. Girl/MVI_5288.MOV,people/78. girl/mvi_5288.video,78. Girl,People,1,78. Girl,People,True
+train,Colours/55. White/MVI_3891.MOV,colours/55. white/mvi_3891.video,55. White,Colours,1,55. White,Colours,True
+train,Pronouns/44. it/MVI_9938.MOV,pronouns/44. it/mvi_9938.video,44. it,Pronouns,1,44. it,Pronouns,True
+train,People/66. Brother/MVI_3928.MOV,people/66. brother/mvi_3928.video,66. Brother,People,1,66. Brother,People,True
+train,Colours/47. Red/MVI_8612.MOV,colours/47. red/mvi_8612.video,47. Red,Colours,1,47. Red,Colours,True
+train,Means_of_Transportation/11. Car/MVI_3146.MOV,means_of_transportation/11. car/mvi_3146.video,11. Car,Means_of_Transportation,1,11. Car,Means_of_Transportation,True
+train,Home/40. Paint/MVI_8819.MOV,home/40. paint/mvi_8819.video,40. Paint,Home,1,40. Paint,Home,True
+train,Pronouns/40. I/MVI_0002.MOV,pronouns/40. i/mvi_0002.video,40. I,Pronouns,1,40. I,Pronouns,True
+train,Animals/5. Cow/MVI_3075.MOV,animals/5. cow/mvi_3075.video,5. Cow,Animals,1,5. Cow,Animals,True
+train,Electronics/53. Fan/MVI_9097.MOV,electronics/53. fan/mvi_9097.video,53. Fan,Electronics,1,53. Fan,Electronics,True
+train,Animals/5. Cow/MVI_4160.MOV,animals/5. cow/mvi_4160.video,5. Cow,Animals,1,5. Cow,Animals,True
+train,Adjectives/1. loud/MVI_9449.MOV,adjectives/1. loud/mvi_9449.video,1. loud,Adjectives,1,1. loud,Adjectives,True
+train,Adjectives/84. small little/MVI_9478.MOV,adjectives/84. small little/mvi_9478.video,84. small little,Adjectives,1,84. small little,Adjectives,True
+train,Colours/55. White/MVI_4043.MOV,colours/55. white/mvi_4043.video,55. White,Colours,1,55. White,Colours,True
+train,Greetings/48. Hello/MVI_9956.MOV,greetings/48. hello/mvi_9956.video,48. Hello,Greetings,1,48. Hello,Greetings,True
+train,Colours/54. Black/MVI_5206.MOV,colours/54. black/mvi_5206.video,54. Black,Colours,1,54. Black,Colours,True
+train,Animals/5. Cow/MVI_2991.MOV,animals/5. cow/mvi_2991.video,5. Cow,Animals,1,5. Cow,Animals,True
+train,Colours/55. White/MVI_3892.MOV,colours/55. white/mvi_3892.video,55. White,Colours,1,55. White,Colours,True
+train,People/66. Brother/MVI_4956.MOV,people/66. brother/mvi_4956.video,66. Brother,People,1,66. Brother,People,True
+train,Clothes/37. Hat/MVI_5007.MOV,clothes/37. hat/mvi_5007.video,37. Hat,Clothes,1,37. Hat,Clothes,True
+train,Animals/4. Bird/MVI_2987.MOV,animals/4. bird/mvi_2987.video,4. Bird,Animals,1,4. Bird,Animals,True
+train,Animals/5. Cow/MVI_3049.MOV,animals/5. cow/mvi_3049.video,5. Cow,Animals,1,5. Cow,Animals,True
+train,Adjectives/78. long/MVI_9298.MOV,adjectives/78. long/mvi_9298.video,78. long,Adjectives,1,78. long,Adjectives,True
+train,Adjectives/78. long/MVI_5108.MOV,adjectives/78. long/mvi_5108.video,78. long,Adjectives,1,78. long,Adjectives,True
+train,Adjectives/83. big large/MVI_9317.MOV,adjectives/83. big large/mvi_9317.video,83. big large,Adjectives,1,83. big large,Adjectives,True
+train,Greetings/51. Good Morning/MVI_0045.MOV,greetings/51. good morning/mvi_0045.video,51. Good Morning,Greetings,1,51. Good Morning,Greetings,True
+train,Animals/4. Bird/Extra/MVI_3043.MOV,animals/4. bird/extra/mvi_3043.video,4. Bird,Animals,0,,,
+train,Clothes/44. Shoes/MVI_5175.MOV,clothes/44. shoes/mvi_5175.video,44. Shoes,Clothes,1,44. Shoes,Clothes,True
+train,Animals/4. Bird/MVI_3038.MOV,animals/4. bird/mvi_3038.video,4. Bird,Animals,1,4. Bird,Animals,True
+train,Adjectives/79. short/MVI_5110.MOV,adjectives/79. short/mvi_5110.video,79. short,Adjectives,2,79. short,Adjectives,True
+train,Adjectives/78. long/MVI_9218.MOV,adjectives/78. long/mvi_9218.video,78. long,Adjectives,1,78. long,Adjectives,True
+train,Colours/54. Black/MVI_3889.MOV,colours/54. black/mvi_3889.video,54. Black,Colours,1,54. Black,Colours,True
+train,People/61. Father/MVI_3764.MOV,people/61. father/mvi_3764.video,61. Father,People,1,61. Father,People,True
+train,Adjectives/97. dry/MVI_9441.MOV,adjectives/97. dry/mvi_9441.video,97. dry,Adjectives,1,97. dry,Adjectives,True
+train,Electronics/54. Cell phone/MVI_4538.MOV,electronics/54. cell phone/mvi_4538.video,54. Cell phone,Electronics,1,54. Cell phone,Electronics,True
+train,Adjectives/91. new/MVI_5309.MOV,adjectives/91. new/mvi_5309.video,91. new,Adjectives,1,91. new,Adjectives,True
+train,Clothes/42. T-Shirt/MVI_4002.MOV,clothes/42. t-shirt/mvi_4002.video,42. T-Shirt,Clothes,1,42. T-Shirt,Clothes,True
+train,People/77. Boy/MVI_4242.MOV,people/77. boy/mvi_4242.video,77. Boy,People,1,77. Boy,People,True
+train,Adjectives/94. good/MVI_5240.MOV,adjectives/94. good/mvi_5240.video,94. good,Adjectives,1,94. good,Adjectives,True
+train,Adjectives/3. happy/MVI_5184.MOV,adjectives/3. happy/mvi_5184.video,3. happy,Adjectives,1,3. happy,Adjectives,True
+train,Adjectives/3. happy/MVI_9541.MOV,adjectives/3. happy/mvi_9541.video,3. happy,Adjectives,1,3. happy,Adjectives,True
+train,Adjectives/91. new/MVI_5229.MOV,adjectives/91. new/mvi_5229.video,91. new,Adjectives,1,91. new,Adjectives,True
+train,Home/34. Pen/MVI_8791.MOV,home/34. pen/mvi_8791.video,34. Pen,Home,1,34. Pen,Home,True
+train,Jobs/91. Priest/MVI_4486.MOV,jobs/91. priest/mvi_4486.video,91. Priest,Jobs,1,91. Priest,Jobs,True
+train,Adjectives/97. dry/MVI_5167.MOV,adjectives/97. dry/mvi_5167.video,97. dry,Adjectives,1,97. dry,Adjectives,True
+train,Colours/47. Red/MVI_5039.MOV,colours/47. red/mvi_5039.video,47. Red,Colours,1,47. Red,Colours,True
+train,Adjectives/83. big large/MVI_5284.MOV,adjectives/83. big large/mvi_5284.video,83. big large,Adjectives,1,83. big large,Adjectives,True
+train,Greetings/55. Thank you/MVI_0061.MOV,greetings/55. thank you/mvi_0061.video,55. Thank you,Greetings,1,55. Thank you,Greetings,True
+train,People/77. Boy/MVI_4112.MOV,people/77. boy/mvi_4112.video,77. Boy,People,1,77. Boy,People,True
+train,Home/34. Pen/MVI_4387.MOV,home/34. pen/mvi_4387.video,34. Pen,Home,1,34. Pen,Home,True
+train,Jobs/91. Priest/MVI_4771.MOV,jobs/91. priest/mvi_4771.video,91. Priest,Jobs,1,91. Priest,Jobs,True
+train,Clothes/44. Shoes/MVI_4888.MOV,clothes/44. shoes/mvi_4888.video,44. Shoes,Clothes,1,44. Shoes,Clothes,True
+train,Clothes/37. Hat/MVI_3985.MOV,clothes/37. hat/mvi_3985.video,37. Hat,Clothes,1,37. Hat,Clothes,True
+train,Home/40. Paint/MVI_4413.MOV,home/40. paint/mvi_4413.video,40. Paint,Home,1,40. Paint,Home,True
+train,Society/14. Election/MVI_8713.MOV,society/14. election/mvi_8713.video,14. Election,Society,1,14. Election,Society,True
+train,Jobs/84. Teacher/MVI_4459.MOV,jobs/84. teacher/mvi_4459.video,84. Teacher,Jobs,1,84. Teacher,Jobs,True
+train,Means_of_Transportation/16. train ticket/MVI_3194.MOV,means_of_transportation/16. train ticket/mvi_3194.video,16. train ticket,Means_of_Transportation,1,16. train ticket,Means_of_Transportation,True
+train,Society/14. Election/MVI_4839.MOV,society/14. election/mvi_4839.video,14. Election,Society,1,14. Election,Society,True
+train,Days_and_Time/86. Time/MVI_5524.MOV,days_and_time/86. time/mvi_5524.video,86. Time,Days_and_Time,1,86. Time,Days_and_Time,True
+train,Adjectives/97. dry/MVI_9440.MOV,adjectives/97. dry/mvi_9440.video,97. dry,Adjectives,1,97. dry,Adjectives,True
+train,Adjectives/91. new/MVI_9342.MOV,adjectives/91. new/mvi_9342.video,91. new,Adjectives,1,91. new,Adjectives,True
+train,Adjectives/91. new/MVI_9422.MOV,adjectives/91. new/mvi_9422.video,91. new,Adjectives,1,91. new,Adjectives,True
+train,Adjectives/83. big large/MVI_9477.MOV,adjectives/83. big large/mvi_9477.video,83. big large,Adjectives,1,83. big large,Adjectives,True
+train,Adjectives/84. small little/extra/MVI_5209.MOV,adjectives/84. small little/extra/mvi_5209.video,84. small little,Adjectives,0,,,
+train,People/61. Father/MVI_4060.MOV,people/61. father/mvi_4060.video,61. Father,People,1,61. Father,People,True
+train,Days_and_Time/67. Monday/MVI_9144.MOV,days_and_time/67. monday/mvi_9144.video,67. Monday,Days_and_Time,1,67. Monday,Days_and_Time,True
+train,Pronouns/46. you (plural)/MVI_9975.MOV,pronouns/46. you (plural)/mvi_9975.video,46. you (plural),Pronouns,1,46. you (plural),Pronouns,True
+train,Society/14. Election/MVI_8711.MOV,society/14. election/mvi_8711.video,14. Election,Society,1,14. Election,Society,True
+train,Adjectives/2. quiet/MVI_9538.MOV,adjectives/2. quiet/mvi_9538.video,2. quiet,Adjectives,1,2. quiet,Adjectives,True
+train,Home/40. Paint/MVI_4412.MOV,home/40. paint/mvi_4412.video,40. Paint,Home,1,40. Paint,Home,True
+train,Days_and_Time/86. Time/MVI_4668.MOV,days_and_time/86. time/mvi_4668.video,86. Time,Days_and_Time,1,86. Time,Days_and_Time,True
+train,Colours/54. Black/MVI_3887.MOV,colours/54. black/mvi_3887.video,54. Black,Colours,1,54. Black,Colours,True
+train,Adjectives/78. long/MVI_9217.MOV,adjectives/78. long/mvi_9217.video,78. long,Adjectives,1,78. long,Adjectives,True
+train,Clothes/44. Shoes/MVI_4204.MOV,clothes/44. shoes/mvi_4204.video,44. Shoes,Clothes,1,44. Shoes,Clothes,True
+train,Adjectives/84. small little/MVI_9400.MOV,adjectives/84. small little/mvi_9400.video,84. small little,Adjectives,1,84. small little,Adjectives,True
+train,Clothes/44. Shoes/MVI_3710.MOV,clothes/44. shoes/mvi_3710.video,44. Shoes,Clothes,1,44. Shoes,Clothes,True
+train,Pronouns/46. you (plural)/MVI_0030.MOV,pronouns/46. you (plural)/mvi_0030.video,46. you (plural),Pronouns,1,46. you (plural),Pronouns,True
+train,Greetings/55. Thank you/MVI_9950.MOV,greetings/55. thank you/mvi_9950.video,55. Thank you,Greetings,1,55. Thank you,Greetings,True
+train,Pronouns/44. it/MVI_0014.MOV,pronouns/44. it/mvi_0014.video,44. it,Pronouns,1,44. it,Pronouns,True
+train,Adjectives/97. dry/MVI_5249.MOV,adjectives/97. dry/mvi_5249.video,97. dry,Adjectives,1,97. dry,Adjectives,True
+train,Colours/47. Red/MVI_3720.MOV,colours/47. red/mvi_3720.video,47. Red,Colours,1,47. Red,Colours,True
+train,Electronics/53. Fan/MVI_5390.MOV,electronics/53. fan/mvi_5390.video,53. Fan,Electronics,1,53. Fan,Electronics,True
+train,Adjectives/91. new/MVI_9340.MOV,adjectives/91. new/mvi_9340.video,91. new,Adjectives,1,91. new,Adjectives,True
+train,People/77. Boy/MVI_4981.MOV,people/77. boy/mvi_4981.video,77. Boy,People,1,77. Boy,People,True
+train,Clothes/37. Hat/MVI_5006.MOV,clothes/37. hat/mvi_5006.video,37. Hat,Clothes,1,37. Hat,Clothes,True
+train,Adjectives/84. small little/MVI_9480.MOV,adjectives/84. small little/mvi_9480.video,84. small little,Adjectives,1,84. small little,Adjectives,True
+train,Colours/55. White/MVI_4921.MOV,colours/55. white/mvi_4921.video,55. White,Colours,1,55. White,Colours,True
+train,Places/19. House/MVI_3515.MOV,places/19. house/mvi_3515.video,19. House,Places,1,19. House,Places,True
+train,Adjectives/84. small little/MVI_9236.MOV,adjectives/84. small little/mvi_9236.video,84. small little,Adjectives,1,84. small little,Adjectives,True
+train,Animals/1. Dog/MVI_3028.MOV,animals/1. dog/mvi_3028.video,1. Dog,Animals,2,1. Dog | 23. Court,Animals | Places,True
+train,Home/34. Pen/MVI_4908.MOV,home/34. pen/mvi_4908.video,34. Pen,Home,1,34. Pen,Home,True
+train,Colours/47. Red/MVI_3719.MOV,colours/47. red/mvi_3719.video,47. Red,Colours,1,47. Red,Colours,True
+train,Electronics/54. Cell phone/MVI_4539.MOV,electronics/54. cell phone/mvi_4539.video,54. Cell phone,Electronics,1,54. Cell phone,Electronics,True
+train,Greetings/48. Hello/MVI_9914.MOV,greetings/48. hello/mvi_9914.video,48. Hello,Greetings,1,48. Hello,Greetings,True
+train,Adjectives/79. short/MVI_5270.MOV,adjectives/79. short/mvi_5270.video,79. short,Adjectives,1,79. short,Adjectives,True
+train,Pronouns/44. it/MVI_0078.MOV,pronouns/44. it/mvi_0078.video,44. it,Pronouns,1,44. it,Pronouns,True
+train,Pronouns/40. I/MVI_9958.MOV,pronouns/40. i/mvi_9958.video,40. I,Pronouns,1,40. I,Pronouns,True
+train,Places/19. House/MVI_3595.MOV,places/19. house/mvi_3595.video,19. House,Places,1,19. House,Places,True
+train,Jobs/84. Teacher/MVI_5311.MOV,jobs/84. teacher/mvi_5311.video,84. Teacher,Jobs,1,84. Teacher,Jobs,True
+train,Adjectives/91. new/MVI_9421.MOV,adjectives/91. new/mvi_9421.video,91. new,Adjectives,1,91. new,Adjectives,True
+train,Adjectives/83. big large/MVI_9394.MOV,adjectives/83. big large/mvi_9394.video,83. big large,Adjectives,1,83. big large,Adjectives,True
+train,People/61. Father/MVI_4942.MOV,people/61. father/mvi_4942.video,61. Father,People,1,61. Father,People,True
+train,Colours/54. Black/MVI_4919.MOV,colours/54. black/mvi_4919.video,54. Black,Colours,1,54. Black,Colours,True
+train,People/78. Girl/MVI_5289.MOV,people/78. girl/mvi_5289.video,78. Girl,People,1,78. Girl,People,True
+train,Adjectives/91. new/MVI_9260.MOV,adjectives/91. new/mvi_9260.video,91. new,Adjectives,1,91. new,Adjectives,True
+train,Adjectives/87. hot/MVI_9328.MOV,adjectives/87. hot/mvi_9328.video,87. hot,Adjectives,1,87. hot,Adjectives,True
+train,Means_of_Transportation/11. Car/MVI_3211.MOV,means_of_transportation/11. car/mvi_3211.video,11. Car,Means_of_Transportation,1,11. Car,Means_of_Transportation,True
+train,Electronics/54. Cell phone/MVI_9102.MOV,electronics/54. cell phone/mvi_9102.video,54. Cell phone,Electronics,1,54. Cell phone,Electronics,True
+train,Clothes/42. T-Shirt/MVI_3706.MOV,clothes/42. t-shirt/mvi_3706.video,42. T-Shirt,Clothes,1,42. T-Shirt,Clothes,True
+train,Adjectives/83. big large/MVI_9234.MOV,adjectives/83. big large/mvi_9234.video,83. big large,Adjectives,1,83. big large,Adjectives,True
+train,Pronouns/40. I/MVI_9918.MOV,pronouns/40. i/mvi_9918.video,40. I,Pronouns,1,40. I,Pronouns,True
+train,Seasons/64. Fall/MVI_4999.MOV,seasons/64. fall/mvi_4999.video,64. Fall,Seasons,1,64. Fall,Seasons,True
+train,Pronouns/44. it/MVI_9898.MOV,pronouns/44. it/mvi_9898.video,44. it,Pronouns,1,44. it,Pronouns,True
+train,Greetings/51. Good Morning/MVI_9968.MOV,greetings/51. good morning/mvi_9968.video,51. Good Morning,Greetings,1,51. Good Morning,Greetings,True
+train,Days_and_Time/86. Time/MVI_9202.MOV,days_and_time/86. time/mvi_9202.video,86. Time,Days_and_Time,1,86. Time,Days_and_Time,True
+train,Adjectives/97. dry/MVI_5326.MOV,adjectives/97. dry/mvi_5326.video,97. dry,Adjectives,1,97. dry,Adjectives,True
+train,Greetings/51. Good Morning/MVI_0046.MOV,greetings/51. good morning/mvi_0046.video,51. Good Morning,Greetings,1,51. Good Morning,Greetings,True
+train,People/77. Boy/MVI_3964.MOV,people/77. boy/mvi_3964.video,77. Boy,People,1,77. Boy,People,True
+train,Colours/47. Red/MVI_4019.MOV,colours/47. red/mvi_4019.video,47. Red,Colours,1,47. Red,Colours,True
+train,Greetings/51. Good Morning/MVI_9934.MOV,greetings/51. good morning/mvi_9934.video,51. Good Morning,Greetings,1,51. Good Morning,Greetings,True
+train,Adjectives/97. dry/MVI_9279.MOV,adjectives/97. dry/mvi_9279.video,97. dry,Adjectives,1,97. dry,Adjectives,True
+train,Places/23. Court/MVI_3367.MOV,places/23. court/mvi_3367.video,23. Court,Places,1,23. Court,Places,True
+train,Places/28. Store or Shop/MVI_3387.MOV,places/28. store or shop/mvi_3387.video,28. Store or Shop,Places,1,28. Store or Shop,Places,True
+train,Adjectives/1. loud/MVI_9291.MOV,adjectives/1. loud/mvi_9291.video,1. loud,Adjectives,1,1. loud,Adjectives,True
+train,Animals/5. Cow/MVI_3046.MOV,animals/5. cow/mvi_3046.video,5. Cow,Animals,1,5. Cow,Animals,True
+train,Places/19. House/MVI_3349.MOV,places/19. house/mvi_3349.video,19. House,Places,2,19. House | 4. Bird,Animals | Places,True
+train,Adjectives/79. short/MVI_9463.MOV,adjectives/79. short/mvi_9463.video,79. short,Adjectives,1,79. short,Adjectives,True
+train,Adjectives/94. good/MVI_5238.MOV,adjectives/94. good/mvi_5238.video,94. good,Adjectives,1,94. good,Adjectives,True
+train,Adjectives/91. new/MVI_5307.MOV,adjectives/91. new/mvi_5307.video,91. new,Adjectives,2,84. small little | 91. new,Adjectives,True
+train,Days_and_Time/86. Time/MVI_5526.MOV,days_and_time/86. time/mvi_5526.video,86. Time,Days_and_Time,1,86. Time,Days_and_Time,True
+train,Places/28. Store or Shop/MVI_3309.MOV,places/28. store or shop/mvi_3309.video,28. Store or Shop,Places,1,28. Store or Shop,Places,True
+train,Places/35. Bank/MVI_3337.MOV,places/35. bank/mvi_3337.video,35. Bank,Places,1,35. Bank,Places,True
+train,Clothes/37. Hat/MVI_3986.MOV,clothes/37. hat/mvi_3986.video,37. Hat,Clothes,1,37. Hat,Clothes,True
+train,Adjectives/2. quiet/MVI_5260.MOV,adjectives/2. quiet/mvi_5260.video,2. quiet,Adjectives,1,2. quiet,Adjectives,True
+train,Days_and_Time/78. Year/MVI_5047.MOV,days_and_time/78. year/mvi_5047.video,78. Year,Days_and_Time,1,78. Year,Days_and_Time,True
+train,Means_of_Transportation/16. train ticket/MVI_4191.MOV,means_of_transportation/16. train ticket/mvi_4191.video,16. train ticket,Means_of_Transportation,1,16. train ticket,Means_of_Transportation,True
+train,People/78. Girl/MVI_4243.MOV,people/78. girl/mvi_4243.video,78. Girl,People,1,78. Girl,People,True
+train,Adjectives/91. new/MVI_5151.MOV,adjectives/91. new/mvi_5151.video,91. new,Adjectives,1,91. new,Adjectives,True
+train,Colours/55. White/MVI_4044.MOV,colours/55. white/mvi_4044.video,55. White,Colours,1,55. White,Colours,True
+train,Places/19. House/MVI_3438.MOV,places/19. house/mvi_3438.video,19. House,Places,1,19. House,Places,True
+train,Adjectives/97. dry/MVI_9277.MOV,adjectives/97. dry/mvi_9277.video,97. dry,Adjectives,1,97. dry,Adjectives,True
+train,People/78. Girl/MVI_5290.MOV,people/78. girl/mvi_5290.video,78. Girl,People,1,78. Girl,People,True
+train,Animals/1. Dog/MVI_3061.MOV,animals/1. dog/mvi_3061.video,1. Dog,Animals,1,1. Dog,Animals,True
+train,Adjectives/84. small little/MVI_9479.MOV,adjectives/84. small little/mvi_9479.video,84. small little,Adjectives,1,84. small little,Adjectives,True
+train,Society/2. Death/MVI_4802.MOV,society/2. death/mvi_4802.video,2. Death,Society,1,2. Death,Society,True
+train,Adjectives/79. short/MVI_5112.MOV,adjectives/79. short/mvi_5112.video,79. short,Adjectives,1,79. short,Adjectives,True
+train,Adjectives/2. quiet/MVI_9293.MOV,adjectives/2. quiet/mvi_9293.video,2. quiet,Adjectives,1,2. quiet,Adjectives,True
+train,Animals/5. Cow/MVI_3097.MOV,animals/5. cow/mvi_3097.video,5. Cow,Animals,1,5. Cow,Animals,True
+train,Places/35. Bank/MVI_3336.MOV,places/35. bank/mvi_3336.video,35. Bank,Places,1,35. Bank,Places,True
+train,Electronics/53. Fan/MVI_9099.MOV,electronics/53. fan/mvi_9099.video,53. Fan,Electronics,1,53. Fan,Electronics,True
+train,Seasons/61. Summer/MVI_4565.MOV,seasons/61. summer/mvi_4565.video,61. Summer,Seasons,1,61. Summer,Seasons,True
+train,Greetings/48. Hello/MVI_0038.MOV,greetings/48. hello/mvi_0038.video,48. Hello,Greetings,1,48. Hello,Greetings,True
+train,Clothes/42. T-Shirt/MVI_3705.MOV,clothes/42. t-shirt/mvi_3705.video,42. T-Shirt,Clothes,1,42. T-Shirt,Clothes,True
+train,People/77. Boy/MVI_4982.MOV,people/77. boy/mvi_4982.video,77. Boy,People,1,77. Boy,People,True
+train,Colours/47. Red/MVI_5184.MOV,colours/47. red/mvi_5184.video,47. Red,Colours,1,47. Red,Colours,True
+train,Colours/55. White/MVI_5209.MOV,colours/55. white/mvi_5209.video,55. White,Colours,1,55. White,Colours,True
+train,Animals/4. Bird/MVI_4157.MOV,animals/4. bird/mvi_4157.video,4. Bird,Animals,1,4. Bird,Animals,True
+train,Places/23. Court/MVI_3285.MOV,places/23. court/mvi_3285.video,23. Court,Places,2,23. Court | 4. Bird,Animals | Places,True
+train,Colours/55. White/MVI_8620.MOV,colours/55. white/mvi_8620.video,55. White,Colours,1,55. White,Colours,True
+train,Home/40. Paint/MVI_9051.MOV,home/40. paint/mvi_9051.video,40. Paint,Home,1,40. Paint,Home,True
+train,Greetings/51. Good Morning/MVI_0048.MOV,greetings/51. good morning/mvi_0048.video,51. Good Morning,Greetings,1,51. Good Morning,Greetings,True
+train,Adjectives/97. dry/MVI_5327.MOV,adjectives/97. dry/mvi_5327.video,97. dry,Adjectives,1,97. dry,Adjectives,True
+train,Clothes/42. T-Shirt/MVI_5022.MOV,clothes/42. t-shirt/mvi_5022.video,42. T-Shirt,Clothes,1,42. T-Shirt,Clothes,True
+train,Days_and_Time/67. Monday/MVI_4591.MOV,days_and_time/67. monday/mvi_4591.video,67. Monday,Days_and_Time,1,67. Monday,Days_and_Time,True
+train,Greetings/51. Good Morning/MVI_9935.MOV,greetings/51. good morning/mvi_9935.video,51. Good Morning,Greetings,1,51. Good Morning,Greetings,True
+train,Adjectives/83. big large/MVI_5205.MOV,adjectives/83. big large/mvi_5205.video,83. big large,Adjectives,1,83. big large,Adjectives,True
+train,Greetings/48. Hello/MVI_9917.MOV,greetings/48. hello/mvi_9917.video,48. Hello,Greetings,1,48. Hello,Greetings,True
+train,Clothes/44. Shoes/MVI_8608.MOV,clothes/44. shoes/mvi_8608.video,44. Shoes,Clothes,1,44. Shoes,Clothes,True
+train,Electronics/53. Fan/MVI_4532.MOV,electronics/53. fan/mvi_4532.video,53. Fan,Electronics,2,28. Store or Shop | 53. Fan,Electronics | Places,True
+train,Places/28. Store or Shop/MVI_3385.MOV,places/28. store or shop/mvi_3385.video,28. Store or Shop,Places,1,28. Store or Shop,Places,True
+train,Adjectives/87. hot/MVI_5136.MOV,adjectives/87. hot/mvi_5136.video,87. hot,Adjectives,1,87. hot,Adjectives,True
+train,Places/28. Store or Shop/MVI_3555.MOV,places/28. store or shop/mvi_3555.video,28. Store or Shop,Places,1,28. Store or Shop,Places,True
+train,Jobs/84. Teacher/MVI_5312.MOV,jobs/84. teacher/mvi_5312.video,84. Teacher,Jobs,1,84. Teacher,Jobs,True
+train,Clothes/42. T-Shirt/MVI_3851.MOV,clothes/42. t-shirt/mvi_3851.video,42. T-Shirt,Clothes,2,4. Bird | 42. T-Shirt,Animals | Clothes,True
+train,Animals/4. Bird/MVI_3096.MOV,animals/4. bird/mvi_3096.video,4. Bird,Animals,1,4. Bird,Animals,True
+train,Adjectives/1. loud/MVI_9535.MOV,adjectives/1. loud/mvi_9535.video,1. loud,Adjectives,1,1. loud,Adjectives,True
+train,Means_of_Transportation/16. train ticket/MVI_3133.MOV,means_of_transportation/16. train ticket/mvi_3133.video,16. train ticket,Means_of_Transportation,1,16. train ticket,Means_of_Transportation,True
+train,Seasons/61. Summer/MVI_9124.MOV,seasons/61. summer/mvi_9124.video,61. Summer,Seasons,1,61. Summer,Seasons,True
+train,Adjectives/91. new/MVI_9502.MOV,adjectives/91. new/mvi_9502.video,91. new,Adjectives,1,91. new,Adjectives,True
+train,Adjectives/2. quiet/MVI_9294.MOV,adjectives/2. quiet/mvi_9294.video,2. quiet,Adjectives,1,2. quiet,Adjectives,True
+train,Adjectives/87. hot/MVI_9488.MOV,adjectives/87. hot/mvi_9488.video,87. hot,Adjectives,1,87. hot,Adjectives,True
+train,Adjectives/91. new/MVI_9259.MOV,adjectives/91. new/mvi_9259.video,91. new,Adjectives,1,91. new,Adjectives,True
+train,Animals/5. Cow/MVI_3098.MOV,animals/5. cow/mvi_3098.video,5. Cow,Animals,1,5. Cow,Animals,True
+train,Colours/55. White/MVI_3890.MOV,colours/55. white/mvi_3890.video,55. White,Colours,1,55. White,Colours,True
+train,Means_of_Transportation/11. Car/MVI_8584.MOV,means_of_transportation/11. car/mvi_8584.video,11. Car,Means_of_Transportation,1,11. Car,Means_of_Transportation,True
+train,People/66. Brother/MVI_5243.MOV,people/66. brother/mvi_5243.video,66. Brother,People,1,66. Brother,People,True
+train,Days_and_Time/67. Monday/MVI_5449.MOV,days_and_time/67. monday/mvi_5449.video,67. Monday,Days_and_Time,1,67. Monday,Days_and_Time,True
+train,People/66. Brother/MVI_4955.MOV,people/66. brother/mvi_4955.video,66. Brother,People,1,66. Brother,People,True
+train,People/78. Girl/MVI_3965.MOV,people/78. girl/mvi_3965.video,78. Girl,People,1,78. Girl,People,True
+train,Adjectives/2. quiet/MVI_5339.MOV,adjectives/2. quiet/mvi_5339.video,2. quiet,Adjectives,1,2. quiet,Adjectives,True
+train,People/61. Father/MVI_4940.MOV,people/61. father/mvi_4940.video,61. Father,People,1,61. Father,People,True
+train,Pronouns/40. I/MVI_0012.MOV,pronouns/40. i/mvi_0012.video,40. I,Pronouns,1,40. I,Pronouns,True
+train,Places/23. Court/Extra/MVI_3368.MOV,places/23. court/extra/mvi_3368.video,23. Court,Places,0,,,
+train,Clothes/37. Hat/MVI_3835.MOV,clothes/37. hat/mvi_3835.video,37. Hat,Clothes,1,37. Hat,Clothes,True
+train,Seasons/61. Summer/MVI_9123.MOV,seasons/61. summer/mvi_9123.video,61. Summer,Seasons,1,61. Summer,Seasons,True
+train,Places/35. Bank/MVI_3583.MOV,places/35. bank/mvi_3583.video,35. Bank,Places,1,35. Bank,Places,True
+train,Home/40. Paint/MVI_4927.MOV,home/40. paint/mvi_4927.video,40. Paint,Home,1,40. Paint,Home,True
+train,Adjectives/97. dry/MVI_9278.MOV,adjectives/97. dry/mvi_9278.video,97. dry,Adjectives,1,97. dry,Adjectives,True
+train,Adjectives/79. short/extra/MVI_5192.MOV,adjectives/79. short/extra/mvi_5192.video,79. short,Adjectives,0,,,
+train,Adjectives/94. good/MVI_9349.MOV,adjectives/94. good/mvi_9349.video,94. good,Adjectives,1,94. good,Adjectives,True
+train,Home/34. Pen/MVI_4390.MOV,home/34. pen/mvi_4390.video,34. Pen,Home,1,34. Pen,Home,True
+train,Greetings/55. Thank you/MVI_0059.MOV,greetings/55. thank you/mvi_0059.video,55. Thank you,Greetings,1,55. Thank you,Greetings,True
+train,Adjectives/1. loud/MVI_9448.MOV,adjectives/1. loud/mvi_9448.video,1. loud,Adjectives,1,1. loud,Adjectives,True
+train,Adjectives/2. quiet/MVI_9292.MOV,adjectives/2. quiet/mvi_9292.video,2. quiet,Adjectives,1,2. quiet,Adjectives,True
+train,Places/35. Bank/MVI_3422.MOV,places/35. bank/mvi_3422.video,35. Bank,Places,1,35. Bank,Places,True
+train,Adjectives/83. big large/MVI_5124.MOV,adjectives/83. big large/mvi_5124.video,83. big large,Adjectives,1,83. big large,Adjectives,True
+train,Society/2. Death/MVI_8664.MOV,society/2. death/mvi_8664.video,2. Death,Society,1,2. Death,Society,True
+train,Electronics/54. Cell phone/MVI_4540.MOV,electronics/54. cell phone/mvi_4540.video,54. Cell phone,Electronics,1,54. Cell phone,Electronics,True
+train,Clothes/44. Shoes/MVI_5176.MOV,clothes/44. shoes/mvi_5176.video,44. Shoes,Clothes,1,44. Shoes,Clothes,True
+train,Places/19. House/MVI_3435.MOV,places/19. house/mvi_3435.video,19. House,Places,1,19. House,Places,True
+train,Colours/54. Black/MVI_4040.MOV,colours/54. black/mvi_4040.video,54. Black,Colours,1,54. Black,Colours,True
+train,Animals/5. Cow/MVI_8569.MOV,animals/5. cow/mvi_8569.video,5. Cow,Animals,1,5. Cow,Animals,True
+train,Colours/54. Black/MVI_4918.MOV,colours/54. black/mvi_4918.video,54. Black,Colours,1,54. Black,Colours,True
+train,Adjectives/2. quiet/MVI_9371.MOV,adjectives/2. quiet/mvi_9371.video,2. quiet,Adjectives,1,2. quiet,Adjectives,True
+train,Adjectives/1. loud/MVI_9290.MOV,adjectives/1. loud/mvi_9290.video,1. loud,Adjectives,2,1. loud | 23. Court,Adjectives | Places,True
+train,People/61. Father/MVI_5228.MOV,people/61. father/mvi_5228.video,61. Father,People,2,28. Store or Shop | 61. Father,People | Places,True
+train,Places/28. Store or Shop/MVI_3632.MOV,places/28. store or shop/mvi_3632.video,28. Store or Shop,Places,1,28. Store or Shop,Places,True
+train,Clothes/42. T-Shirt/MVI_4883.MOV,clothes/42. t-shirt/mvi_4883.video,42. T-Shirt,Clothes,1,42. T-Shirt,Clothes,True
+train,Adjectives/87. hot/MVI_9249.MOV,adjectives/87. hot/mvi_9249.video,87. hot,Adjectives,1,87. hot,Adjectives,True
+train,Animals/5. Cow/MVI_8570.MOV,animals/5. cow/mvi_8570.video,5. Cow,Animals,1,5. Cow,Animals,True
+train,Animals/4. Bird/Extra/MVI_3042.MOV,animals/4. bird/extra/mvi_3042.video,4. Bird,Animals,0,,,
+train,Adjectives/97. dry/MVI_5169.MOV,adjectives/97. dry/mvi_5169.video,97. dry,Adjectives,1,97. dry,Adjectives,True
+train,Adjectives/2. quiet/MVI_5338.MOV,adjectives/2. quiet/mvi_5338.video,2. quiet,Adjectives,1,2. quiet,Adjectives,True
+train,Adjectives/3. happy/MVI_5185.MOV,adjectives/3. happy/mvi_5185.video,3. happy,Adjectives,1,3. happy,Adjectives,True
+train,Adjectives/87. hot/MVI_9247.MOV,adjectives/87. hot/mvi_9247.video,87. hot,Adjectives,1,87. hot,Adjectives,True
+train,Seasons/64. Fall/MVI_5434.MOV,seasons/64. fall/mvi_5434.video,64. Fall,Seasons,1,64. Fall,Seasons,True
+train,Jobs/84. Teacher/MVI_8865.MOV,jobs/84. teacher/mvi_8865.video,84. Teacher,Jobs,1,84. Teacher,Jobs,True
+train,Home/34. Pen/MVI_9032.MOV,home/34. pen/mvi_9032.video,34. Pen,Home,1,34. Pen,Home,True
+train,People/78. Girl/MVI_8645.MOV,people/78. girl/mvi_8645.video,78. Girl,People,1,78. Girl,People,True
+train,Places/23. Court/Extra/MVI_3613.MOV,places/23. court/extra/mvi_3613.video,23. Court,Places,0,,,
+train,Seasons/61. Summer/MVI_4992.MOV,seasons/61. summer/mvi_4992.video,61. Summer,Seasons,1,61. Summer,Seasons,True
+train,Adjectives/78. long/MVI_5186.MOV,adjectives/78. long/mvi_5186.video,78. long,Adjectives,1,78. long,Adjectives,True
+train,Colours/55. White/MVI_4216.MOV,colours/55. white/mvi_4216.video,55. White,Colours,1,55. White,Colours,True
+train,Pronouns/46. you (plural)/MVI_9909.MOV,pronouns/46. you (plural)/mvi_9909.video,46. you (plural),Pronouns,1,46. you (plural),Pronouns,True
+train,Clothes/42. T-Shirt/MVI_4881.MOV,clothes/42. t-shirt/mvi_4881.video,42. T-Shirt,Clothes,1,42. T-Shirt,Clothes,True
+train,Adjectives/87. hot/MVI_5138.MOV,adjectives/87. hot/mvi_5138.video,87. hot,Adjectives,1,87. hot,Adjectives,True
+train,Adjectives/78. long/MVI_9459.MOV,adjectives/78. long/mvi_9459.video,78. long,Adjectives,1,78. long,Adjectives,True
+train,Animals/1. Dog/MVI_4148.MOV,animals/1. dog/mvi_4148.video,1. Dog,Animals,1,1. Dog,Animals,True
+train,Greetings/55. Thank you/MVI_0058.MOV,greetings/55. thank you/mvi_0058.video,55. Thank you,Greetings,1,55. Thank you,Greetings,True
+train,People/77. Boy/MVI_5133.MOV,people/77. boy/mvi_5133.video,77. Boy,People,1,77. Boy,People,True
+train,Animals/5. Cow/MVI_3017.MOV,animals/5. cow/mvi_3017.video,5. Cow,Animals,1,5. Cow,Animals,True
+train,Greetings/51. Good Morning/MVI_9970.MOV,greetings/51. good morning/mvi_9970.video,51. Good Morning,Greetings,1,51. Good Morning,Greetings,True
+train,Adjectives/2. quiet/MVI_5262.MOV,adjectives/2. quiet/mvi_5262.video,2. quiet,Adjectives,1,2. quiet,Adjectives,True
+train,Places/35. Bank/MVI_3664.MOV,places/35. bank/mvi_3664.video,35. Bank,Places,1,35. Bank,Places,True
+train,People/66. Brother/MVI_3780.MOV,people/66. brother/mvi_3780.video,66. Brother,People,1,66. Brother,People,True
+train,Clothes/37. Hat/MVI_4866.MOV,clothes/37. hat/mvi_4866.video,37. Hat,Clothes,1,37. Hat,Clothes,True
+train,Society/14. Election/MVI_8968.MOV,society/14. election/mvi_8968.video,14. Election,Society,1,14. Election,Society,True
+train,Pronouns/44. it/MVI_9897.MOV,pronouns/44. it/mvi_9897.video,44. it,Pronouns,1,44. it,Pronouns,True
+train,Places/23. Court/Extra/MVI_3288.MOV,places/23. court/extra/mvi_3288.video,23. Court,Places,0,,,
+train,Colours/54. Black/MVI_5059.MOV,colours/54. black/mvi_5059.video,54. Black,Colours,1,54. Black,Colours,True
+train,Adjectives/84. small little/MVI_5207.MOV,adjectives/84. small little/mvi_5207.video,84. small little,Adjectives,1,84. small little,Adjectives,True
+train,Animals/1. Dog/MVI_3004.MOV,animals/1. dog/mvi_3004.video,1. Dog,Animals,1,1. Dog,Animals,True
+train,Electronics/54. Cell phone/MVI_5392.MOV,electronics/54. cell phone/mvi_5392.video,54. Cell phone,Electronics,1,54. Cell phone,Electronics,True
+train,Jobs/91. Priest/MVI_4770.MOV,jobs/91. priest/mvi_4770.video,91. Priest,Jobs,1,91. Priest,Jobs,True
+train,Clothes/44. Shoes/MVI_3711.MOV,clothes/44. shoes/mvi_3711.video,44. Shoes,Clothes,1,44. Shoes,Clothes,True
+train,Pronouns/40. I/MVI_9995.MOV,pronouns/40. i/mvi_9995.video,40. I,Pronouns,1,40. I,Pronouns,True
+train,Jobs/84. Teacher/MVI_4458.MOV,jobs/84. teacher/mvi_4458.video,84. Teacher,Jobs,1,84. Teacher,Jobs,True
+train,Electronics/53. Fan/MVI_9098.MOV,electronics/53. fan/mvi_9098.video,53. Fan,Electronics,1,53. Fan,Electronics,True
+train,Seasons/61. Summer/MVI_5420.MOV,seasons/61. summer/mvi_5420.video,61. Summer,Seasons,1,61. Summer,Seasons,True
+train,Places/23. Court/MVI_3533.MOV,places/23. court/mvi_3533.video,23. Court,Places,1,23. Court,Places,True
+train,Society/14. Election/MVI_8710.MOV,society/14. election/mvi_8710.video,14. Election,Society,1,14. Election,Society,True
+train,Electronics/53. Fan/MVI_4966.MOV,electronics/53. fan/mvi_4966.video,53. Fan,Electronics,1,53. Fan,Electronics,True
+train,Seasons/64. Fall/MVI_9135.MOV,seasons/64. fall/mvi_9135.video,64. Fall,Seasons,1,64. Fall,Seasons,True
+train,Greetings/55. Thank you/MVI_0008.MOV,greetings/55. thank you/mvi_0008.video,55. Thank you,Greetings,1,55. Thank you,Greetings,True
+train,Pronouns/46. you (plural)/MVI_0021.MOV,pronouns/46. you (plural)/mvi_0021.video,46. you (plural),Pronouns,1,46. you (plural),Pronouns,True
+train,Adjectives/78. long/MVI_5107.MOV,adjectives/78. long/mvi_5107.video,78. long,Adjectives,1,78. long,Adjectives,True
+train,Seasons/64. Fall/MVI_9133.MOV,seasons/64. fall/mvi_9133.video,64. Fall,Seasons,1,64. Fall,Seasons,True
+train,Adjectives/79. short/MVI_9301.MOV,adjectives/79. short/mvi_9301.video,79. short,Adjectives,1,79. short,Adjectives,True
+train,Places/28. Store or Shop/MVI_3475.MOV,places/28. store or shop/mvi_3475.video,28. Store or Shop,Places,1,28. Store or Shop,Places,True
+train,Days_and_Time/86. Time/MVI_5078.MOV,days_and_time/86. time/mvi_5078.video,86. Time,Days_and_Time,1,86. Time,Days_and_Time,True
+train,Adjectives/91. new/MVI_5231.MOV,adjectives/91. new/mvi_5231.video,91. new,Adjectives,1,91. new,Adjectives,True
+train,Adjectives/97. dry/MVI_5168.MOV,adjectives/97. dry/mvi_5168.video,97. dry,Adjectives,1,97. dry,Adjectives,True
+train,Seasons/61. Summer/MVI_4566.MOV,seasons/61. summer/mvi_4566.video,61. Summer,Seasons,1,61. Summer,Seasons,True
+train,Electronics/53. Fan/MVI_4533.MOV,electronics/53. fan/mvi_4533.video,53. Fan,Electronics,1,53. Fan,Electronics,True
+train,Pronouns/46. you (plural)/MVI_0084.MOV,pronouns/46. you (plural)/mvi_0084.video,46. you (plural),Pronouns,1,46. you (plural),Pronouns,True
+train,Society/2. Death/MVI_8662.MOV,society/2. death/mvi_8662.video,2. Death,Society,1,2. Death,Society,True
+train,Colours/54. Black/MVI_3888.MOV,colours/54. black/mvi_3888.video,54. Black,Colours,1,54. Black,Colours,True
+train,Clothes/37. Hat/MVI_4867.MOV,clothes/37. hat/mvi_4867.video,37. Hat,Clothes,1,37. Hat,Clothes,True
+train,Clothes/44. Shoes/MVI_5177.MOV,clothes/44. shoes/mvi_5177.video,44. Shoes,Clothes,1,44. Shoes,Clothes,True
+train,Places/19. House/MVI_3513.MOV,places/19. house/mvi_3513.video,19. House,Places,1,19. House,Places,True
+train,Days_and_Time/78. Year/MVI_9178.MOV,days_and_time/78. year/mvi_9178.video,78. Year,Days_and_Time,1,78. Year,Days_and_Time,True
+train,Adjectives/94. good/MVI_9431.MOV,adjectives/94. good/mvi_9431.video,94. good,Adjectives,1,94. good,Adjectives,True
+train,Greetings/51. Good Morning/MVI_9991.MOV,greetings/51. good morning/mvi_9991.video,51. Good Morning,Greetings,1,51. Good Morning,Greetings,True
+train,Clothes/44. Shoes/MVI_3857.MOV,clothes/44. shoes/mvi_3857.video,44. Shoes,Clothes,1,44. Shoes,Clothes,True
+train,Animals/4. Bird/Extra/MVI_3044.MOV,animals/4. bird/extra/mvi_3044.video,4. Bird,Animals,0,,,
+train,Adjectives/94. good/MVI_5316.MOV,adjectives/94. good/mvi_5316.video,94. good,Adjectives,1,94. good,Adjectives,True
+train,Home/34. Pen/MVI_4388.MOV,home/34. pen/mvi_4388.video,34. Pen,Home,1,34. Pen,Home,True
+train,Pronouns/40. I/MVI_0065.MOV,pronouns/40. i/mvi_0065.video,40. I,Pronouns,1,40. I,Pronouns,True
+train,Jobs/91. Priest/MVI_4487.MOV,jobs/91. priest/mvi_4487.video,91. Priest,Jobs,1,91. Priest,Jobs,True
+train,People/66. Brother/MVI_4075.MOV,people/66. brother/mvi_4075.video,66. Brother,People,1,66. Brother,People,True
+train,Adjectives/97. dry/MVI_5250.MOV,adjectives/97. dry/mvi_5250.video,97. dry,Adjectives,1,97. dry,Adjectives,True
+train,Means_of_Transportation/16. train ticket/MVI_3255.MOV,means_of_transportation/16. train ticket/mvi_3255.video,16. train ticket,Means_of_Transportation,1,16. train ticket,Means_of_Transportation,True
+train,Pronouns/46. you (plural)/MVI_0031.MOV,pronouns/46. you (plural)/mvi_0031.video,46. you (plural),Pronouns,1,46. you (plural),Pronouns,True
+train,Animals/4. Bird/MVI_3070.MOV,animals/4. bird/mvi_3070.video,4. Bird,Animals,1,4. Bird,Animals,True
+train,Places/35. Bank/MVI_3423.MOV,places/35. bank/mvi_3423.video,35. Bank,Places,1,35. Bank,Places,True
+train,Home/40. Paint/MVI_9052.MOV,home/40. paint/mvi_9052.video,40. Paint,Home,1,40. Paint,Home,True
+train,Colours/47. Red/MVI_3868.MOV,colours/47. red/mvi_3868.video,47. Red,Colours,1,47. Red,Colours,True
+train,Animals/4. Bird/Extra/MVI_3041.MOV,animals/4. bird/extra/mvi_3041.video,4. Bird,Animals,0,,,
+train,Seasons/61. Summer/MVI_5421.MOV,seasons/61. summer/mvi_5421.video,61. Summer,Seasons,1,61. Summer,Seasons,True
+train,Places/28. Store or Shop/MVI_3473.MOV,places/28. store or shop/mvi_3473.video,28. Store or Shop,Places,1,28. Store or Shop,Places,True
+train,Clothes/42. T-Shirt/MVI_4882.MOV,clothes/42. t-shirt/mvi_4882.video,42. T-Shirt,Clothes,1,42. T-Shirt,Clothes,True
+train,Means_of_Transportation/11. Car/MVI_3239.MOV,means_of_transportation/11. car/mvi_3239.video,11. Car,Means_of_Transportation,1,11. Car,Means_of_Transportation,True
+train,People/77. Boy/MVI_5286.MOV,people/77. boy/mvi_5286.video,77. Boy,People,1,77. Boy,People,True
+train,Pronouns/40. I/MVI_9879.MOV,pronouns/40. i/mvi_9879.video,40. I,Pronouns,1,40. I,Pronouns,True
+train,Adjectives/3. happy/MVI_9375.MOV,adjectives/3. happy/mvi_9375.video,3. happy,Adjectives,1,3. happy,Adjectives,True
+train,Colours/54. Black/MVI_4215.MOV,colours/54. black/mvi_4215.video,54. Black,Colours,1,54. Black,Colours,True
+train,Adjectives/2. quiet/MVI_5181.MOV,adjectives/2. quiet/mvi_5181.video,2. quiet,Adjectives,1,2. quiet,Adjectives,True
+train,Adjectives/94. good/MVI_9268.MOV,adjectives/94. good/mvi_9268.video,94. good,Adjectives,1,94. good,Adjectives,True
+train,Clothes/37. Hat/MVI_3690.MOV,clothes/37. hat/mvi_3690.video,37. Hat,Clothes,1,37. Hat,Clothes,True
+train,Clothes/42. T-Shirt/MVI_5170.MOV,clothes/42. t-shirt/mvi_5170.video,42. T-Shirt,Clothes,1,42. T-Shirt,Clothes,True
+train,Adjectives/2. quiet/MVI_9373.MOV,adjectives/2. quiet/mvi_9373.video,2. quiet,Adjectives,1,2. quiet,Adjectives,True
+train,Adjectives/1. loud/MVI_5337.MOV,adjectives/1. loud/mvi_5337.video,1. loud,Adjectives,1,1. loud,Adjectives,True
+train,People/61. Father/MVI_5229.MOV,people/61. father/mvi_5229.video,61. Father,People,1,61. Father,People,True
+train,Adjectives/94. good/MVI_5318.MOV,adjectives/94. good/mvi_5318.video,94. good,Adjectives,1,94. good,Adjectives,True
+train,Adjectives/94. good/MVI_9432.MOV,adjectives/94. good/mvi_9432.video,94. good,Adjectives,1,94. good,Adjectives,True
+train,Adjectives/97. dry/MVI_9439.MOV,adjectives/97. dry/mvi_9439.video,97. dry,Adjectives,1,97. dry,Adjectives,True
+train,Pronouns/44. it/MVI_0025.MOV,pronouns/44. it/mvi_0025.video,44. it,Pronouns,1,44. it,Pronouns,True
+train,Adjectives/94. good/MVI_9351.MOV,adjectives/94. good/mvi_9351.video,94. good,Adjectives,1,94. good,Adjectives,True
+train,People/78. Girl/MVI_3819.MOV,people/78. girl/mvi_3819.video,78. Girl,People,1,78. Girl,People,True
+train,People/77. Boy/MVI_5132.MOV,people/77. boy/mvi_5132.video,77. Boy,People,1,77. Boy,People,True
+train,Adjectives/3. happy/MVI_5264.MOV,adjectives/3. happy/mvi_5264.video,3. happy,Adjectives,1,3. happy,Adjectives,True
+train,Adjectives/84. small little/MVI_5287.MOV,adjectives/84. small little/mvi_5287.video,84. small little,Adjectives,1,84. small little,Adjectives,True
+train,People/78. Girl/MVI_4984.MOV,people/78. girl/mvi_4984.video,78. Girl,People,1,78. Girl,People,True
+train,Animals/1. Dog/MVI_3060.MOV,animals/1. dog/mvi_3060.video,1. Dog,Animals,2,1. Dog | 35. Bank,Animals | Places,True
+train,Greetings/51. Good Morning/MVI_0100.MOV,greetings/51. good morning/mvi_0100.video,51. Good Morning,Greetings,1,51. Good Morning,Greetings,True
+train,Days_and_Time/86. Time/MVI_5079.MOV,days_and_time/86. time/mvi_5079.video,86. Time,Days_and_Time,1,86. Time,Days_and_Time,True
+train,Pronouns/40. I/MVI_0066.MOV,pronouns/40. i/mvi_0066.video,40. I,Pronouns,1,40. I,Pronouns,True
+train,Colours/55. White/MVI_4042.MOV,colours/55. white/mvi_4042.video,55. White,Colours,1,55. White,Colours,True
+train,Animals/4. Bird/MVI_3095.MOV,animals/4. bird/mvi_3095.video,4. Bird,Animals,1,4. Bird,Animals,True
+train,Places/19. House/MVI_3436.MOV,places/19. house/mvi_3436.video,19. House,Places,1,19. House,Places,True
+train,Clothes/37. Hat/MVI_5154.MOV,clothes/37. hat/mvi_5154.video,37. Hat,Clothes,1,37. Hat,Clothes,True
+train,Days_and_Time/67. Monday/MVI_9142.MOV,days_and_time/67. monday/mvi_9142.video,67. Monday,Days_and_Time,1,67. Monday,Days_and_Time,True
+train,Adjectives/94. good/MVI_5317.MOV,adjectives/94. good/mvi_5317.video,94. good,Adjectives,1,94. good,Adjectives,True
+train,Home/28. Window/MVI_4365.MOV,home/28. window/mvi_4365.video,28. Window,Home,1,28. Window,Home,True
+train,Colours/47. Red/MVI_5037.MOV,colours/47. red/mvi_5037.video,47. Red,Colours,1,47. Red,Colours,True
+train,Places/23. Court/MVI_3454.MOV,places/23. court/mvi_3454.video,23. Court,Places,1,23. Court,Places,True
+train,Seasons/64. Fall/MVI_4577.MOV,seasons/64. fall/mvi_4577.video,64. Fall,Seasons,1,64. Fall,Seasons,True
+train,Home/28. Window/MVI_4883.MOV,home/28. window/mvi_4883.video,28. Window,Home,1,28. Window,Home,True
+train,Greetings/48. Hello/MVI_0032.MOV,greetings/48. hello/mvi_0032.video,48. Hello,Greetings,1,48. Hello,Greetings,True
+train,Adjectives/91. new/MVI_9341.MOV,adjectives/91. new/mvi_9341.video,91. new,Adjectives,1,91. new,Adjectives,True
+train,Jobs/84. Teacher/MVI_4746.MOV,jobs/84. teacher/mvi_4746.video,84. Teacher,Jobs,1,84. Teacher,Jobs,True
+train,Adjectives/97. dry/MVI_9359.MOV,adjectives/97. dry/mvi_9359.video,97. dry,Adjectives,1,97. dry,Adjectives,True
+train,Places/28. Store or Shop/MVI_3386.MOV,places/28. store or shop/mvi_3386.video,28. Store or Shop,Places,1,28. Store or Shop,Places,True
+train,Society/2. Death/MVI_8932.MOV,society/2. death/mvi_8932.video,2. Death,Society,1,2. Death,Society,True
+train,Adjectives/3. happy/MVI_9454.MOV,adjectives/3. happy/mvi_9454.video,3. happy,Adjectives,1,3. happy,Adjectives,True
+train,Seasons/64. Fall/MVI_5000.MOV,seasons/64. fall/mvi_5000.video,64. Fall,Seasons,2,35. Bank | 64. Fall,Places | Seasons,True
+train,Animals/5. Cow/MVI_2992.MOV,animals/5. cow/mvi_2992.video,5. Cow,Animals,1,5. Cow,Animals,True
+train,Jobs/91. Priest/MVI_8889.MOV,jobs/91. priest/mvi_8889.video,91. Priest,Jobs,1,91. Priest,Jobs,True
+train,Places/28. Store or Shop/Extra/MVI_3637.MOV,places/28. store or shop/extra/mvi_3637.video,28. Store or Shop,Places,0,,,
+train,Days_and_Time/86. Time/MVI_4669.MOV,days_and_time/86. time/mvi_4669.video,86. Time,Days_and_Time,1,86. Time,Days_and_Time,True
+train,Greetings/55. Thank you/MVI_0063.MOV,greetings/55. thank you/mvi_0063.video,55. Thank you,Greetings,1,55. Thank you,Greetings,True
+train,Adjectives/3. happy/MVI_9296.MOV,adjectives/3. happy/mvi_9296.video,3. happy,Adjectives,1,3. happy,Adjectives,True
+train,Animals/5. Cow/MVI_3099.MOV,animals/5. cow/mvi_3099.video,5. Cow,Animals,1,5. Cow,Animals,True
+train,Greetings/55. Thank you/MVI_0060.MOV,greetings/55. thank you/mvi_0060.video,55. Thank you,Greetings,1,55. Thank you,Greetings,True
+train,Electronics/54. Cell phone/MVI_4968.MOV,electronics/54. cell phone/mvi_4968.video,54. Cell phone,Electronics,1,54. Cell phone,Electronics,True
+train,Electronics/54. Cell phone/MVI_9101.MOV,electronics/54. cell phone/mvi_9101.video,54. Cell phone,Electronics,1,54. Cell phone,Electronics,True
+train,Days_and_Time/86. Time/MVI_9201.MOV,days_and_time/86. time/mvi_9201.video,86. Time,Days_and_Time,1,86. Time,Days_and_Time,True
+train,Pronouns/44. it/MVI_9937.MOV,pronouns/44. it/mvi_9937.video,44. it,Pronouns,1,44. it,Pronouns,True
+train,Adjectives/97. dry/MVI_5328.MOV,adjectives/97. dry/mvi_5328.video,97. dry,Adjectives,1,97. dry,Adjectives,True
+train,People/77. Boy/MVI_4983.MOV,people/77. boy/mvi_4983.video,77. Boy,People,1,77. Boy,People,True
+train,Greetings/51. Good Morning/MVI_9933.MOV,greetings/51. good morning/mvi_9933.video,51. Good Morning,Greetings,1,51. Good Morning,Greetings,True
+train,Adjectives/2. quiet/MVI_5261.MOV,adjectives/2. quiet/mvi_5261.video,2. quiet,Adjectives,1,2. quiet,Adjectives,True
+train,Adjectives/83. big large/MVI_9318.MOV,adjectives/83. big large/mvi_9318.video,83. big large,Adjectives,1,83. big large,Adjectives,True
+train,Means_of_Transportation/11. Car/MVI_8583.MOV,means_of_transportation/11. car/mvi_8583.video,11. Car,Means_of_Transportation,1,11. Car,Means_of_Transportation,True
+train,Days_and_Time/67. Monday/MVI_9143.MOV,days_and_time/67. monday/mvi_9143.video,67. Monday,Days_and_Time,1,67. Monday,Days_and_Time,True
+train,Home/28. Window/MVI_4882.MOV,home/28. window/mvi_4882.video,28. Window,Home,1,28. Window,Home,True
+train,Adjectives/87. hot/MVI_5217.MOV,adjectives/87. hot/mvi_5217.video,87. hot,Adjectives,1,87. hot,Adjectives,True
+train,Adjectives/3. happy/MVI_9542.MOV,adjectives/3. happy/mvi_9542.video,3. happy,Adjectives,1,3. happy,Adjectives,True
+train,Adjectives/79. short/MVI_5269.MOV,adjectives/79. short/mvi_5269.video,79. short,Adjectives,1,79. short,Adjectives,True
+train,Adjectives/83. big large/MVI_5285.MOV,adjectives/83. big large/mvi_5285.video,83. big large,Adjectives,1,83. big large,Adjectives,True
+train,People/78. Girl/MVI_3966.MOV,people/78. girl/mvi_3966.video,78. Girl,People,1,78. Girl,People,True
+train,Animals/4. Bird/MVI_3012.MOV,animals/4. bird/mvi_3012.video,4. Bird,Animals,1,4. Bird,Animals,True
+train,Jobs/91. Priest/MVI_4489.MOV,jobs/91. priest/mvi_4489.video,91. Priest,Jobs,1,91. Priest,Jobs,True
+train,Pronouns/40. I/MVI_9920.MOV,pronouns/40. i/mvi_9920.video,40. I,Pronouns,1,40. I,Pronouns,True
+train,Animals/4. Bird/Extra/MVI_3045.MOV,animals/4. bird/extra/mvi_3045.video,4. Bird,Animals,0,,,
+train,Days_and_Time/78. Year/MVI_5493.MOV,days_and_time/78. year/mvi_5493.video,78. Year,Days_and_Time,1,78. Year,Days_and_Time,True
+train,Animals/5. Cow/MVI_3047.MOV,animals/5. cow/mvi_3047.video,5. Cow,Animals,1,5. Cow,Animals,True
+train,Places/23. Court/MVI_3609.MOV,places/23. court/mvi_3609.video,23. Court,Places,1,23. Court,Places,True
+train,Adjectives/84. small little/MVI_9321.MOV,adjectives/84. small little/mvi_9321.video,84. small little,Adjectives,1,84. small little,Adjectives,True
+train,Adjectives/83. big large/MVI_9235.MOV,adjectives/83. big large/mvi_9235.video,83. big large,Adjectives,1,83. big large,Adjectives,True
+train,Adjectives/87. hot/MVI_9330.MOV,adjectives/87. hot/mvi_9330.video,87. hot,Adjectives,1,87. hot,Adjectives,True
+train,Places/19. House/MVI_3594.MOV,places/19. house/mvi_3594.video,19. House,Places,1,19. House,Places,True
+train,Adjectives/84. small little/MVI_5286.MOV,adjectives/84. small little/mvi_5286.video,84. small little,Adjectives,1,84. small little,Adjectives,True
+train,Clothes/37. Hat/MVI_3691.MOV,clothes/37. hat/mvi_3691.video,37. Hat,Clothes,1,37. Hat,Clothes,True
+train,Pronouns/40. I/MVI_9919.MOV,pronouns/40. i/mvi_9919.video,40. I,Pronouns,1,40. I,Pronouns,True
+train,Places/35. Bank/Extra/MVI_3420.MOV,places/35. bank/extra/mvi_3420.video,35. Bank,Places,0,,,
+train,Colours/54. Black/MVI_8619.MOV,colours/54. black/mvi_8619.video,54. Black,Colours,1,54. Black,Colours,True
+train,People/78. Girl/MVI_5135.MOV,people/78. girl/mvi_5135.video,78. Girl,People,1,78. Girl,People,True
+train,Greetings/48. Hello/MVI_9983.MOV,greetings/48. hello/mvi_9983.video,48. Hello,Greetings,1,48. Hello,Greetings,True
+train,Adjectives/94. good/MVI_5160.MOV,adjectives/94. good/mvi_5160.video,94. good,Adjectives,1,94. good,Adjectives,True
+train,Adjectives/87. hot/MVI_5297.MOV,adjectives/87. hot/mvi_5297.video,87. hot,Adjectives,1,87. hot,Adjectives,True
+train,Colours/54. Black/MVI_5208.MOV,colours/54. black/mvi_5208.video,54. Black,Colours,1,54. Black,Colours,True
+train,Animals/5. Cow/MVI_2990.MOV,animals/5. cow/mvi_2990.video,5. Cow,Animals,1,5. Cow,Animals,True
+train,Electronics/53. Fan/MVI_5389.MOV,electronics/53. fan/mvi_5389.video,53. Fan,Electronics,1,53. Fan,Electronics,True
+train,Greetings/48. Hello/MVI_0090.MOV,greetings/48. hello/mvi_0090.video,48. Hello,Greetings,1,48. Hello,Greetings,True
+train,Adjectives/97. dry/MVI_9360.MOV,adjectives/97. dry/mvi_9360.video,97. dry,Adjectives,1,97. dry,Adjectives,True
+train,Clothes/42. T-Shirt/MVI_4202.MOV,clothes/42. t-shirt/mvi_4202.video,42. T-Shirt,Clothes,1,42. T-Shirt,Clothes,True
+train,Animals/1. Dog/MVI_4146.MOV,animals/1. dog/mvi_4146.video,1. Dog,Animals,1,1. Dog,Animals,True
+train,Clothes/44. Shoes/MVI_5030.MOV,clothes/44. shoes/mvi_5030.video,44. Shoes,Clothes,1,44. Shoes,Clothes,True
+train,Means_of_Transportation/11. Car/MVI_3238.MOV,means_of_transportation/11. car/mvi_3238.video,11. Car,Means_of_Transportation,1,11. Car,Means_of_Transportation,True
+train,Adjectives/3. happy/MVI_9295.MOV,adjectives/3. happy/mvi_9295.video,3. happy,Adjectives,1,3. happy,Adjectives,True
+train,Adjectives/79. short/MVI_9381.MOV,adjectives/79. short/mvi_9381.video,79. short,Adjectives,1,79. short,Adjectives,True
+train,Places/23. Court/MVI_3453.MOV,places/23. court/mvi_3453.video,23. Court,Places,1,23. Court,Places,True
+train,Adjectives/94. good/MVI_9511.MOV,adjectives/94. good/mvi_9511.video,94. good,Adjectives,1,94. good,Adjectives,True
+train,Places/23. Court/MVI_3287.MOV,places/23. court/mvi_3287.video,23. Court,Places,1,23. Court,Places,True
+train,Greetings/51. Good Morning/MVI_0042.MOV,greetings/51. good morning/mvi_0042.video,51. Good Morning,Greetings,1,51. Good Morning,Greetings,True
+train,Days_and_Time/67. Monday/MVI_4592.MOV,days_and_time/67. monday/mvi_4592.video,67. Monday,Days_and_Time,1,67. Monday,Days_and_Time,True
+train,Places/28. Store or Shop/MVI_3554.MOV,places/28. store or shop/mvi_3554.video,28. Store or Shop,Places,1,28. Store or Shop,Places,True
+train,Jobs/91. Priest/MVI_5344.MOV,jobs/91. priest/mvi_5344.video,91. Priest,Jobs,1,91. Priest,Jobs,True
+train,Adjectives/1. loud/MVI_5257.MOV,adjectives/1. loud/mvi_5257.video,1. loud,Adjectives,1,1. loud,Adjectives,True
+train,Home/40. Paint/MVI_9053.MOV,home/40. paint/mvi_9053.video,40. Paint,Home,1,40. Paint,Home,True
+train,Means_of_Transportation/16. train ticket/MVI_3226.MOV,means_of_transportation/16. train ticket/mvi_3226.video,16. train ticket,Means_of_Transportation,1,16. train ticket,Means_of_Transportation,True
+train,Adjectives/3. happy/MVI_9374.MOV,adjectives/3. happy/mvi_9374.video,3. happy,Adjectives,1,3. happy,Adjectives,True
+train,People/61. Father/MVI_4061.MOV,people/61. father/mvi_4061.video,61. Father,People,1,61. Father,People,True
+train,Home/28. Window/MVI_8766.MOV,home/28. window/mvi_8766.video,28. Window,Home,1,28. Window,Home,True
+train,Animals/1. Dog/MVI_3085.MOV,animals/1. dog/mvi_3085.video,1. Dog,Animals,1,1. Dog,Animals,True
+train,Pronouns/46. you (plural)/MVI_9976.MOV,pronouns/46. you (plural)/mvi_9976.video,46. you (plural),Pronouns,1,46. you (plural),Pronouns,True
+train,Home/34. Pen/MVI_4907.MOV,home/34. pen/mvi_4907.video,34. Pen,Home,1,34. Pen,Home,True
+train,Pronouns/44. it/MVI_9936.MOV,pronouns/44. it/mvi_9936.video,44. it,Pronouns,1,44. it,Pronouns,True
+train,Jobs/91. Priest/MVI_8887.MOV,jobs/91. priest/mvi_8887.video,91. Priest,Jobs,1,91. Priest,Jobs,True
+train,Pronouns/40. I/MVI_9957.MOV,pronouns/40. i/mvi_9957.video,40. I,Pronouns,1,40. I,Pronouns,True
+train,Adjectives/79. short/MVI_5111.MOV,adjectives/79. short/mvi_5111.video,79. short,Adjectives,1,79. short,Adjectives,True
+train,Greetings/55. Thank you/MVI_0111.MOV,greetings/55. thank you/mvi_0111.video,55. Thank you,Greetings,1,55. Thank you,Greetings,True
+train,Clothes/44. Shoes/MVI_3712.MOV,clothes/44. shoes/mvi_3712.video,44. Shoes,Clothes,1,44. Shoes,Clothes,True
+train,Adjectives/84. small little/MVI_9238.MOV,adjectives/84. small little/mvi_9238.video,84. small little,Adjectives,1,84. small little,Adjectives,True
+train,Animals/4. Bird/MVI_4155.MOV,animals/4. bird/mvi_4155.video,4. Bird,Animals,1,4. Bird,Animals,True
+train,Animals/5. Cow/MVI_3074.MOV,animals/5. cow/mvi_3074.video,5. Cow,Animals,1,5. Cow,Animals,True
+train,Pronouns/46. you (plural)/MVI_0024.MOV,pronouns/46. you (plural)/mvi_0024.video,46. you (plural),Pronouns,1,46. you (plural),Pronouns,True
+train,Animals/4. Bird/MVI_3013.MOV,animals/4. bird/mvi_3013.video,4. Bird,Animals,1,4. Bird,Animals,True
+train,Adjectives/2. quiet/MVI_5182.MOV,adjectives/2. quiet/mvi_5182.video,2. quiet,Adjectives,1,2. quiet,Adjectives,True
+train,Pronouns/44. it/MVI_0016.MOV,pronouns/44. it/mvi_0016.video,44. it,Pronouns,1,44. it,Pronouns,True
+train,Colours/54. Black/MVI_3741.MOV,colours/54. black/mvi_3741.video,54. Black,Colours,1,54. Black,Colours,True
+train,Home/34. Pen/MVI_9034.MOV,home/34. pen/mvi_9034.video,34. Pen,Home,1,34. Pen,Home,True
+train,Colours/55. White/MVI_5210.MOV,colours/55. white/mvi_5210.video,55. White,Colours,1,55. White,Colours,True
+train,Pronouns/40. I/MVI_9878.MOV,pronouns/40. i/mvi_9878.video,40. I,Pronouns,1,40. I,Pronouns,True
+train,Adjectives/87. hot/MVI_5218.MOV,adjectives/87. hot/mvi_5218.video,87. hot,Adjectives,1,87. hot,Adjectives,True
+train,Adjectives/1. loud/MVI_5335.MOV,adjectives/1. loud/mvi_5335.video,1. loud,Adjectives,1,1. loud,Adjectives,True
+train,People/78. Girl/MVI_5137.MOV,people/78. girl/mvi_5137.video,78. Girl,People,1,78. Girl,People,True
+train,Adjectives/87. hot/MVI_9409.MOV,adjectives/87. hot/mvi_9409.video,87. hot,Adjectives,1,87. hot,Adjectives,True
+train,Places/19. House/MVI_3596.MOV,places/19. house/mvi_3596.video,19. House,Places,1,19. House,Places,True
+train,Adjectives/2. quiet/MVI_9452.MOV,adjectives/2. quiet/mvi_9452.video,2. quiet,Adjectives,1,2. quiet,Adjectives,True
+train,Adjectives/87. hot/MVI_5296.MOV,adjectives/87. hot/mvi_5296.video,87. hot,Adjectives,1,87. hot,Adjectives,True
+train,Colours/54. Black/MVI_5060.MOV,colours/54. black/mvi_5060.video,54. Black,Colours,1,54. Black,Colours,True
+train,Electronics/53. Fan/MVI_4534.MOV,electronics/53. fan/mvi_4534.video,53. Fan,Electronics,1,53. Fan,Electronics,True
+train,Clothes/42. T-Shirt/MVI_5169.MOV,clothes/42. t-shirt/mvi_5169.video,42. T-Shirt,Clothes,1,42. T-Shirt,Clothes,True
+train,Adjectives/87. hot/MVI_5295.MOV,adjectives/87. hot/mvi_5295.video,87. hot,Adjectives,1,87. hot,Adjectives,True
+train,Pronouns/46. you (plural)/MVI_9977.MOV,pronouns/46. you (plural)/mvi_9977.video,46. you (plural),Pronouns,1,46. you (plural),Pronouns,True
+train,Places/35. Bank/MVI_3662.MOV,places/35. bank/mvi_3662.video,35. Bank,Places,1,35. Bank,Places,True
+train,Greetings/55. Thank you/MVI_9985.MOV,greetings/55. thank you/mvi_9985.video,55. Thank you,Greetings,1,55. Thank you,Greetings,True
+train,Means_of_Transportation/11. Car/MVI_4176.MOV,means_of_transportation/11. car/mvi_4176.video,11. Car,Means_of_Transportation,1,11. Car,Means_of_Transportation,True
+train,People/77. Boy/MVI_3963.MOV,people/77. boy/mvi_3963.video,77. Boy,People,1,77. Boy,People,True
+train,Society/14. Election/MVI_4307.MOV,society/14. election/mvi_4307.video,14. Election,Society,1,14. Election,Society,True
+train,Animals/4. Bird/MVI_8568.MOV,animals/4. bird/mvi_8568.video,4. Bird,Animals,1,4. Bird,Animals,True
+train,Adjectives/78. long/MVI_5187.MOV,adjectives/78. long/mvi_5187.video,78. long,Adjectives,1,78. long,Adjectives,True
+train,Colours/47. Red/MVI_4017.MOV,colours/47. red/mvi_4017.video,47. Red,Colours,1,47. Red,Colours,True
+train,Days_and_Time/67. Monday/MVI_4594.MOV,days_and_time/67. monday/mvi_4594.video,67. Monday,Days_and_Time,1,67. Monday,Days_and_Time,True
+train,Adjectives/84. small little/MVI_9319.MOV,adjectives/84. small little/mvi_9319.video,84. small little,Adjectives,1,84. small little,Adjectives,True
+train,Places/19. House/MVI_3593.MOV,places/19. house/mvi_3593.video,19. House,Places,1,19. House,Places,True
+train,People/78. Girl/MVI_3967.MOV,people/78. girl/mvi_3967.video,78. Girl,People,1,78. Girl,People,True
+train,Pronouns/44. it/MVI_9970.MOV,pronouns/44. it/mvi_9970.video,44. it,Pronouns,1,44. it,Pronouns,True
+train,People/61. Father/MVI_4941.MOV,people/61. father/mvi_4941.video,61. Father,People,1,61. Father,People,True
+train,Places/19. House/MVI_3267.MOV,places/19. house/mvi_3267.video,19. House,Places,1,19. House,Places,True
+train,Adjectives/83. big large/MVI_9233.MOV,adjectives/83. big large/mvi_9233.video,83. big large,Adjectives,1,83. big large,Adjectives,True
+train,Places/35. Bank/MVI_3663.MOV,places/35. bank/mvi_3663.video,35. Bank,Places,1,35. Bank,Places,True
+val,Greetings/51. Good Morning/MVI_0099.MOV,greetings/51. good morning/mvi_0099.video,51. Good Morning,Greetings,1,51. Good Morning,Greetings,True
+val,Means_of_Transportation/11. Car/MVI_3240.MOV,means_of_transportation/11. car/mvi_3240.video,11. Car,Means_of_Transportation,1,11. Car,Means_of_Transportation,True
+val,Adjectives/3. happy/MVI_9456.MOV,adjectives/3. happy/mvi_9456.video,3. happy,Adjectives,1,3. happy,Adjectives,True
+val,Animals/4. Bird/MVI_3011.MOV,animals/4. bird/mvi_3011.video,4. Bird,Animals,1,4. Bird,Animals,True
+val,Days_and_Time/86. Time/MVI_9204.MOV,days_and_time/86. time/mvi_9204.video,86. Time,Days_and_Time,1,86. Time,Days_and_Time,True
+val,Animals/5. Cow/MVI_4158.MOV,animals/5. cow/mvi_4158.video,5. Cow,Animals,1,5. Cow,Animals,True
+val,Adjectives/97. dry/MVI_5248.MOV,adjectives/97. dry/mvi_5248.video,97. dry,Adjectives,1,97. dry,Adjectives,True
+val,Adjectives/84. small little/MVI_9237.MOV,adjectives/84. small little/mvi_9237.video,84. small little,Adjectives,1,84. small little,Adjectives,True
+val,Colours/54. Black/MVI_4039.MOV,colours/54. black/mvi_4039.video,54. Black,Colours,1,54. Black,Colours,True
+val,Pronouns/40. I/MVI_9922.MOV,pronouns/40. i/mvi_9922.video,40. I,Pronouns,1,40. I,Pronouns,True
+val,Places/23. Court/MVI_3532.MOV,places/23. court/mvi_3532.video,23. Court,Places,1,23. Court,Places,True
+val,Pronouns/46. you (plural)/MVI_0032.MOV,pronouns/46. you (plural)/mvi_0032.video,46. you (plural),Pronouns,1,46. you (plural),Pronouns,True
+val,Adjectives/78. long/MVI_5267.MOV,adjectives/78. long/mvi_5267.video,78. long,Adjectives,1,78. long,Adjectives,True
+val,People/66. Brother/MVI_5245.MOV,people/66. brother/mvi_5245.video,66. Brother,People,1,66. Brother,People,True
+val,Adjectives/2. quiet/MVI_9537.MOV,adjectives/2. quiet/mvi_9537.video,2. quiet,Adjectives,1,2. quiet,Adjectives,True
+val,Greetings/51. Good Morning/MVI_0044.MOV,greetings/51. good morning/mvi_0044.video,51. Good Morning,Greetings,1,51. Good Morning,Greetings,True
+val,Electronics/54. Cell phone/MVI_5394.MOV,electronics/54. cell phone/mvi_5394.video,54. Cell phone,Electronics,1,54. Cell phone,Electronics,True
+val,Adjectives/94. good/MVI_5159.MOV,adjectives/94. good/mvi_5159.video,94. good,Adjectives,1,94. good,Adjectives,True
+val,Days_and_Time/67. Monday/MVI_5448.MOV,days_and_time/67. monday/mvi_5448.video,67. Monday,Days_and_Time,1,67. Monday,Days_and_Time,True
+val,Animals/1. Dog/MVI_8561.MOV,animals/1. dog/mvi_8561.video,1. Dog,Animals,1,1. Dog,Animals,True
+val,Seasons/61. Summer/MVI_5422.MOV,seasons/61. summer/mvi_5422.video,61. Summer,Seasons,1,61. Summer,Seasons,True
+val,Jobs/91. Priest/MVI_8888.MOV,jobs/91. priest/mvi_8888.video,91. Priest,Jobs,1,91. Priest,Jobs,True
+val,Colours/47. Red/MVI_3866.MOV,colours/47. red/mvi_3866.video,47. Red,Colours,1,47. Red,Colours,True
+val,Places/19. House/MVI_3514.MOV,places/19. house/mvi_3514.video,19. House,Places,1,19. House,Places,True
+val,Places/19. House/MVI_3269.MOV,places/19. house/mvi_3269.video,19. House,Places,1,19. House,Places,True
+val,Adjectives/1. loud/MVI_9534.MOV,adjectives/1. loud/mvi_9534.video,1. loud,Adjectives,1,1. loud,Adjectives,True
+val,Clothes/44. Shoes/MVI_3856.MOV,clothes/44. shoes/mvi_3856.video,44. Shoes,Clothes,1,44. Shoes,Clothes,True
+val,Adjectives/83. big large/MVI_5125.MOV,adjectives/83. big large/mvi_5125.video,83. big large,Adjectives,1,83. big large,Adjectives,True
+val,Colours/55. White/MVI_5063.MOV,colours/55. white/mvi_5063.video,55. White,Colours,1,55. White,Colours,True
+val,People/78. Girl/MVI_4115.MOV,people/78. girl/mvi_4115.video,78. Girl,People,1,78. Girl,People,True
+val,Colours/55. White/MVI_3744.MOV,colours/55. white/mvi_3744.video,55. White,Colours,1,55. White,Colours,True
+val,Adjectives/91. new/MVI_9423.MOV,adjectives/91. new/mvi_9423.video,91. new,Adjectives,1,91. new,Adjectives,True
+val,Clothes/44. Shoes/MVI_4008.MOV,clothes/44. shoes/mvi_4008.video,44. Shoes,Clothes,1,44. Shoes,Clothes,True
+val,Greetings/48. Hello/MVI_0039.MOV,greetings/48. hello/mvi_0039.video,48. Hello,Greetings,1,48. Hello,Greetings,True
+val,People/66. Brother/MVI_3778.MOV,people/66. brother/mvi_3778.video,66. Brother,People,1,66. Brother,People,True
+val,Places/35. Bank/MVI_3661.MOV,places/35. bank/mvi_3661.video,35. Bank,Places,1,35. Bank,Places,True
+val,Adjectives/84. small little/MVI_5208.MOV,adjectives/84. small little/mvi_5208.video,84. small little,Adjectives,1,84. small little,Adjectives,True
+val,Adjectives/2. quiet/MVI_5340.MOV,adjectives/2. quiet/mvi_5340.video,2. quiet,Adjectives,1,2. quiet,Adjectives,True
+val,Clothes/42. T-Shirt/MVI_5023.MOV,clothes/42. t-shirt/mvi_5023.video,42. T-Shirt,Clothes,1,42. T-Shirt,Clothes,True
+val,Means_of_Transportation/16. train ticket/MVI_4192.MOV,means_of_transportation/16. train ticket/mvi_4192.video,16. train ticket,Means_of_Transportation,1,16. train ticket,Means_of_Transportation,True
+val,Adjectives/97. dry/MVI_9361.MOV,adjectives/97. dry/mvi_9361.video,97. dry,Adjectives,1,97. dry,Adjectives,True
+val,People/77. Boy/MVI_3962.MOV,people/77. boy/mvi_3962.video,77. Boy,People,1,77. Boy,People,True
+val,Places/28. Store or Shop/MVI_3633.MOV,places/28. store or shop/mvi_3633.video,28. Store or Shop,Places,1,28. Store or Shop,Places,True
+val,Pronouns/40. I/MVI_0003.MOV,pronouns/40. i/mvi_0003.video,40. I,Pronouns,1,40. I,Pronouns,True
+val,Means_of_Transportation/11. Car/MVI_3118.MOV,means_of_transportation/11. car/mvi_3118.video,11. Car,Means_of_Transportation,1,11. Car,Means_of_Transportation,True
+val,Jobs/84. Teacher/MVI_4745.MOV,jobs/84. teacher/mvi_4745.video,84. Teacher,Jobs,1,84. Teacher,Jobs,True
+val,Home/28. Window/MVI_9013.MOV,home/28. window/mvi_9013.video,28. Window,Home,1,28. Window,Home,True
+val,Days_and_Time/78. Year/MVI_9175.MOV,days_and_time/78. year/mvi_9175.video,78. Year,Days_and_Time,1,78. Year,Days_and_Time,True
+val,Places/23. Court/MVI_3284.MOV,places/23. court/mvi_3284.video,23. Court,Places,1,23. Court,Places,True
+val,Adjectives/79. short/MVI_9302.MOV,adjectives/79. short/mvi_9302.video,79. short,Adjectives,1,79. short,Adjectives,True
+val,Society/2. Death/MVI_8663.MOV,society/2. death/mvi_8663.video,2. Death,Society,1,2. Death,Society,True
+val,Animals/5. Cow/MVI_4159.MOV,animals/5. cow/mvi_4159.video,5. Cow,Animals,1,5. Cow,Animals,True
+val,Adjectives/94. good/MVI_9350.MOV,adjectives/94. good/mvi_9350.video,94. good,Adjectives,1,94. good,Adjectives,True
+val,Clothes/37. Hat/MVI_3837.MOV,clothes/37. hat/mvi_3837.video,37. Hat,Clothes,1,37. Hat,Clothes,True
+val,Pronouns/44. it/MVI_9939.MOV,pronouns/44. it/mvi_9939.video,44. it,Pronouns,1,44. it,Pronouns,True
+val,Greetings/55. Thank you/MVI_0112.MOV,greetings/55. thank you/mvi_0112.video,55. Thank you,Greetings,1,55. Thank you,Greetings,True
+val,Adjectives/3. happy/MVI_9376.MOV,adjectives/3. happy/mvi_9376.video,3. happy,Adjectives,1,3. happy,Adjectives,True
+val,Adjectives/91. new/MVI_9261.MOV,adjectives/91. new/mvi_9261.video,91. new,Adjectives,1,91. new,Adjectives,True
+val,Electronics/53. Fan/MVI_4964.MOV,electronics/53. fan/mvi_4964.video,53. Fan,Electronics,1,53. Fan,Electronics,True
+val,Adjectives/79. short/MVI_5190.MOV,adjectives/79. short/mvi_5190.video,79. short,Adjectives,1,79. short,Adjectives,True
+val,Seasons/64. Fall/MVI_5433.MOV,seasons/64. fall/mvi_5433.video,64. Fall,Seasons,1,64. Fall,Seasons,True
+val,Society/14. Election/MVI_4306.MOV,society/14. election/mvi_4306.video,14. Election,Society,1,14. Election,Society,True
+val,People/78. Girl/MVI_4986.MOV,people/78. girl/mvi_4986.video,78. Girl,People,1,78. Girl,People,True
+val,Animals/4. Bird/MVI_4156.MOV,animals/4. bird/mvi_4156.video,4. Bird,Animals,1,4. Bird,Animals,True
+val,Adjectives/83. big large/MVI_9396.MOV,adjectives/83. big large/mvi_9396.video,83. big large,Adjectives,1,83. big large,Adjectives,True
+val,People/77. Boy/MVI_3815.MOV,people/77. boy/mvi_3815.video,77. Boy,People,1,77. Boy,People,True
+val,People/61. Father/MVI_8626.MOV,people/61. father/mvi_8626.video,61. Father,People,1,61. Father,People,True
+val,People/61. Father/MVI_3909.MOV,people/61. father/mvi_3909.video,61. Father,People,1,61. Father,People,True
+val,Colours/47. Red/MVI_4897.MOV,colours/47. red/mvi_4897.video,47. Red,Colours,1,47. Red,Colours,True
+val,Clothes/42. T-Shirt/MVI_5171.MOV,clothes/42. t-shirt/mvi_5171.video,42. T-Shirt,Clothes,1,42. T-Shirt,Clothes,True
+val,Places/28. Store or Shop/MVI_3307.MOV,places/28. store or shop/mvi_3307.video,28. Store or Shop,Places,1,28. Store or Shop,Places,True
+val,Home/34. Pen/MVI_8795.MOV,home/34. pen/mvi_8795.video,34. Pen,Home,1,34. Pen,Home,True
+val,Home/40. Paint/MVI_8820.MOV,home/40. paint/mvi_8820.video,40. Paint,Home,1,40. Paint,Home,True
+val,Adjectives/1. loud/MVI_5178.MOV,adjectives/1. loud/mvi_5178.video,1. loud,Adjectives,1,1. loud,Adjectives,True
+val,Pronouns/46. you (plural)/MVI_9945.MOV,pronouns/46. you (plural)/mvi_9945.video,46. you (plural),Pronouns,1,46. you (plural),Pronouns,True
+val,Adjectives/87. hot/MVI_9410.MOV,adjectives/87. hot/mvi_9410.video,87. hot,Adjectives,1,87. hot,Adjectives,True
+val,Places/35. Bank/MVI_3421.MOV,places/35. bank/mvi_3421.video,35. Bank,Places,1,35. Bank,Places,True
+test,Animals/4. Bird/MVI_2988.MOV,animals/4. bird/mvi_2988.video,4. Bird,Animals,1,4. Bird,Animals,True
+test,Colours/54. Black/MVI_4920.MOV,colours/54. black/mvi_4920.video,54. Black,Colours,1,54. Black,Colours,True
+test,Colours/54. Black/MVI_3740.MOV,colours/54. black/mvi_3740.video,54. Black,Colours,1,54. Black,Colours,True
+test,Colours/54. Black/MVI_3742.MOV,colours/54. black/mvi_3742.video,54. Black,Colours,1,54. Black,Colours,True
+test,Colours/54. Black/MVI_5207.MOV,colours/54. black/mvi_5207.video,54. Black,Colours,1,54. Black,Colours,True
+test,Colours/54. Black/MVI_4041.MOV,colours/54. black/mvi_4041.video,54. Black,Colours,1,54. Black,Colours,True
+test,Means_of_Transportation/11. Car/MVI_3145.MOV,means_of_transportation/11. car/mvi_3145.video,11. Car,Means_of_Transportation,1,11. Car,Means_of_Transportation,True
+test,Means_of_Transportation/11. Car/MVI_3174.MOV,means_of_transportation/11. car/mvi_3174.video,11. Car,Means_of_Transportation,1,11. Car,Means_of_Transportation,True
+test,Means_of_Transportation/11. Car/MVI_3176.MOV,means_of_transportation/11. car/mvi_3176.video,11. Car,Means_of_Transportation,1,11. Car,Means_of_Transportation,True
+test,Means_of_Transportation/11. Car/MVI_3116.MOV,means_of_transportation/11. car/mvi_3116.video,11. Car,Means_of_Transportation,1,11. Car,Means_of_Transportation,True
+test,Animals/1. Dog/MVI_3086.MOV,animals/1. dog/mvi_3086.video,1. Dog,Animals,1,1. Dog,Animals,True
+test,Animals/1. Dog/MVI_8560.MOV,animals/1. dog/mvi_8560.video,1. Dog,Animals,1,1. Dog,Animals,True
+test,Animals/1. Dog/MVI_2978.MOV,animals/1. dog/mvi_2978.video,1. Dog,Animals,1,1. Dog,Animals,True
+test,Animals/1. Dog/MVI_3087.MOV,animals/1. dog/mvi_3087.video,1. Dog,Animals,1,1. Dog,Animals,True
+test,Animals/1. Dog/MVI_2980.MOV,animals/1. dog/mvi_2980.video,1. Dog,Animals,1,1. Dog,Animals,True
+test,Animals/1. Dog/MVI_4147.MOV,animals/1. dog/mvi_4147.video,1. Dog,Animals,1,1. Dog,Animals,True
+test,Animals/1. Dog/MVI_3029.MOV,animals/1. dog/mvi_3029.video,1. Dog,Animals,1,1. Dog,Animals,True
+test,Seasons/64. Fall/MVI_5435.MOV,seasons/64. fall/mvi_5435.video,64. Fall,Seasons,1,64. Fall,Seasons,True
+test,Seasons/64. Fall/MVI_9132.MOV,seasons/64. fall/mvi_9132.video,64. Fall,Seasons,1,64. Fall,Seasons,True
+test,Seasons/64. Fall/MVI_4578.MOV,seasons/64. fall/mvi_4578.video,64. Fall,Seasons,1,64. Fall,Seasons,True
+test,People/61. Father/MVI_5082.MOV,people/61. father/mvi_5082.video,61. Father,People,1,61. Father,People,True
+test,People/61. Father/MVI_5080.MOV,people/61. father/mvi_5080.video,61. Father,People,1,61. Father,People,True
+test,Greetings/51. Good Morning/MVI_9971.MOV,greetings/51. good morning/mvi_9971.video,51. Good Morning,Greetings,1,51. Good Morning,Greetings,True
+test,Greetings/51. Good Morning/MVI_9993.MOV,greetings/51. good morning/mvi_9993.video,51. Good Morning,Greetings,1,51. Good Morning,Greetings,True
+test,Greetings/51. Good Morning/MVI_9992.MOV,greetings/51. good morning/mvi_9992.video,51. Good Morning,Greetings,1,51. Good Morning,Greetings,True
+test,Greetings/51. Good Morning/MVI_9969.MOV,greetings/51. good morning/mvi_9969.video,51. Good Morning,Greetings,1,51. Good Morning,Greetings,True
+test,Colours/47. Red/MVI_5186.MOV,colours/47. red/mvi_5186.video,47. Red,Colours,1,47. Red,Colours,True
+test,Colours/47. Red/MVI_4898.MOV,colours/47. red/mvi_4898.video,47. Red,Colours,1,47. Red,Colours,True
+test,Seasons/61. Summer/MVI_9122.MOV,seasons/61. summer/mvi_9122.video,61. Summer,Seasons,1,61. Summer,Seasons,True
+test,Seasons/61. Summer/MVI_4991.MOV,seasons/61. summer/mvi_4991.video,61. Summer,Seasons,1,61. Summer,Seasons,True
+test,Seasons/61. Summer/MVI_4568.MOV,seasons/61. summer/mvi_4568.video,61. Summer,Seasons,1,61. Summer,Seasons,True
+test,Colours/55. White/MVI_5211.MOV,colours/55. white/mvi_5211.video,55. White,Colours,1,55. White,Colours,True
+test,Adjectives/1. loud/MVI_9369.MOV,adjectives/1. loud/mvi_9369.video,1. loud,Adjectives,1,1. loud,Adjectives,True
+test,Adjectives/1. loud/MVI_9536.MOV,adjectives/1. loud/mvi_9536.video,1. loud,Adjectives,1,1. loud,Adjectives,True
+test,Adjectives/1. loud/MVI_5258.MOV,adjectives/1. loud/mvi_5258.video,1. loud,Adjectives,1,1. loud,Adjectives,True
+test,Adjectives/1. loud/MVI_5259.MOV,adjectives/1. loud/mvi_5259.video,1. loud,Adjectives,1,1. loud,Adjectives,True
+test,Adjectives/1. loud/MVI_9289.MOV,adjectives/1. loud/mvi_9289.video,1. loud,Adjectives,1,1. loud,Adjectives,True
+test,Adjectives/1. loud/MVI_5177.MOV,adjectives/1. loud/mvi_5177.video,1. loud,Adjectives,1,1. loud,Adjectives,True
+test,Adjectives/2. quiet/MVI_5180.MOV,adjectives/2. quiet/mvi_5180.video,2. quiet,Adjectives,1,2. quiet,Adjectives,True
+test,Adjectives/2. quiet/MVI_9539.MOV,adjectives/2. quiet/mvi_9539.video,2. quiet,Adjectives,1,2. quiet,Adjectives,True
+test,Adjectives/2. quiet/MVI_9372.MOV,adjectives/2. quiet/mvi_9372.video,2. quiet,Adjectives,1,2. quiet,Adjectives,True
+test,Adjectives/3. happy/MVI_5183.MOV,adjectives/3. happy/mvi_5183.video,3. happy,Adjectives,1,3. happy,Adjectives,True
+test,Adjectives/3. happy/MVI_9297.MOV,adjectives/3. happy/mvi_9297.video,3. happy,Adjectives,1,3. happy,Adjectives,True
+test,Adjectives/3. happy/MVI_5263.MOV,adjectives/3. happy/mvi_5263.video,3. happy,Adjectives,1,3. happy,Adjectives,True
+test,Adjectives/78. long/MVI_9219.MOV,adjectives/78. long/mvi_9219.video,78. long,Adjectives,1,78. long,Adjectives,True
+test,Adjectives/78. long/MVI_9379.MOV,adjectives/78. long/mvi_9379.video,78. long,Adjectives,1,78. long,Adjectives,True
+test,Adjectives/78. long/MVI_5268.MOV,adjectives/78. long/mvi_5268.video,78. long,Adjectives,1,78. long,Adjectives,True
+test,Adjectives/78. long/MVI_5106.MOV,adjectives/78. long/mvi_5106.video,78. long,Adjectives,2,19. House | 78. long,Adjectives | Places,True
+test,Adjectives/78. long/MVI_9300.MOV,adjectives/78. long/mvi_9300.video,78. long,Adjectives,1,78. long,Adjectives,True
+test,Adjectives/78. long/MVI_9377.MOV,adjectives/78. long/mvi_9377.video,78. long,Adjectives,1,78. long,Adjectives,True
+test,Adjectives/79. short/MVI_5191.MOV,adjectives/79. short/mvi_5191.video,79. short,Adjectives,1,79. short,Adjectives,True
+test,Adjectives/79. short/MVI_9220.MOV,adjectives/79. short/mvi_9220.video,79. short,Adjectives,1,79. short,Adjectives,True
+test,Adjectives/79. short/MVI_9222.MOV,adjectives/79. short/mvi_9222.video,79. short,Adjectives,1,79. short,Adjectives,True
+test,Adjectives/79. short/MVI_9462.MOV,adjectives/79. short/mvi_9462.video,79. short,Adjectives,1,79. short,Adjectives,True
+test,Adjectives/79. short/MVI_5271.MOV,adjectives/79. short/mvi_5271.video,79. short,Adjectives,1,79. short,Adjectives,True
+test,Adjectives/79. short/MVI_9303.MOV,adjectives/79. short/mvi_9303.video,79. short,Adjectives,1,79. short,Adjectives,True
+test,Adjectives/83. big large/MVI_9395.MOV,adjectives/83. big large/mvi_9395.video,83. big large,Adjectives,1,83. big large,Adjectives,True
+test,Adjectives/83. big large/MVI_5283.MOV,adjectives/83. big large/mvi_5283.video,83. big large,Adjectives,1,83. big large,Adjectives,True
+test,Adjectives/83. big large/MVI_9475.MOV,adjectives/83. big large/mvi_9475.video,83. big large,Adjectives,1,83. big large,Adjectives,True
+test,Adjectives/83. big large/MVI_5203.MOV,adjectives/83. big large/mvi_5203.video,83. big large,Adjectives,1,83. big large,Adjectives,True
+test,Adjectives/84. small little/MVI_9397.MOV,adjectives/84. small little/mvi_9397.video,84. small little,Adjectives,1,84. small little,Adjectives,True
+test,Adjectives/84. small little/MVI_5127.MOV,adjectives/84. small little/mvi_5127.video,84. small little,Adjectives,1,84. small little,Adjectives,True
+test,Adjectives/84. small little/MVI_9320.MOV,adjectives/84. small little/mvi_9320.video,84. small little,Adjectives,1,84. small little,Adjectives,True
+test,Adjectives/84. small little/MVI_5206.MOV,adjectives/84. small little/mvi_5206.video,84. small little,Adjectives,1,84. small little,Adjectives,True
+test,Adjectives/87. hot/MVI_9408.MOV,adjectives/87. hot/mvi_9408.video,87. hot,Adjectives,1,87. hot,Adjectives,True
+test,Adjectives/87. hot/MVI_9487.MOV,adjectives/87. hot/mvi_9487.video,87. hot,Adjectives,1,87. hot,Adjectives,True
+test,Adjectives/87. hot/MVI_9489.MOV,adjectives/87. hot/mvi_9489.video,87. hot,Adjectives,1,87. hot,Adjectives,True
+test,Adjectives/87. hot/MVI_9329.MOV,adjectives/87. hot/mvi_9329.video,87. hot,Adjectives,1,87. hot,Adjectives,True
+test,Adjectives/87. hot/MVI_9248.MOV,adjectives/87. hot/mvi_9248.video,87. hot,Adjectives,1,87. hot,Adjectives,True
+test,Adjectives/87. hot/MVI_5216.MOV,adjectives/87. hot/mvi_5216.video,87. hot,Adjectives,1,87. hot,Adjectives,True
+test,Adjectives/91. new/MVI_5150.MOV,adjectives/91. new/mvi_5150.video,91. new,Adjectives,1,91. new,Adjectives,True
+test,Adjectives/91. new/MVI_5230.MOV,adjectives/91. new/mvi_5230.video,91. new,Adjectives,1,91. new,Adjectives,True
+test,Adjectives/91. new/MVI_9501.MOV,adjectives/91. new/mvi_9501.video,91. new,Adjectives,1,91. new,Adjectives,True
+test,Adjectives/94. good/MVI_9430.MOV,adjectives/94. good/mvi_9430.video,94. good,Adjectives,1,94. good,Adjectives,True
+test,Adjectives/94. good/MVI_5158.MOV,adjectives/94. good/mvi_5158.video,94. good,Adjectives,1,94. good,Adjectives,True
+test,Adjectives/94. good/MVI_5239.MOV,adjectives/94. good/mvi_5239.video,94. good,Adjectives,1,94. good,Adjectives,True
+test,Animals/5. Cow/MVI_3016.MOV,animals/5. cow/mvi_3016.video,5. Cow,Animals,1,5. Cow,Animals,True
+test,Animals/5. Cow/MVI_3073.MOV,animals/5. cow/mvi_3073.video,5. Cow,Animals,1,5. Cow,Animals,True
+test,Animals/5. Cow/MVI_3048.MOV,animals/5. cow/mvi_3048.video,5. Cow,Animals,1,5. Cow,Animals,True
+test,Clothes/37. Hat/MVI_8600.MOV,clothes/37. hat/mvi_8600.video,37. Hat,Clothes,1,37. Hat,Clothes,True
+test,Clothes/37. Hat/MVI_5156.MOV,clothes/37. hat/mvi_5156.video,37. Hat,Clothes,1,37. Hat,Clothes,True
+test,Clothes/37. Hat/MVI_5155.MOV,clothes/37. hat/mvi_5155.video,37. Hat,Clothes,1,37. Hat,Clothes,True
+test,Clothes/37. Hat/MVI_3984.MOV,clothes/37. hat/mvi_3984.video,37. Hat,Clothes,1,37. Hat,Clothes,True
+test,Clothes/37. Hat/MVI_3836.MOV,clothes/37. hat/mvi_3836.video,37. Hat,Clothes,1,37. Hat,Clothes,True
+test,Clothes/37. Hat/MVI_4865.MOV,clothes/37. hat/mvi_4865.video,37. Hat,Clothes,1,37. Hat,Clothes,True
+test,Clothes/42. T-Shirt/MVI_4004.MOV,clothes/42. t-shirt/mvi_4004.video,42. T-Shirt,Clothes,1,42. T-Shirt,Clothes,True
+test,Clothes/42. T-Shirt/MVI_3852.MOV,clothes/42. t-shirt/mvi_3852.video,42. T-Shirt,Clothes,1,42. T-Shirt,Clothes,True
+test,Clothes/42. T-Shirt/MVI_3704.MOV,clothes/42. t-shirt/mvi_3704.video,42. T-Shirt,Clothes,1,42. T-Shirt,Clothes,True
+test,Clothes/44. Shoes/MVI_3858.MOV,clothes/44. shoes/mvi_3858.video,44. Shoes,Clothes,1,44. Shoes,Clothes,True
+test,Clothes/44. Shoes/MVI_4010.MOV,clothes/44. shoes/mvi_4010.video,44. Shoes,Clothes,1,44. Shoes,Clothes,True
+test,Clothes/44. Shoes/MVI_4889.MOV,clothes/44. shoes/mvi_4889.video,44. Shoes,Clothes,1,44. Shoes,Clothes,True
+test,Clothes/44. Shoes/MVI_5029.MOV,clothes/44. shoes/mvi_5029.video,44. Shoes,Clothes,1,44. Shoes,Clothes,True
+test,Days_and_Time/67. Monday/MVI_5447.MOV,days_and_time/67. monday/mvi_5447.video,67. Monday,Days_and_Time,1,67. Monday,Days_and_Time,True
+test,Days_and_Time/67. Monday/MVI_4593.MOV,days_and_time/67. monday/mvi_4593.video,67. Monday,Days_and_Time,1,67. Monday,Days_and_Time,True
+test,Days_and_Time/78. Year/MVI_5494.MOV,days_and_time/78. year/mvi_5494.video,78. Year,Days_and_Time,1,78. Year,Days_and_Time,True
+test,Days_and_Time/78. Year/MVI_4638.MOV,days_and_time/78. year/mvi_4638.video,78. Year,Days_and_Time,1,78. Year,Days_and_Time,True
+test,Days_and_Time/78. Year/MVI_4635.MOV,days_and_time/78. year/mvi_4635.video,78. Year,Days_and_Time,1,78. Year,Days_and_Time,True
+test,Days_and_Time/78. Year/MVI_4637.MOV,days_and_time/78. year/mvi_4637.video,78. Year,Days_and_Time,1,78. Year,Days_and_Time,True
+test,Days_and_Time/78. Year/MVI_4636.MOV,days_and_time/78. year/mvi_4636.video,78. Year,Days_and_Time,1,78. Year,Days_and_Time,True
+test,Days_and_Time/78. Year/MVI_5049.MOV,days_and_time/78. year/mvi_5049.video,78. Year,Days_and_Time,1,78. Year,Days_and_Time,True
+test,Days_and_Time/78. Year/MVI_9177.MOV,days_and_time/78. year/mvi_9177.video,78. Year,Days_and_Time,1,78. Year,Days_and_Time,True
+test,Days_and_Time/86. Time/MVI_5525.MOV,days_and_time/86. time/mvi_5525.video,86. Time,Days_and_Time,1,86. Time,Days_and_Time,True
+test,Days_and_Time/86. Time/MVI_5527.MOV,days_and_time/86. time/mvi_5527.video,86. Time,Days_and_Time,1,86. Time,Days_and_Time,True
+test,Days_and_Time/86. Time/MVI_5077.MOV,days_and_time/86. time/mvi_5077.video,86. Time,Days_and_Time,1,86. Time,Days_and_Time,True
+test,Electronics/53. Fan/MVI_5387.MOV,electronics/53. fan/mvi_5387.video,53. Fan,Electronics,1,53. Fan,Electronics,True
+test,Electronics/53. Fan/MVI_4535.MOV,electronics/53. fan/mvi_4535.video,53. Fan,Electronics,1,53. Fan,Electronics,True
+test,Electronics/53. Fan/MVI_5388.MOV,electronics/53. fan/mvi_5388.video,53. Fan,Electronics,1,53. Fan,Electronics,True
+test,Electronics/54. Cell phone/MVI_5393.MOV,electronics/54. cell phone/mvi_5393.video,54. Cell phone,Electronics,1,54. Cell phone,Electronics,True
+test,Electronics/54. Cell phone/MVI_4969.MOV,electronics/54. cell phone/mvi_4969.video,54. Cell phone,Electronics,1,54. Cell phone,Electronics,True
+test,Electronics/54. Cell phone/MVI_4967.MOV,electronics/54. cell phone/mvi_4967.video,54. Cell phone,Electronics,1,54. Cell phone,Electronics,True
+test,Electronics/54. Cell phone/MVI_4537.MOV,electronics/54. cell phone/mvi_4537.video,54. Cell phone,Electronics,1,54. Cell phone,Electronics,True
+test,Greetings/48. Hello/MVI_0029.MOV,greetings/48. hello/mvi_0029.video,48. Hello,Greetings,1,48. Hello,Greetings,True
+test,Greetings/48. Hello/MVI_9915.MOV,greetings/48. hello/mvi_9915.video,48. Hello,Greetings,1,48. Hello,Greetings,True
+test,Greetings/48. Hello/MVI_0091.MOV,greetings/48. hello/mvi_0091.video,48. Hello,Greetings,1,48. Hello,Greetings,True
+test,Greetings/48. Hello/MVI_9957.MOV,greetings/48. hello/mvi_9957.video,48. Hello,Greetings,1,48. Hello,Greetings,True
+test,Greetings/48. Hello/MVI_0030.MOV,greetings/48. hello/mvi_0030.video,48. Hello,Greetings,1,48. Hello,Greetings,True
+test,Greetings/48. Hello/MVI_9982.MOV,greetings/48. hello/mvi_9982.video,48. Hello,Greetings,1,48. Hello,Greetings,True
+test,Greetings/48. Hello/MVI_0031.MOV,greetings/48. hello/mvi_0031.video,48. Hello,Greetings,1,48. Hello,Greetings,True
+test,Greetings/55. Thank you/MVI_0006.MOV,greetings/55. thank you/mvi_0006.video,55. Thank you,Greetings,1,55. Thank you,Greetings,True
+test,Greetings/55. Thank you/MVI_9948.MOV,greetings/55. thank you/mvi_9948.video,55. Thank you,Greetings,1,55. Thank you,Greetings,True
+test,Greetings/55. Thank you/MVI_0113.MOV,greetings/55. thank you/mvi_0113.video,55. Thank you,Greetings,1,55. Thank you,Greetings,True
+test,Greetings/55. Thank you/MVI_9987.MOV,greetings/55. thank you/mvi_9987.video,55. Thank you,Greetings,1,55. Thank you,Greetings,True
+test,Greetings/55. Thank you/MVI_9951.MOV,greetings/55. thank you/mvi_9951.video,55. Thank you,Greetings,1,55. Thank you,Greetings,True
+test,Greetings/55. Thank you/MVI_9984.MOV,greetings/55. thank you/mvi_9984.video,55. Thank you,Greetings,1,55. Thank you,Greetings,True
+test,Greetings/55. Thank you/MVI_0060_.MOV,greetings/55. thank you/mvi_0060_.video,55. Thank you,Greetings,1,55. Thank you,Greetings,True
+test,Home/28. Window/MVI_4363.MOV,home/28. window/mvi_4363.video,28. Window,Home,1,28. Window,Home,True
+test,Home/28. Window/MVI_9015.MOV,home/28. window/mvi_9015.video,28. Window,Home,1,28. Window,Home,True
+test,Home/28. Window/MVI_8768.MOV,home/28. window/mvi_8768.video,28. Window,Home,1,28. Window,Home,True
+test,Home/34. Pen/MVI_4906.MOV,home/34. pen/mvi_4906.video,34. Pen,Home,1,34. Pen,Home,True
+test,Home/34. Pen/MVI_8793.MOV,home/34. pen/mvi_8793.video,34. Pen,Home,1,34. Pen,Home,True
+test,Home/40. Paint/MVI_8821.MOV,home/40. paint/mvi_8821.video,40. Paint,Home,1,40. Paint,Home,True
+test,Home/40. Paint/MVI_4415.MOV,home/40. paint/mvi_4415.video,40. Paint,Home,1,40. Paint,Home,True
+test,Home/40. Paint/MVI_8817.MOV,home/40. paint/mvi_8817.video,40. Paint,Home,1,40. Paint,Home,True
+test,Jobs/84. Teacher/MVI_4460.MOV,jobs/84. teacher/mvi_4460.video,84. Teacher,Jobs,1,84. Teacher,Jobs,True
+test,Jobs/84. Teacher/MVI_5313.MOV,jobs/84. teacher/mvi_5313.video,84. Teacher,Jobs,1,84. Teacher,Jobs,True
+test,Jobs/84. Teacher/MVI_4457.MOV,jobs/84. teacher/mvi_4457.video,84. Teacher,Jobs,1,84. Teacher,Jobs,True
+test,Jobs/91. Priest/MVI_4772.MOV,jobs/91. priest/mvi_4772.video,91. Priest,Jobs,1,91. Priest,Jobs,True
+test,Means_of_Transportation/16. train ticket/MVI_3253.MOV,means_of_transportation/16. train ticket/mvi_3253.video,16. train ticket,Means_of_Transportation,1,16. train ticket,Means_of_Transportation,True
+test,Means_of_Transportation/16. train ticket/MVI_3132.MOV,means_of_transportation/16. train ticket/mvi_3132.video,16. train ticket,Means_of_Transportation,1,16. train ticket,Means_of_Transportation,True
+test,Means_of_Transportation/16. train ticket/MVI_3225.MOV,means_of_transportation/16. train ticket/mvi_3225.video,16. train ticket,Means_of_Transportation,1,16. train ticket,Means_of_Transportation,True
+test,Means_of_Transportation/16. train ticket/MVI_3197.MOV,means_of_transportation/16. train ticket/mvi_3197.video,16. train ticket,Means_of_Transportation,1,16. train ticket,Means_of_Transportation,True
+test,Means_of_Transportation/16. train ticket/MVI_3195.MOV,means_of_transportation/16. train ticket/mvi_3195.video,16. train ticket,Means_of_Transportation,1,16. train ticket,Means_of_Transportation,True
+test,Means_of_Transportation/16. train ticket/MVI_4193.MOV,means_of_transportation/16. train ticket/mvi_4193.video,16. train ticket,Means_of_Transportation,1,16. train ticket,Means_of_Transportation,True
+test,Means_of_Transportation/16. train ticket/MVI_3163.MOV,means_of_transportation/16. train ticket/mvi_3163.video,16. train ticket,Means_of_Transportation,1,16. train ticket,Means_of_Transportation,True
+test,Means_of_Transportation/16. train ticket/MVI_8597.MOV,means_of_transportation/16. train ticket/mvi_8597.video,16. train ticket,Means_of_Transportation,1,16. train ticket,Means_of_Transportation,True
+test,People/66. Brother/MVI_4077.MOV,people/66. brother/mvi_4077.video,66. Brother,People,1,66. Brother,People,True
+test,People/66. Brother/MVI_3929.MOV,people/66. brother/mvi_3929.video,66. Brother,People,1,66. Brother,People,True
+test,People/66. Brother/MVI_5097.MOV,people/66. brother/mvi_5097.video,66. Brother,People,1,66. Brother,People,True
+test,People/66. Brother/MVI_3779.MOV,people/66. brother/mvi_3779.video,66. Brother,People,1,66. Brother,People,True
+test,People/66. Brother/MVI_3927.MOV,people/66. brother/mvi_3927.video,66. Brother,People,1,66. Brother,People,True
+test,People/77. Boy/MVI_4111.MOV,people/77. boy/mvi_4111.video,77. Boy,People,1,77. Boy,People,True
+test,People/77. Boy/MVI_5287.MOV,people/77. boy/mvi_5287.video,77. Boy,People,1,77. Boy,People,True
+test,People/77. Boy/MVI_5134.MOV,people/77. boy/mvi_5134.video,77. Boy,People,1,77. Boy,People,True
+test,People/77. Boy/MVI_8644.MOV,people/77. boy/mvi_8644.video,77. Boy,People,1,77. Boy,People,True
+test,People/78. Girl/MVI_4985.MOV,people/78. girl/mvi_4985.video,78. Girl,People,1,78. Girl,People,True
+test,People/78. Girl/MVI_5136.MOV,people/78. girl/mvi_5136.video,78. Girl,People,1,78. Girl,People,True
+test,Places/23. Court/MVI_3286.MOV,places/23. court/mvi_3286.video,23. Court,Places,1,23. Court,Places,True
+test,Places/23. Court/MVI_3365.MOV,places/23. court/mvi_3365.video,23. Court,Places,1,23. Court,Places,True
+test,Places/23. Court/MVI_3611.MOV,places/23. court/mvi_3611.video,23. Court,Places,1,23. Court,Places,True
+test,Places/19. House/Extra/MVI_3439.MOV,places/19. house/extra/mvi_3439.video,19. House,Places,0,,,
+test,Places/28. Store or Shop/MVI_3634.MOV,places/28. store or shop/mvi_3634.video,28. Store or Shop,Places,1,28. Store or Shop,Places,True
+test,Places/28. Store or Shop/MVI_3384.MOV,places/28. store or shop/mvi_3384.video,28. Store or Shop,Places,1,28. Store or Shop,Places,True
+test,Places/28. Store or Shop/MVI_3552.MOV,places/28. store or shop/mvi_3552.video,28. Store or Shop,Places,1,28. Store or Shop,Places,True
+test,Places/28. Store or Shop/MVI_3472.MOV,places/28. store or shop/mvi_3472.video,28. Store or Shop,Places,1,28. Store or Shop,Places,True
+test,Places/35. Bank/MVI_3335.MOV,places/35. bank/mvi_3335.video,35. Bank,Places,1,35. Bank,Places,True
+test,Places/35. Bank/MVI_3581.MOV,places/35. bank/mvi_3581.video,35. Bank,Places,1,35. Bank,Places,True
+test,Places/35. Bank/MVI_3419.MOV,places/35. bank/mvi_3419.video,35. Bank,Places,1,35. Bank,Places,True
+test,Places/35. Bank/MVI_3584.MOV,places/35. bank/mvi_3584.video,35. Bank,Places,1,35. Bank,Places,True
+test,Places/35. Bank/MVI_3503.MOV,places/35. bank/mvi_3503.video,35. Bank,Places,1,35. Bank,Places,True
+test,Places/35. Bank/MVI_3338.MOV,places/35. bank/mvi_3338.video,35. Bank,Places,1,35. Bank,Places,True
+test,Pronouns/40. I/MVI_0014.MOV,pronouns/40. i/mvi_0014.video,40. I,Pronouns,1,40. I,Pronouns,True
+test,Pronouns/40. I/MVI_0064.MOV,pronouns/40. i/mvi_0064.video,40. I,Pronouns,1,40. I,Pronouns,True
+test,Pronouns/40. I/MVI_9880.MOV,pronouns/40. i/mvi_9880.video,40. I,Pronouns,1,40. I,Pronouns,True
+test,Pronouns/44. it/MVI_9971.MOV,pronouns/44. it/mvi_9971.video,44. it,Pronouns,1,44. it,Pronouns,True
+test,Pronouns/44. it/MVI_0015.MOV,pronouns/44. it/mvi_0015.video,44. it,Pronouns,1,44. it,Pronouns,True
+test,Pronouns/44. it/MVI_0077.MOV,pronouns/44. it/mvi_0077.video,44. it,Pronouns,1,44. it,Pronouns,True
+test,Pronouns/44. it/MVI_9899.MOV,pronouns/44. it/mvi_9899.video,44. it,Pronouns,1,44. it,Pronouns,True
+test,Pronouns/44. it/MVI_0076.MOV,pronouns/44. it/mvi_0076.video,44. it,Pronouns,1,44. it,Pronouns,True
+test,Pronouns/44. it/MVI_9900.MOV,pronouns/44. it/mvi_9900.video,44. it,Pronouns,1,44. it,Pronouns,True
+test,Pronouns/44. it/MVI_0026.MOV,pronouns/44. it/mvi_0026.video,44. it,Pronouns,1,44. it,Pronouns,True
+test,Pronouns/44. it/MVI_0024.MOV,pronouns/44. it/mvi_0024.video,44. it,Pronouns,1,44. it,Pronouns,True
+test,Pronouns/44. it/MVI_9969.MOV,pronouns/44. it/mvi_9969.video,44. it,Pronouns,1,44. it,Pronouns,True
+test,Pronouns/46. you (plural)/MVI_9948.MOV,pronouns/46. you (plural)/mvi_9948.video,46. you (plural),Pronouns,1,46. you (plural),Pronouns,True
+test,Pronouns/46. you (plural)/MVI_9907.MOV,pronouns/46. you (plural)/mvi_9907.video,46. you (plural),Pronouns,1,46. you (plural),Pronouns,True
+test,Pronouns/46. you (plural)/MVI_9905.MOV,pronouns/46. you (plural)/mvi_9905.video,46. you (plural),Pronouns,1,46. you (plural),Pronouns,True
+test,Society/14. Election/MVI_4841.MOV,society/14. election/mvi_4841.video,14. Election,Society,1,14. Election,Society,True
+test,Society/14. Election/MVI_8967.MOV,society/14. election/mvi_8967.video,14. Election,Society,1,14. Election,Society,True
+test,Society/2. Death/MVI_8931.MOV,society/2. death/mvi_8931.video,2. Death,Society,1,2. Death,Society,True
+test,Society/2. Death/MVI_4801.MOV,society/2. death/mvi_4801.video,2. Death,Society,1,2. Death,Society,True
+test,Society/2. Death/MVI_4800.MOV,society/2. death/mvi_4800.video,2. Death,Society,1,2. Death,Society,True
+test,Society/2. Death/MVI_4255.MOV,society/2. death/mvi_4255.video,2. Death,Society,1,2. Death,Society,True
+test,Society/2. Death/MVI_4256.MOV,society/2. death/mvi_4256.video,2. Death,Society,1,2. Death,Society,True

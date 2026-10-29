@@ -309,6 +309,16 @@ datasets/*
 !datasets/processed/.gitkeep
 !datasets/landmarks/.gitkeep
 
+# INCLUDE-50 metadata required for preprocessing and training
+!datasets/metadata_cache/
+datasets/metadata_cache/*
+!datasets/metadata_cache/include50_manifest_v1.csv
+!datasets/metadata_cache/official_splits/
+datasets/metadata_cache/official_splits/*
+!datasets/metadata_cache/official_splits/include50_train.txt
+!datasets/metadata_cache/official_splits/include50_val.txt
+!datasets/metadata_cache/official_splits/include50_test.txt
+
 # Temporary project artifacts
 tmpp*/
 project_structure.txt
