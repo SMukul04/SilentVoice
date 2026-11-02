@@ -342,3 +342,11 @@ avatar/unity/Assets/Models/Avatar/Y_Bot.fbx
 
 # Local third-party ISL animation experiments
 avatar/unity/Assets/Animations/ISL_Test/
+
+# Local backup environment and scripts
+.venv_old/
+scripts/preprocess_include50_old.py
+
+# INCLUDE-50 generated preprocessing data
+datasets/include50/processed/
+datasets/include50/reports/
