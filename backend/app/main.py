@@ -8,6 +8,7 @@ from fastapi.exceptions import RequestValidationError
 from backend.app.schemas import PredictionRequest, PredictionResponse, APIErrorResponse
 from backend.services.model_service import ModelService
 from backend.services.prediction_service import PredictionService
+from backend.inference.torch_inference_engine import TorchInferenceEngine
 
 
 logger = logging.getLogger(__name__)
@@ -19,7 +20,11 @@ app = FastAPI(
 )
 
 # Global service instance to persist the sequence buffer across HTTP requests
-_model_service = ModelService()
+_model_service = ModelService(
+    model_path="models/include50_torch_dropout03/best_model.pth",
+    metadata_path="datasets/include50/processed/class_names.json",
+    engine_factory=TorchInferenceEngine,
+)
 _prediction_service = PredictionService(model_service=_model_service)
 
 def get_prediction_service() -> PredictionService:

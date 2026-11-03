@@ -8,7 +8,7 @@ from typing import Any
 import cv2
 import numpy as np
 
-from backend.inference.inference_engine import InferenceEngine
+from backend.inference.torch_inference_engine import TorchInferenceEngine
 from backend.realtime.landmark_pipeline import RealTimeLandmarkPipeline
 from backend.realtime.prediction_stabilizer import PredictionStabilizer
 
@@ -27,7 +27,7 @@ class WebcamRecognizer:
         mirror: bool = True,
         show_landmarks: bool = True,
         pipeline: RealTimeLandmarkPipeline | Any | None = None,
-        inference_engine: InferenceEngine | Any | None = None,
+        inference_engine: TorchInferenceEngine | Any | None = None,
         stabilizer: PredictionStabilizer | Any | None = None,
         cv2_module: Any = cv2,
     ) -> None:
@@ -58,7 +58,9 @@ class WebcamRecognizer:
         self.camera: Any | None = None
 
         if inference_engine is None:
-            inference_engine = InferenceEngine(confidence_threshold=self.confidence_threshold)
+            inference_engine = TorchInferenceEngine(
+                confidence_threshold=self.confidence_threshold
+            )
             inference_engine.load()
         self.inference_engine = inference_engine
         self.pipeline = pipeline if pipeline is not None else RealTimeLandmarkPipeline()
