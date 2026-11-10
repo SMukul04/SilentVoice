@@ -545,13 +545,13 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // Pulse avatar viewport borders
         const avatarContainer = document.getElementById('avatarContainer');
-        avatarContainer.style.boxShadow = "0 0 25px rgba(188, 52, 250, 0.4)";
+        avatarContainer.style.boxShadow = "0 0 15px rgba(147, 51, 234, 0.35)";
         
         avatarTimer = setTimeout(() => {
             avatarStateBadge.textContent = "ACTIVE";
             avatarStateBadge.className = "badge bg-success bg-opacity-25 text-success border border-success border-opacity-25";
             avatarDetailedStatus.textContent = "Avatar Idle. Waiting for input...";
-            avatarContainer.style.boxShadow = "inset 0 0 30px rgba(0, 0, 0, 0.8)";
+            avatarContainer.style.boxShadow = "none";
         }, 3500);
     }
 
@@ -560,8 +560,7 @@ document.addEventListener('DOMContentLoaded', () => {
         chatWindow.innerHTML = `
             <div class="d-flex flex-column align-items-center justify-content-center h-100 text-muted py-5" id="chatEmptyState">
                 <i class="fa-regular fa-comment-dots fa-3x mb-3 text-secondary text-opacity-50"></i>
-                <h6>No messages yet</h6>
-                <p class="small text-center px-4">Start speaking or turn on the camera to begin translating conversations.</p>
+                <p class="small text-center px-4 mb-0">Your conversation will appear here.</p>
             </div>
         `;
         updateChatCounter();
@@ -644,18 +643,17 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!toast) {
             toast = document.createElement('div');
             toast.id = 'systemToast';
-            toast.className = 'toast align-items-center text-white bg-dark border border-info border-opacity-25 position-fixed top-0 start-50 translate-middle-x m-3 p-1';
+            toast.className = 'toast align-items-center text-dark bg-white border border-info border-opacity-50 position-fixed top-0 start-50 translate-middle-x m-3 p-1';
             toast.style.zIndex = '1090';
             toast.style.borderRadius = '12px';
-            toast.style.backdropFilter = 'blur(10px)';
-            toast.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.5)';
+            toast.style.boxShadow = '0 10px 25px rgba(15, 23, 42, 0.15)';
             toast.innerHTML = `
                 <div class="d-flex">
                     <div class="toast-body d-flex align-items-center gap-2">
                         <i class="fa-solid fa-circle-info text-info"></i>
                         <span id="toastMessage"></span>
                     </div>
-                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                    <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
                 </div>
             `;
             document.body.appendChild(toast);

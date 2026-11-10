@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,12 +14,32 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <!-- Custom CSS (Relative to root of frontend) -->
-    <link rel="stylesheet" href="static/css/style.css">
+    <link rel="stylesheet" href="static/css/style.css?v=3.5">
+    
+    <!-- Critical Inline Light Theme Style Guard -->
+    <style>
+        :root, html, body {
+            background-color: #F4F7FB !important;
+            color: #475569 !important;
+        }
+        .navbar-glass, .status-bar-footer, .glass-card, .metric-card, .avatar-status-card {
+            background-color: #FFFFFF !important;
+        }
+        .feed-viewport, .feed-viewport.avatar-view {
+            background-color: #F1F5F9 !important;
+        }
+        .secondary-section, .sub-card, .chat-window {
+            background-color: #F8FAFC !important;
+        }
+        h1, h2, h3, h4, h5, h6, .panel-title, .feed-placeholder-title {
+            color: #172033 !important;
+        }
+    </style>
 </head>
-<body class="bg-dark text-light overflow-x-hidden">
+<body class="overflow-x-hidden">
     
     <!-- Top Header/Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark navbar-glass sticky-top">
+    <nav class="navbar navbar-expand-lg navbar-light navbar-glass sticky-top">
         <div class="container-fluid">
             <a class="navbar-brand d-flex align-items-center" href="#">
                 <span class="logo-icon"><i class="fa-solid fa-hand-holding-hand"></i></span>
@@ -27,7 +47,7 @@
                 <span class="navbar-tagline d-none d-md-inline-block">Giving Every Gesture a Voice.</span>
             </a>
             <div class="ms-auto d-flex align-items-center">
-                <button class="btn btn-link text-light p-2" data-bs-toggle="modal" data-bs-target="#settingsModal" id="btnSettings" title="SilentVoice Settings">
+                <button class="btn btn-link text-secondary p-2" data-bs-toggle="modal" data-bs-target="#settingsModal" id="btnSettings" title="SilentVoice Settings">
                     <i class="fa-solid fa-sliders fa-lg"></i>
                 </button>
             </div>
@@ -43,53 +63,57 @@
                 <div class="glass-card accent-blue h-100 d-flex flex-column justify-content-between">
                     <div>
                         <div class="d-flex justify-content-between align-items-center mb-3">
-                            <h4 class="m-0 text-white"><i class="fa-solid fa-hand-spock me-2 text-info"></i>Sign Language Recognition</h4>
-                            <span class="status-pill" id="cameraStatusBadge">
-                                <span class="status-dot" id="cameraStatusDot"></span>
-                                <span id="cameraStatusText">Camera Off</span>
-                            </span>
+                            <h4 class="m-0 panel-title"><i class="fa-solid fa-hand-spock me-2 text-info"></i>Sign Language Recognition</h4>
+                            <div class="d-flex gap-2">
+                                <span class="status-pill" id="handsDetectedBadge">
+                                    <span id="handsDetectedText">Hands detected: 0</span>
+                                </span>
+                                <span class="status-pill" id="cameraStatusBadge">
+                                    <span class="status-dot" id="cameraStatusDot"></span>
+                                    <span id="cameraStatusText">Camera Off</span>
+                                </span>
+                            </div>
                         </div>
 
                         <!-- Camera Feed Card -->
                         <div class="feed-viewport mb-4" id="cameraContainer">
-                            <!-- Simulated Grid & Scanning lines -->
-                            <div class="feed-grid"></div>
-                            <div class="feed-scan-line"></div>
-                            
                             <!-- Real Webcam Video element (hidden by default) -->
                             <video id="webcamVideo" class="video-element d-none" autoplay playsinline muted></video>
                             
+                            <!-- Overlay Canvas for Drawing Landmarks -->
+                            <canvas id="landmarkCanvas" class="video-element d-none" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none;"></canvas>
+                            
                             <!-- Fallback / Static Placeholder -->
                             <div class="feed-placeholder-content" id="cameraPlaceholder">
-                                <span class="feed-placeholder-icon text-info"><i class="fa-solid fa-camera"></i></span>
-                                <h5 class="text-white mb-1">Live Camera Feed</h5>
-                                <p class="text-muted small">Click "Start Camera" to capture hand gestures</p>
+                                <span class="feed-placeholder-icon"><i class="fa-solid fa-camera"></i></span>
+                                <h5 class="feed-placeholder-title mb-1">Live Camera Feed</h5>
+                                <p class="text-muted small">Click "Start Recognition" to capture hand gestures</p>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Recognition Stats Subgrid -->
+                    <!-- Recognition Stats Subgrid (White Cards) -->
                     <div class="row g-3">
                         <!-- Recognized Sign Card -->
                         <div class="col-md-4">
-                            <div class="glass-card bg-dark bg-opacity-50 p-3 h-100 border-0">
+                            <div class="metric-card p-3 h-100">
                                 <span class="text-muted small text-uppercase tracking-wider">Recognized Sign</span>
                                 <div class="metrics-glow-value mt-2 text-truncate" id="signOutput">--</div>
                             </div>
                         </div>
                         <!-- Confidence Card -->
                         <div class="col-md-4">
-                            <div class="glass-card bg-dark bg-opacity-50 p-3 h-100 border-0">
+                            <div class="metric-card p-3 h-100">
                                 <span class="text-muted small text-uppercase tracking-wider">Confidence</span>
                                 <div class="metrics-glow-value mt-2" id="confidenceOutput">0%</div>
                                 <div class="progress progress-glow mt-2" style="height: 4px;">
-                                    <div class="progress-bar bg-info progress-glow-bar" role="progressbar" style="width: 0%" id="confidenceProgress"></div>
+                                    <div class="progress-bar progress-glow-bar" role="progressbar" style="width: 0%" id="confidenceProgress"></div>
                                 </div>
                             </div>
                         </div>
                         <!-- FPS Card -->
                         <div class="col-md-4">
-                            <div class="glass-card bg-dark bg-opacity-50 p-3 h-100 border-0">
+                            <div class="metric-card p-3 h-100">
                                 <span class="text-muted small text-uppercase tracking-wider">FPS</span>
                                 <div class="metrics-glow-value mt-2 purple" id="fpsOutput">0.0</div>
                             </div>
@@ -103,7 +127,7 @@
                 <div class="glass-card accent-purple h-100 d-flex flex-column justify-content-between">
                     <div>
                         <div class="d-flex justify-content-between align-items-center mb-3">
-                            <h4 class="m-0 text-white"><i class="fa-solid fa-user-astronaut me-2 text-purple text-opacity-75"></i>Sign Language Avatar</h4>
+                            <h4 class="m-0 panel-title"><i class="fa-solid fa-user-astronaut me-2 text-purple"></i>Sign Language Avatar</h4>
                             <span class="status-pill" id="avatarStatusBadge">
                                 <span class="status-dot" id="avatarStatusDot"></span>
                                 <span id="avatarStatusText">Offline</span>
@@ -120,19 +144,80 @@
                             
                             <!-- Fallback / Load Placeholder -->
                             <div class="feed-placeholder-content" id="avatarPlaceholder">
-                                <span class="feed-placeholder-icon text-purple"><i class="fa-solid fa-child-reaching"></i></span>
-                                <h5 class="text-white mb-1">3D Avatar Preview</h5>
+                                <span class="feed-placeholder-icon"><i class="fa-solid fa-child-reaching"></i></span>
+                                <h5 class="feed-placeholder-title mb-1">3D Avatar Preview</h5>
                                 <p class="text-muted small">Visualizing translated speech gestures</p>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Avatar Status -->
-                    <div class="glass-card bg-dark bg-opacity-50 p-3 border-0">
+                    <!-- Avatar Status (White Card) -->
+                    <div class="avatar-status-card p-3">
                         <span class="text-muted small text-uppercase tracking-wider d-block mb-1">Avatar Status</span>
                         <div class="d-flex align-items-center gap-2">
-                            <span class="badge bg-purple bg-opacity-25 text-purple border border-purple border-opacity-25" id="avatarStateBadge">IDLE</span>
-                            <span class="text-light-50 small" id="avatarDetailedStatus">Waiting for input...</span>
+                            <span class="badge bg-purple-subtle text-purple border border-purple-subtle" id="avatarStateBadge">IDLE</span>
+                            <span class="text-secondary small" id="avatarDetailedStatus">Waiting for input...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SENTENCE SECTION (Full-Width Card) -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="glass-card">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h4 class="m-0 panel-title"><i class="fa-solid fa-align-left me-2 text-info"></i>Sentence</h4>
+                        <button class="btn btn-sm btn-outline-info" id="btnClearSentence" title="Clear constructed sentence">
+                            <i class="fa-solid fa-eraser me-1"></i>Clear Sentence
+                        </button>
+                    </div>
+                    <div class="p-3 secondary-section rounded" style="min-height: 80px;">
+                        <h3 class="m-0 text-navy" id="sentenceOutput" style="font-family: monospace; letter-spacing: 1px;"></h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TEXT TO SIGN SECTION (Full-Width Card) -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="glass-card">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h4 class="m-0 panel-title"><i class="fa-solid fa-keyboard me-2 text-info"></i>Text to Sign</h4>
+                        <button class="btn btn-sm btn-outline-secondary" id="btnTextSignReset" title="Reset Session">
+                            <i class="fa-solid fa-rotate-right me-1"></i>Reset
+                        </button>
+                    </div>
+                    
+                    <div class="row">
+                        <!-- Input Area -->
+                        <div class="col-md-4 mb-3 mb-md-0">
+                            <label for="textSignInput" class="form-label text-muted small text-uppercase tracking-wider">Input Text</label>
+                            <textarea class="form-control form-control-light" id="textSignInput" rows="3" placeholder="Enter text to convert to sign language..."></textarea>
+                            <div class="mt-2 d-flex justify-content-between align-items-center">
+                                <button class="btn btn-info-gradient w-100" id="btnTextSignProcess">
+                                    <i class="fa-solid fa-language me-2"></i>Convert to Sign
+                                </button>
+                            </div>
+                            <div id="textSignStatus" class="small mt-2 text-muted"></div>
+                        </div>
+                        
+                        <!-- Result Area -->
+                        <div class="col-md-8">
+                            <label class="form-label text-muted small text-uppercase tracking-wider">Sign Sequence Result</label>
+                            <div class="p-3 secondary-section rounded d-flex flex-wrap align-items-center" id="textSignSequence" style="min-height: 86px;">
+                                <span class="text-muted">Enter text and click convert...</span>
+                            </div>
+                            
+                            <!-- Unsupported Tokens -->
+                            <div id="textSignUnsupported" class="mt-3 d-none">
+                                <label class="form-label text-warning small text-uppercase tracking-wider"><i class="fa-solid fa-triangle-exclamation me-1"></i>Unsupported Words</label>
+                                <div class="p-2 secondary-section rounded border border-warning border-opacity-50" id="textSignUnsupportedList">
+                                    <!-- Tokens will be appended here -->
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -144,55 +229,15 @@
             <div class="col-12">
                 <div class="glass-card">
                     <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h4 class="m-0 text-white"><i class="fa-solid fa-comments me-2 text-primary"></i>Conversation</h4>
-                        <span class="badge bg-primary bg-opacity-25 text-info border border-info border-opacity-25" id="chatCounterBadge">3 Messages</span>
+                        <h4 class="m-0 panel-title"><i class="fa-solid fa-comments me-2 text-info"></i>Conversation</h4>
+                        <span class="badge bg-primary-subtle text-primary border border-primary-subtle" id="chatCounterBadge">0 Messages</span>
                     </div>
                     
                     <!-- Chat Window Scrollable -->
-                    <div class="chat-window p-2" id="chatWindow">
-                        <!-- Dummy Message 1 -->
-                        <div class="chat-message deaf">
-                            <div class="message-avatar">🤟</div>
-                            <div>
-                                <div class="message-bubble">
-                                    Hello
-                                </div>
-                                <div class="message-meta">
-                                    <span>🤟 Deaf</span>
-                                    <span>•</span>
-                                    <span class="msg-time" data-offset="120">19:54</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Dummy Message 2 -->
-                        <div class="chat-message hearing">
-                            <div class="message-avatar">🎤</div>
-                            <div>
-                                <div class="message-bubble">
-                                    Hi! How are you?
-                                </div>
-                                <div class="message-meta">
-                                    <span class="msg-time" data-offset="60">19:55</span>
-                                    <span>•</span>
-                                    <span>🎤 Hearing</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Dummy Message 3 -->
-                        <div class="chat-message deaf">
-                            <div class="message-avatar">🤟</div>
-                            <div>
-                                <div class="message-bubble">
-                                    I am fine.
-                                </div>
-                                <div class="message-meta">
-                                    <span>🤟 Deaf</span>
-                                    <span>•</span>
-                                    <span class="msg-time" data-offset="0">19:56</span>
-                                </div>
-                            </div>
+                    <div class="chat-window p-3" id="chatWindow">
+                        <div class="d-flex flex-column align-items-center justify-content-center h-100 text-muted py-5" id="chatEmptyState">
+                            <i class="fa-regular fa-comment-dots fa-3x mb-3 text-secondary text-opacity-50"></i>
+                            <p class="small text-center px-4 mb-0">Your conversation will appear here.</p>
                         </div>
                     </div>
                 </div>
@@ -207,9 +252,13 @@
                         <i class="fa-solid fa-microphone"></i>
                         <span id="btnSpeakText">Start Speaking</span>
                     </button>
-                    <button class="control-btn control-btn-purple" id="btnCamera" title="Toggle webcam gesture tracking">
+                    <button class="control-btn control-btn-purple" id="btnStartRecognition" title="Start webcam gesture tracking">
                         <i class="fa-solid fa-camera"></i>
-                        <span id="btnCameraText">Start Camera</span>
+                        <span>Start Recognition</span>
+                    </button>
+                    <button class="control-btn control-btn-danger" id="btnStopRecognition" title="Stop webcam gesture tracking" disabled>
+                        <i class="fa-solid fa-stop"></i>
+                        <span>Stop Recognition</span>
                     </button>
                     <button class="control-btn control-btn-gray" id="btnClear" title="Clear chat conversation">
                         <i class="fa-solid fa-trash-can"></i>
@@ -250,15 +299,15 @@
     <!-- SETTINGS MODAL -->
     <div class="modal fade glass-modal" id="settingsModal" tabindex="-1" aria-labelledby="settingsModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content text-light">
+            <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="settingsModalLabel"><i class="fa-solid fa-gear me-2 text-info"></i>System Settings</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <div class="mb-4">
                         <label class="form-label text-muted small text-uppercase tracking-wider">AI Recognition Model</label>
-                        <select class="form-select form-select-glass text-light" id="selectModel">
+                        <select class="form-select form-select-glass" id="selectModel">
                             <option value="lstm" selected>LSTM Sign Recognizer (Low Latency)</option>
                             <option value="transformer">Transformer Hand Gesture Pipeline</option>
                             <option value="mediapipe">MediaPipe Raw Landmarks Tester</option>
@@ -273,14 +322,14 @@
                     </div>
                     <div class="mb-4">
                         <label class="form-label text-muted small text-uppercase tracking-wider">Camera Input Resolution</label>
-                        <select class="form-select form-select-glass text-light" id="selectResolution">
+                        <select class="form-select form-select-glass" id="selectResolution">
                             <option value="640" selected>640 x 360 (Optimal 30 FPS)</option>
                             <option value="1280">1280 x 720 (HD - High Load)</option>
                         </select>
                     </div>
                     <div class="mb-3">
                         <label class="form-label text-muted small text-uppercase tracking-wider">Speech-to-Text Language</label>
-                        <select class="form-select form-select-glass text-light" id="selectLanguage">
+                        <select class="form-select form-select-glass" id="selectLanguage">
                             <option value="en-US" selected>English (United States)</option>
                             <option value="es-ES">Spanish (Spain)</option>
                             <option value="fr-FR">French (France)</option>
@@ -289,8 +338,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary bg-opacity-25 border-0" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-info text-dark" data-bs-dismiss="modal" id="btnSaveSettings">Apply Settings</button>
+                    <button type="button" class="btn btn-light border" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-info-gradient" data-bs-dismiss="modal" id="btnSaveSettings">Apply Settings</button>
                 </div>
             </div>
         </div>
@@ -298,8 +347,7 @@
 
     <!-- Bootstrap 5 Bundle JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Custom JS (Relative to root of frontend) -->
-    <script src="static/js/avatar_adapter.js"></script>
-    <script src="static/js/app.js"></script>
+    <!-- Custom JS -->
+    <script type="module" src="static/js/app.js?v=3.5"></script>
 </body>
 </html>
