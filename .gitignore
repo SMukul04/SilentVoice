@@ -342,3 +342,30 @@ avatar/unity/Assets/Models/Avatar/Y_Bot.fbx
 
 # Local third-party ISL animation experiments
 avatar/unity/Assets/Animations/ISL_Test/
+
+# Local backup environment and scripts
+.venv_old/
+scripts/preprocess_include50_old.py
+
+# INCLUDE-50 generated preprocessing data
+datasets/include50/processed/
+datasets/include50/reports/
+datasets/include50/processed_crop70/
+datasets/include50/reports_crop70/
+
+# INCLUDE-50 crop-70 training artifacts
+models/include50_torch_crop70/
+artifacts/include50_torch_crop70/
+
+# INCLUDE-50 PyTorch model checkpoints and generated artifacts
+models/include50_torch/
+models/include50_torch_dropout03/
+artifacts/include50_torch/
+artifacts/include50_torch_dropout03/
+
+# INCLUDE-50 generated preprocessing and evaluation outputs
+datasets/include50/processed/
+datasets/include50/reports/
+datasets/include50/processed_crop70/
+datasets/include50/reports_crop70/
+datasets/include50/reports_dropout03/
